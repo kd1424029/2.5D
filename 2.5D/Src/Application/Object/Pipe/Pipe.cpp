@@ -8,7 +8,7 @@ void Pipe::Init()
 
 	m_pos = { -0.1,5,0 };
 
-	//m_color = { 0,1,0,1 };
+	m_color = { 0,1,0,1 };
 
 	Math::Matrix transMat = Math::Matrix::CreateTranslation(m_pos);
 
