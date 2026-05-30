@@ -64,3 +64,4 @@ public:
 		return Instance;
 	}
 };
+#define APP Application::Instance()

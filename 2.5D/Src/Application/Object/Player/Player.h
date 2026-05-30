@@ -35,9 +35,9 @@ private:
 	bool MoveFlgLeft;   //移動の入力を受け付けるフラグ
 	bool MoveFlgRight;
 
-	int MoveCoolDownCount; // クールタイムの残りフレーム数カウンター
+	int MoveCoolDownCount; //クールタイムの残りフレーム数カウント
 
-	const int MoveCoolDownMax = 2;   // 移動後に押しっぱなしで次へ進むまでの待ち時間
+	const int MoveCoolDownMax = 2;   //移動後に押しっぱなしで次へ進むまでの待ち時間
 
-	PlayerState m_State = PlayerState::Idle;  // プレイヤーの状態を管理する変数
+	PlayerState m_State = PlayerState::Idle;  //プレイヤーの状態を管理する変数
 };
