@@ -27,9 +27,9 @@ void Pipe::Update()
 	{
 		case PipeState::None:
 
-			RandomColor = 3;//rand() % 3 + 1; //1から3のランダムな整数を生成
+			RandomColor = rand() % 3 + 1; //1から3のランダムな整数を生成
 
-			RandomPos = 1;//rand() % 3 + 1;
+			RandomPos = rand() % 3 + 1;
 
 			if (RandomColor == 1)
 			{
@@ -54,14 +54,110 @@ void Pipe::Update()
 			if (RandomPos == 1)
 			{
 				m_pos.x = SecondFromLeftPos;
+
+				if (MoveUpFlg == false)
+				{
+					m_pos.y -= MoveSpeed;
+
+					if (m_pos.y < MaxBottomPos)
+					{
+						m_pos.y = MaxBottomPos;
+
+						MoveUpCount++;//MoveUpCountを足していく
+
+						if (MoveUpCount >= 60.0f) //1秒経ったら
+						{
+							MoveUpFlg = true;
+							MoveUpCount = 0;
+						}
+					}
+				}
+
+				if (MoveUpFlg == true)
+				{
+					m_pos.y += MoveSpeed;
+
+					if (m_pos.y > 10.0f)
+					{
+						m_pos.y = 10.0f;
+
+						m_State = PipeState::None;
+
+						MoveUpFlg = false;
+					}
+				}
 			}
 			else if (RandomPos == 2)
 			{
 				m_pos.x = MiddlePos;
+
+				if (MoveUpFlg == false)
+				{
+					m_pos.y -= MoveSpeed;
+
+					if (m_pos.y < MaxBottomPos)
+					{
+						m_pos.y = MaxBottomPos;
+
+						MoveUpCount++;//MoveUpCountを足していく
+
+						if (MoveUpCount >= 60.0f) //1秒経ったら
+						{
+							MoveUpFlg = true;
+							MoveUpCount = 0;
+						}
+					}
+				}
+
+				if (MoveUpFlg == true)
+				{
+					m_pos.y += MoveSpeed;
+
+					if (m_pos.y > 10.0f)
+					{
+						m_pos.y = 10.0f;
+
+						m_State = PipeState::None;
+
+						MoveUpFlg = false;
+					}
+				}
 			}
 			else if (RandomPos == 3)
 			{
 				m_pos.x = FourthFromLeftPos;
+
+				if (MoveUpFlg == false)
+				{
+					m_pos.y -= MoveSpeed;
+
+					if (m_pos.y < MaxBottomPos)
+					{
+						m_pos.y = MaxBottomPos;
+
+						MoveUpCount++;//MoveUpCountを足していく
+
+						if (MoveUpCount >= 60.0f) //1秒経ったら
+						{
+							MoveUpFlg = true;
+							MoveUpCount = 0;
+						}
+					}
+				}
+
+				if (MoveUpFlg == true)
+				{
+					m_pos.y += MoveSpeed;
+
+					if (m_pos.y > 10.0f)
+					{
+						m_pos.y = 10.0f;
+
+						m_State = PipeState::None;
+
+						MoveUpFlg = false;
+					}
+				}
 			}
 			
 			break;
@@ -70,14 +166,110 @@ void Pipe::Update()
 			if (RandomPos == 1)
 			{
 				m_pos.x = MiddlePos;
+
+				if (MoveUpFlg == false)
+				{
+					m_pos.y -= MoveSpeed;
+
+					if (m_pos.y < MaxBottomPos)
+					{
+						m_pos.y = MaxBottomPos;
+
+						MoveUpCount++;//MoveUpCountを足していく
+
+						if (MoveUpCount >= 60.0f) //1秒経ったら
+						{
+							MoveUpFlg = true;
+							MoveUpCount = 0;
+						}
+					}
+				}
+
+				if (MoveUpFlg == true)
+				{
+					m_pos.y += MoveSpeed;
+
+					if (m_pos.y > 10.0f)
+					{
+						m_pos.y = 10.0f;
+
+						m_State = PipeState::None;
+
+						MoveUpFlg = false;
+					}
+				}
 			}
 			else if (RandomPos == 2)
 			{
 				m_pos.x = FourthFromLeftPos;
+
+				if (MoveUpFlg == false)
+				{
+					m_pos.y -= MoveSpeed;
+
+					if (m_pos.y < MaxBottomPos)
+					{
+						m_pos.y = MaxBottomPos;
+
+						MoveUpCount++;//MoveUpCountを足していく
+
+						if (MoveUpCount >= 60.0f) //1秒経ったら
+						{
+							MoveUpFlg = true;
+							MoveUpCount = 0;
+						}
+					}
+				}
+
+				if (MoveUpFlg == true)
+				{
+					m_pos.y += MoveSpeed;
+
+					if (m_pos.y > 10.0f)
+					{
+						m_pos.y = 10.0f;
+
+						m_State = PipeState::None;
+
+						MoveUpFlg = false;
+					}
+				}
 			}
 			else if (RandomPos == 3)
 			{
 				m_pos.x = FifthFromLeftPos;
+
+				if (MoveUpFlg == false)
+				{
+					m_pos.y -= MoveSpeed;
+
+					if (m_pos.y < MaxBottomPos)
+					{
+						m_pos.y = MaxBottomPos;
+
+						MoveUpCount++;//MoveUpCountを足していく
+
+						if (MoveUpCount >= 60.0f) //1秒経ったら
+						{
+							MoveUpFlg = true;
+							MoveUpCount = 0;
+						}
+					}
+				}
+
+				if (MoveUpFlg == true)
+				{
+					m_pos.y += MoveSpeed;
+
+					if (m_pos.y > 10.0f)
+					{
+						m_pos.y = 10.0f;
+
+						m_State = PipeState::None;
+
+						MoveUpFlg = false;
+					}
+				}
 			}
 			
 			break;
@@ -123,10 +315,74 @@ void Pipe::Update()
 			else if (RandomPos == 2)
 			{
 				m_pos.x = SecondFromLeftPos;
+
+				if (MoveUpFlg == false)
+				{
+					m_pos.y -= MoveSpeed;
+
+					if (m_pos.y < MaxBottomPos)
+					{
+						m_pos.y = MaxBottomPos;
+
+						MoveUpCount++;//MoveUpCountを足していく
+
+						if (MoveUpCount >= 60.0f) //1秒経ったら
+						{
+							MoveUpFlg = true;
+							MoveUpCount = 0;
+						}
+					}
+				}
+
+				if (MoveUpFlg == true)
+				{
+					m_pos.y += MoveSpeed;
+
+					if (m_pos.y > 10.0f)
+					{
+						m_pos.y = 10.0f;
+
+						m_State = PipeState::None;
+
+						MoveUpFlg = false;
+					}
+				}
 			}
 			else if (RandomPos == 3)
 			{
 				m_pos.x = MiddlePos;
+
+				if (MoveUpFlg == false)
+				{
+					m_pos.y -= MoveSpeed;
+
+					if (m_pos.y < MaxBottomPos)
+					{
+						m_pos.y = MaxBottomPos;
+
+						MoveUpCount++;//MoveUpCountを足していく
+
+						if (MoveUpCount >= 60.0f) //1秒経ったら
+						{
+							MoveUpFlg = true;
+							MoveUpCount = 0;
+						}
+					}
+				}
+
+				if (MoveUpFlg == true)
+				{
+					m_pos.y += MoveSpeed;
+
+					if (m_pos.y > 10.0f)
+					{
+						m_pos.y = 10.0f;
+
+						m_State = PipeState::None;
+
+						MoveUpFlg = false;
+					}
+				}
 			}
 			
 			break;
@@ -135,7 +391,8 @@ void Pipe::Update()
 
 	Math::Matrix transMat = Math::Matrix::CreateTranslation(m_pos);
 
-	m_mWorld = transMat; 
+	m_mWorld = transMat;  
+
 }
 
 void Pipe::DrawLit()

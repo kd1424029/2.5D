@@ -3,7 +3,7 @@
 
 #include "../../Object/Player/Player.h"
 #include "../../Object/Pipe/Pipe.h"
-#include "../../Object/Ball/Ball.h"
+#include "../../Object/Ball/NormalBall/NormalBall.h"
 #include "../../Object/Back/Back.h"
 
 void GameScene::Event()
@@ -44,9 +44,12 @@ void GameScene::Init()
 	m_objList.push_back(pipe);
 
 	//弾
-	std::shared_ptr<Ball> ball;
-	ball = std::make_shared<Ball>();
-	m_objList.push_back(ball);
+	//std::shared_ptr<NormalBall> ball;
+	//ball = std::make_shared<NormalBall>();
+	//m_objList.push_back(ball);
 
-	ball->SetPipe(pipe.get());
+	auto normalBall = std::make_shared<NormalBall>();
+	normalBall->SetPipe(pipe.get()); // パイプをセット
+	normalBall->Init();
+	m_objList.push_back(normalBall); // リストに追加
 }

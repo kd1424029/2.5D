@@ -91,6 +91,9 @@
     <Filter Include="Src\Application\Object\Ball">
       <UniqueIdentifier>{790adc06-d66f-4466-aba0-2d3c09de6cb1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Ball\NormalBall">
+      <UniqueIdentifier>{fec66313-582f-4cce-986d-129015fb951e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -276,7 +279,10 @@
     <ClInclude Include="Src\Application\Object\Back\Back.h">
       <Filter>Src\Application\Object\Back</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Object\Ball\Ball.h">
+    <ClInclude Include="Src\Application\Object\Ball\NormalBall\NormalBall.h">
+      <Filter>Src\Application\Object\Ball\NormalBall</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Ball\BallBase.h">
       <Filter>Src\Application\Object\Ball</Filter>
     </ClInclude>
   </ItemGroup>
@@ -434,7 +440,10 @@
     <ClCompile Include="Src\Application\Object\Back\Back.cpp">
       <Filter>Src\Application\Object\Back</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\Object\Ball\Ball.cpp">
+    <ClCompile Include="Src\Application\Object\Ball\NormalBall\NormalBall.cpp">
+      <Filter>Src\Application\Object\Ball\NormalBall</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Ball\BallBase.cpp">
       <Filter>Src\Application\Object\Ball</Filter>
     </ClCompile>
   </ItemGroup>
