@@ -28,6 +28,7 @@ void Pipe::Init()
 
 void Pipe::PreUpdate()
 {
+
 }
 
 void Pipe::Update()
