@@ -21,6 +21,8 @@ void Pipe::Init()
 
 	ReachBottomFlg = false;
 
+	SpikeReachBottomFlg = false;
+
 	srand((unsigned)time(NULL)); //ランダム初期化
 }
 
@@ -40,9 +42,11 @@ void Pipe::Update()
 		{
 			RandomPos = rand() % 3 + 1;//1～3をランダムで決める
 
+			SpikeRandomPos = rand() % 4 + 1;//針用
+
 			do //色をランダムで決める（前回と違う色になるまでループ）
 			{
-				RandomColor = rand() % 3 + 1;
+				RandomColor = rand() % 4 + 1;
 			}
 			while (RandomColor == BeforeColor);
 
@@ -91,9 +95,26 @@ void Pipe::Update()
 				{
 					NextX = MiddlePos;
 				}
+			}			
+			else if (RandomColor == 4) //針用
+			{
+				if (SpikeRandomPos == 1)
+				{
+					NextX = MaxLeftPos;
+				}
+				else if (SpikeRandomPos == 2)
+				{
+					NextX = SecondFromLeftPos;
+				}
+				else if (SpikeRandomPos == 3)
+				{
+					NextX = FourthFromLeftPos;
+				}
+				else if (SpikeRandomPos == 4)
+				{
+					NextX = FifthFromLeftPos;
+				}
 			}
-
-			
 		} 
 		while (NextX == BeforePosX);//もし計算した結果が前回のX座標と同じならもう一度最初から抽選し直し！
 
@@ -114,6 +135,10 @@ void Pipe::Update()
 		{ 
 			m_State = PipeState::Green; m_color = { 0, 1, 0, 1 }; 
 		}
+		if (RandomColor == 4)
+		{
+			m_State = PipeState::Spike; m_color = { 1, 0, 1, 1 };
+		}
 
 		m_pos.x = NextX; // 確定したX座標を代入
 
@@ -121,7 +146,7 @@ void Pipe::Update()
 	}
 
 	//共通で行う移動処理
-	if (m_State != PipeState::None)
+	if (m_State != PipeState::None && m_State != PipeState::Spike)
 	{
 		if (MoveUpFlg == false)
 		{
@@ -145,6 +170,40 @@ void Pipe::Update()
 		else //MoveUpFlg == true 
 		{
 			ReachBottomFlg = false;
+			m_pos.y += MoveSpeed;
+			if (m_pos.y > MaxTopPos)
+			{
+				m_pos.y = MaxTopPos;
+				m_State = PipeState::None; // 状態をリセットして次のランダムへ
+				MoveUpFlg = false;
+			}
+		}
+	}
+
+	if (m_State != PipeState::None && m_State == PipeState::Spike)
+	{
+		if (MoveUpFlg == false)
+		{
+			m_pos.y -= MoveSpeed;
+			if (m_pos.y < MaxBottomPos)
+			{
+				m_pos.y = MaxBottomPos;
+				if (!SpikeReachBottomFlg && MoveUpCount == 0)
+				{
+					SpikeReachBottomFlg = true;
+				}
+
+				MoveUpCount++; // カウントアップ
+				if (MoveUpCount >= MaxCount) // 1秒経ったら
+				{
+					MoveUpFlg = true;
+					MoveUpCount = 0;
+				}
+			}
+		}
+		else //MoveUpFlg == true 
+		{
+			SpikeReachBottomFlg = false;
 			m_pos.y += MoveSpeed;
 			if (m_pos.y > MaxTopPos)
 			{

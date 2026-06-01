@@ -5,6 +5,7 @@ enum class PipeState
 	Red,    //赤パイプ
 	Blue,   //青パイプ
 	Green,  //緑パイプ
+	Spike,  //針パイプ
 	None,   //なし
 };
 
@@ -27,6 +28,7 @@ public:
 
 	//===== セッター =====
 	void SetReachBottom() { ReachBottomFlg = false; }
+	void SetSpikeReachBottom() { SpikeReachBottomFlg = false; }
 
 	//===== ゲッター =====
 	Math::Color GetColor() const { return m_color; }
@@ -34,6 +36,7 @@ public:
 	Math::Vector3 GetPos() const { return m_pos; }
 	
 	bool GetReachBottom() const { return ReachBottomFlg; }
+	bool GetSpikeReachBottom() const { return SpikeReachBottomFlg; }
 
 private:
 
@@ -61,6 +64,8 @@ private:
 
 	int RandomPos; //パイプの位置をランダムで決めるための変数
 
+	int SpikeRandomPos; //針用
+
 	float BeforeColor;   //前回の色を保存するための変数
 	float BeforePosX;    //前回のX座標を保存するための変数
 
@@ -71,6 +76,7 @@ private:
 	bool MoveUpFlg;       //移動を受け付けるフラグ
 
 	bool ReachBottomFlg; //底に到達したかどうかを管理するフラグ
+	bool SpikeReachBottomFlg;
 
 	PipeState m_State = PipeState::None;  //パイプの状態を管理する変数
 };

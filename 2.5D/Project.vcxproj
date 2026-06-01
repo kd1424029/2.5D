@@ -277,6 +277,7 @@
     <ClInclude Include="Src\Application\Object\Back\Back.h" />
     <ClInclude Include="Src\Application\Object\Ball\BallBase.h" />
     <ClInclude Include="Src\Application\Object\Ball\NormalBall\NormalBall.h" />
+    <ClInclude Include="Src\Application\Object\Ball\SpikeBall\SpikeBall.h" />
     <ClInclude Include="Src\Application\Object\Pipe\Pipe.h" />
     <ClInclude Include="Src\Application\Object\Player\Player.h" />
     <ClInclude Include="Src\Application\Scene\BaseScene\BaseScene.h" />
@@ -335,6 +336,7 @@
     <ClCompile Include="Src\Application\Object\Back\Back.cpp" />
     <ClCompile Include="Src\Application\Object\Ball\BallBase.cpp" />
     <ClCompile Include="Src\Application\Object\Ball\NormalBall\NormalBall.cpp" />
+    <ClCompile Include="Src\Application\Object\Ball\SpikeBall\SpikeBall.cpp" />
     <ClCompile Include="Src\Application\Object\Pipe\Pipe.cpp" />
     <ClCompile Include="Src\Application\Object\Player\Player.cpp" />
     <ClCompile Include="Src\Application\Scene\BaseScene\BaseScene.cpp" />

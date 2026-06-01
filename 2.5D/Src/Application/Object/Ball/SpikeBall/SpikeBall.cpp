@@ -1,24 +1,21 @@
-﻿#include "NormalBall.h"
+﻿#include "SpikeBall.h"
 
 #include "../../Pipe/Pipe.h" 
 
-void NormalBall::ChildClassInit()
+void SpikeBall::ChildClassInit()
 {
 	//ポインタのままでは使い物にならないので、実体化
 	m_BallModel = std::make_shared<KdModelData>();
-	m_BallModel->Load("Asset/Models/Object/Ball/Ball.gltf");
+	m_BallModel->Load("Asset/Models/Object/SpikeBall/SpikeBall.gltf");
 
 	m_pos.x = m_Pipe->GetPos().x;
 	m_pos.y = 9;
 	m_pos.z = m_Pipe->GetPos().z;
 
 	RotationX = 0.0f;
-
-
-	//AliveFlg = true;
 }
 
-void NormalBall::Update()
+void SpikeBall::Update()
 {
 	//ノーマルボールだけパイプの色と同期する
 	if (!ColorGetFlg && m_Pipe)

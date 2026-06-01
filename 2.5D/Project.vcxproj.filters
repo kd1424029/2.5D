@@ -94,6 +94,9 @@
     <Filter Include="Src\Application\Object\Ball\NormalBall">
       <UniqueIdentifier>{fec66313-582f-4cce-986d-129015fb951e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Ball\SpikeBall">
+      <UniqueIdentifier>{aa94d277-5a51-4f86-a3d8-0fad87ee1677}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -285,6 +288,9 @@
     <ClInclude Include="Src\Application\Object\Ball\BallBase.h">
       <Filter>Src\Application\Object\Ball</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Ball\SpikeBall\SpikeBall.h">
+      <Filter>Src\Application\Object\Ball\SpikeBall</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -445,6 +451,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Ball\BallBase.cpp">
       <Filter>Src\Application\Object\Ball</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Ball\SpikeBall\SpikeBall.cpp">
+      <Filter>Src\Application\Object\Ball\SpikeBall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

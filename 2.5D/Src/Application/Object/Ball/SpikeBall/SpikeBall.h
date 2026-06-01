@@ -2,12 +2,12 @@
 
 #include "../BallBase.h"
 
-class NormalBall : public BallBase
+class SpikeBall : public BallBase
 {
 public:
 
-	NormalBall() {}
-	~NormalBall() override {}
+	SpikeBall() {}
+	~SpikeBall() override {}
 
 	void Update() override;
 
