@@ -14,6 +14,13 @@ void Pipe::Init()
 
 	MoveUpCount = 0;
 
+	BeforeColor = 0;
+	BeforePosX = 0;
+
+	NextX = 0;
+
+	ReachBottomFlg = false;
+
 	srand((unsigned)time(NULL)); //ランダム初期化
 }
 
@@ -25,367 +32,127 @@ void Pipe::Update()
 {
 	switch (m_State)
 	{
-		case PipeState::None:
+	case PipeState::None:
+		
+		NextX = 0.0f; //次のX座標入れる変数
 
-			RandomColor = rand() % 3 + 1; //1から3のランダムな整数を生成
+		do //位置をランダムで決める
+		{
+			RandomPos = rand() % 3 + 1;//1～3をランダムで決める
 
-			RandomPos = rand() % 3 + 1;
-
-			if (RandomColor == 1)
+			do //色をランダムで決める（前回と違う色になるまでループ）
 			{
-				m_State = PipeState::Red;
-				m_color = { 1, 0, 0, 1 };
+				RandomColor = rand() % 3 + 1;
 			}
-			else if (RandomColor == 2)
+			while (RandomColor == BeforeColor);
+
+			//色と位置番号の組み合わせとX座標の代入
+			if (RandomColor == 1) //赤
 			{
-				m_State = PipeState::Blue;
-				m_color = { 0, 0, 1, 1 };
-			}
-			else if (RandomColor == 3)
-			{
-				m_State = PipeState::Green;
-				m_color = { 0, 1, 0, 1 };
-			}
-
-			break;
-
-		case PipeState::Red:
-
-			if (RandomPos == 1)
-			{
-				m_pos.x = SecondFromLeftPos;
-
-				if (MoveUpFlg == false)
+				if (RandomPos == 1)
 				{
-					m_pos.y -= MoveSpeed;
-
-					if (m_pos.y < MaxBottomPos)
-					{
-						m_pos.y = MaxBottomPos;
-
-						MoveUpCount++;//MoveUpCountを足していく
-
-						if (MoveUpCount >= 60.0f) //1秒経ったら
-						{
-							MoveUpFlg = true;
-							MoveUpCount = 0;
-						}
-					}
+					NextX = SecondFromLeftPos;
 				}
-
-				if (MoveUpFlg == true)
+				else if (RandomPos == 2)
 				{
-					m_pos.y += MoveSpeed;
-
-					if (m_pos.y > 10.0f)
-					{
-						m_pos.y = 10.0f;
-
-						m_State = PipeState::None;
-
-						MoveUpFlg = false;
-					}
+					NextX = MiddlePos;
+				}
+				else if (RandomPos == 3)
+				{
+					NextX = FourthFromLeftPos;
 				}
 			}
-			else if (RandomPos == 2)
+			else if (RandomColor == 2) //青
 			{
-				m_pos.x = MiddlePos;
-
-				if (MoveUpFlg == false)
+				if (RandomPos == 1)
 				{
-					m_pos.y -= MoveSpeed;
-
-					if (m_pos.y < MaxBottomPos)
-					{
-						m_pos.y = MaxBottomPos;
-
-						MoveUpCount++;//MoveUpCountを足していく
-
-						if (MoveUpCount >= 60.0f) //1秒経ったら
-						{
-							MoveUpFlg = true;
-							MoveUpCount = 0;
-						}
-					}
+					NextX = MiddlePos;
 				}
-
-				if (MoveUpFlg == true)
+				else if (RandomPos == 2)
 				{
-					m_pos.y += MoveSpeed;
-
-					if (m_pos.y > 10.0f)
-					{
-						m_pos.y = 10.0f;
-
-						m_State = PipeState::None;
-
-						MoveUpFlg = false;
-					}
+					NextX = FourthFromLeftPos;
+				}
+				else if (RandomPos == 3)
+				{
+					NextX = FifthFromLeftPos;
 				}
 			}
-			else if (RandomPos == 3)
+			else if (RandomColor == 3) //緑
 			{
-				m_pos.x = FourthFromLeftPos;
-
-				if (MoveUpFlg == false)
+				if (RandomPos == 1)
 				{
-					m_pos.y -= MoveSpeed;
-
-					if (m_pos.y < MaxBottomPos)
-					{
-						m_pos.y = MaxBottomPos;
-
-						MoveUpCount++;//MoveUpCountを足していく
-
-						if (MoveUpCount >= 60.0f) //1秒経ったら
-						{
-							MoveUpFlg = true;
-							MoveUpCount = 0;
-						}
-					}
+					NextX = MaxLeftPos;
 				}
-
-				if (MoveUpFlg == true)
+				else if (RandomPos == 2)
 				{
-					m_pos.y += MoveSpeed;
-
-					if (m_pos.y > 10.0f)
-					{
-						m_pos.y = 10.0f;
-
-						m_State = PipeState::None;
-
-						MoveUpFlg = false;
-					}
+					NextX = SecondFromLeftPos;
+				}
+				else if (RandomPos == 3)
+				{
+					NextX = MiddlePos;
 				}
 			}
+
 			
-			break;
-		case PipeState::Blue:
+		} 
+		while (NextX == BeforePosX);//もし計算した結果が前回のX座標と同じならもう一度最初から抽選し直し！
 
-			if (RandomPos == 1)
+		BeforeColor = RandomColor;//被らない色が見つかったらそれを今回の値として確定し保存する
+
+		BeforePosX = NextX;
+
+		//色に反映
+		if (RandomColor == 1)
+		{
+			m_State = PipeState::Red;   m_color = { 1, 0, 0, 1 }; 
+		}
+		if (RandomColor == 2)
+		{
+			m_State = PipeState::Blue;  m_color = { 0, 0, 1, 1 }; 
+		}
+		if (RandomColor == 3) 
+		{ 
+			m_State = PipeState::Green; m_color = { 0, 1, 0, 1 }; 
+		}
+
+		m_pos.x = NextX; // 確定したX座標を代入
+
+		break;
+	}
+
+	//共通で行う移動処理
+	if (m_State != PipeState::None)
+	{
+		if (MoveUpFlg == false)
+		{
+			m_pos.y -= MoveSpeed;
+			if (m_pos.y < MaxBottomPos)
 			{
-				m_pos.x = MiddlePos;
-
-				if (MoveUpFlg == false)
+				m_pos.y = MaxBottomPos;
+				if (!ReachBottomFlg && MoveUpCount == 0)
 				{
-					m_pos.y -= MoveSpeed;
-
-					if (m_pos.y < MaxBottomPos)
-					{
-						m_pos.y = MaxBottomPos;
-
-						MoveUpCount++;//MoveUpCountを足していく
-
-						if (MoveUpCount >= 60.0f) //1秒経ったら
-						{
-							MoveUpFlg = true;
-							MoveUpCount = 0;
-						}
-					}
+					ReachBottomFlg = true;
 				}
 
-				if (MoveUpFlg == true)
+				MoveUpCount++; // カウントアップ
+				if (MoveUpCount >= MaxCount) // 1秒経ったら
 				{
-					m_pos.y += MoveSpeed;
-
-					if (m_pos.y > 10.0f)
-					{
-						m_pos.y = 10.0f;
-
-						m_State = PipeState::None;
-
-						MoveUpFlg = false;
-					}
+					MoveUpFlg = true;
+					MoveUpCount = 0;
 				}
 			}
-			else if (RandomPos == 2)
+		}
+		else //MoveUpFlg == true 
+		{
+			ReachBottomFlg = false;
+			m_pos.y += MoveSpeed;
+			if (m_pos.y > MaxTopPos)
 			{
-				m_pos.x = FourthFromLeftPos;
-
-				if (MoveUpFlg == false)
-				{
-					m_pos.y -= MoveSpeed;
-
-					if (m_pos.y < MaxBottomPos)
-					{
-						m_pos.y = MaxBottomPos;
-
-						MoveUpCount++;//MoveUpCountを足していく
-
-						if (MoveUpCount >= 60.0f) //1秒経ったら
-						{
-							MoveUpFlg = true;
-							MoveUpCount = 0;
-						}
-					}
-				}
-
-				if (MoveUpFlg == true)
-				{
-					m_pos.y += MoveSpeed;
-
-					if (m_pos.y > 10.0f)
-					{
-						m_pos.y = 10.0f;
-
-						m_State = PipeState::None;
-
-						MoveUpFlg = false;
-					}
-				}
+				m_pos.y = MaxTopPos;
+				m_State = PipeState::None; // 状態をリセットして次のランダムへ
+				MoveUpFlg = false;
 			}
-			else if (RandomPos == 3)
-			{
-				m_pos.x = FifthFromLeftPos;
-
-				if (MoveUpFlg == false)
-				{
-					m_pos.y -= MoveSpeed;
-
-					if (m_pos.y < MaxBottomPos)
-					{
-						m_pos.y = MaxBottomPos;
-
-						MoveUpCount++;//MoveUpCountを足していく
-
-						if (MoveUpCount >= 60.0f) //1秒経ったら
-						{
-							MoveUpFlg = true;
-							MoveUpCount = 0;
-						}
-					}
-				}
-
-				if (MoveUpFlg == true)
-				{
-					m_pos.y += MoveSpeed;
-
-					if (m_pos.y > 10.0f)
-					{
-						m_pos.y = 10.0f;
-
-						m_State = PipeState::None;
-
-						MoveUpFlg = false;
-					}
-				}
-			}
-			
-			break;
-		case PipeState::Green:
-
-			if (RandomPos == 1)
-			{
-				m_pos.x = MaxLeftPos;
-
-				if (MoveUpFlg == false)
-				{
-					m_pos.y -= MoveSpeed;
-
-					if (m_pos.y < MaxBottomPos)
-					{
-						m_pos.y = MaxBottomPos;
-
-						MoveUpCount++;//MoveUpCountを足していく
-
-						if (MoveUpCount >= 60.0f) //1秒経ったら
-						{
-							MoveUpFlg = true;
-							MoveUpCount = 0;
-						}
-					}
-				}
-
-				if (MoveUpFlg == true)
-				{
-					m_pos.y += MoveSpeed;
-
-					if (m_pos.y > 10.0f)
-					{
-						m_pos.y = 10.0f;
-
-						m_State = PipeState::None;
-
-						MoveUpFlg = false;
-					}
-				}
-
-			}
-			else if (RandomPos == 2)
-			{
-				m_pos.x = SecondFromLeftPos;
-
-				if (MoveUpFlg == false)
-				{
-					m_pos.y -= MoveSpeed;
-
-					if (m_pos.y < MaxBottomPos)
-					{
-						m_pos.y = MaxBottomPos;
-
-						MoveUpCount++;//MoveUpCountを足していく
-
-						if (MoveUpCount >= 60.0f) //1秒経ったら
-						{
-							MoveUpFlg = true;
-							MoveUpCount = 0;
-						}
-					}
-				}
-
-				if (MoveUpFlg == true)
-				{
-					m_pos.y += MoveSpeed;
-
-					if (m_pos.y > 10.0f)
-					{
-						m_pos.y = 10.0f;
-
-						m_State = PipeState::None;
-
-						MoveUpFlg = false;
-					}
-				}
-			}
-			else if (RandomPos == 3)
-			{
-				m_pos.x = MiddlePos;
-
-				if (MoveUpFlg == false)
-				{
-					m_pos.y -= MoveSpeed;
-
-					if (m_pos.y < MaxBottomPos)
-					{
-						m_pos.y = MaxBottomPos;
-
-						MoveUpCount++;//MoveUpCountを足していく
-
-						if (MoveUpCount >= 60.0f) //1秒経ったら
-						{
-							MoveUpFlg = true;
-							MoveUpCount = 0;
-						}
-					}
-				}
-
-				if (MoveUpFlg == true)
-				{
-					m_pos.y += MoveSpeed;
-
-					if (m_pos.y > 10.0f)
-					{
-						m_pos.y = 10.0f;
-
-						m_State = PipeState::None;
-
-						MoveUpFlg = false;
-					}
-				}
-			}
-			
-			break;
+		}
 	}
 
 

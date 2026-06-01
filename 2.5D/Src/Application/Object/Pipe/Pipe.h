@@ -26,10 +26,15 @@ public:
 
 
 	//===== セッター =====
+	void SetReachBottom() { ReachBottomFlg = false; }
 
 	//===== ゲッター =====
 	Math::Color GetColor() const { return m_color; }
+
+	Math::Vector3 GetPos() const { return m_pos; }
 	
+	bool GetReachBottom() const { return ReachBottomFlg; }
+
 private:
 
 	std::shared_ptr<KdModelData> m_PipeModel;
@@ -46,17 +51,26 @@ private:
 
 	const float FourthFromLeftPos = 1.9f;
 
-	const float FifthFromLeftPos = 3.6f;
+	const float FifthFromLeftPos = 3.8f;
 
 	const float MiddlePos = -0.1f;
 
-	int RandomColor = rand() % 3 + 1;
+	const float MaxCount = 60.0f; //1秒間のカウント
 
-	int RandomPos = rand() % 3 + 1;
+	int RandomColor;//パイプの色をランダムで決めるための変数
+
+	int RandomPos; //パイプの位置をランダムで決めるための変数
+
+	float BeforeColor;   //前回の色を保存するための変数
+	float BeforePosX;    //前回のX座標を保存するための変数
+
+	float NextX;        //次のX座標を計算して入れる変数
 
 	float MoveUpCount;    //移動を開始するまでの時間をカウントする変数
 
 	bool MoveUpFlg;       //移動を受け付けるフラグ
+
+	bool ReachBottomFlg; //底に到達したかどうかを管理するフラグ
 
 	PipeState m_State = PipeState::None;  //パイプの状態を管理する変数
 };

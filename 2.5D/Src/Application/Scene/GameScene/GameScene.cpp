@@ -21,12 +21,28 @@ void GameScene::Event()
 	Math::Matrix transMat = Math::Matrix::CreateTranslation(comPos);
 
 	m_camera->SetCameraMatrix(transMat);
+
+	if (m_pPipe && m_pPipe->GetReachBottom())
+	{
+		m_pPipe->SetReachBottom(); 
+
+		auto normalBall = std::make_shared<NormalBall>();
+		normalBall->SetPipe(m_pPipe);
+		normalBall->Init();
+		m_objList.push_back(normalBall);
+	}
 }
 
 void GameScene::Init()
 {
 
 	m_camera = std::make_unique<KdCamera>();
+
+	//パイプ
+	std::shared_ptr<Pipe> pipe;
+	pipe = std::make_shared<Pipe>();
+	m_pPipe = pipe.get();
+	m_objList.push_back(pipe);
 
 	//背景
 	std::shared_ptr<Back> back;
@@ -38,18 +54,4 @@ void GameScene::Init()
 	player = std::make_shared<Player>();
 	m_objList.push_back(player);
 
-	//パイプ
-	std::shared_ptr<Pipe> pipe;
-	pipe = std::make_shared<Pipe>();
-	m_objList.push_back(pipe);
-
-	//弾
-	//std::shared_ptr<NormalBall> ball;
-	//ball = std::make_shared<NormalBall>();
-	//m_objList.push_back(ball);
-
-	auto normalBall = std::make_shared<NormalBall>();
-	normalBall->SetPipe(pipe.get()); // パイプをセット
-	normalBall->Init();
-	m_objList.push_back(normalBall); // リストに追加
 }

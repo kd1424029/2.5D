@@ -17,4 +17,6 @@ private:
 
 	void ChildClassInit() override;
 
+	bool ColorGetFlg = false; //色取得済みフラグ
+
 };

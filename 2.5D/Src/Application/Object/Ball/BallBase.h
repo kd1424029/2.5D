@@ -21,7 +21,10 @@ public:
 	//セッター
 	void SetPipe(Pipe* pipe) { m_Pipe = pipe; }
 
-	void Destroy() { AliveFlg = false; }   //外部や自身から消滅させるための関数
+	void Destroy() //外部や自身から消滅させるための関数
+	{
+		m_isExpired = true;
+	}   
 
 protected:
 
@@ -37,5 +40,5 @@ protected:
 
 	float RotationX;
 
-	bool AliveFlg;
+	bool AliveFlg = true;
 };
