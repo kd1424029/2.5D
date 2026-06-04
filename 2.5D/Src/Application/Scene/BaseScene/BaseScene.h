@@ -38,6 +38,4 @@ protected :
 
 	// 全オブジェクトのアドレスをリストで管理
 	std::list<std::shared_ptr<KdGameObject>> m_objList;
-
-	std::vector<std::shared_ptr<KdGameObject>>	m_spGameObjectList{};
 };

@@ -17,5 +17,5 @@ void Back::Init()
 
 void Back::DrawLit()
 {
-	KdShaderManager::Instance().m_StandardShader.DrawPolygon(*m_BackPolygon, m_mWorld);
+	//KdShaderManager::Instance().m_StandardShader.DrawPolygon(*m_BackPolygon, m_mWorld);
 }

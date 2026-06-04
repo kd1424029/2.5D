@@ -6,7 +6,7 @@ void Player::Init()
 	m_PlayerModel = std::make_shared<KdModelData>();
 	m_PlayerModel->Load("Asset/Models/Player/Box.gltf");
 
-	m_pos = { 0,0,0 };
+	m_pos = { 0,1.9,0 };
 
 	MoveCoolDownCount = 0;
 
@@ -84,7 +84,7 @@ void Player::Update()
 	}
 
 	{//移動範囲の制限
-		if (m_pos.x >= MoveAmount)
+		if (m_pos.x >= MoveMaxAmount)
 		{
 			MoveFlgRight = false;
 		}
@@ -93,7 +93,7 @@ void Player::Update()
 			MoveFlgRight = true;
 		}
 
-		if (m_pos.x <= -MoveAmount)
+		if (m_pos.x <= -MoveMaxAmount)
 		{
 			MoveFlgLeft = false;
 		}

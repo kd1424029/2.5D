@@ -2,8 +2,6 @@
 
 #include"../BaseScene/BaseScene.h"
 
-class Pipe;
-
 class GameScene : public BaseScene
 {
 public :
@@ -16,7 +14,5 @@ private:
 	void Event() override;
 
 	void Init()  override;
-
-
-	Pipe* m_pPipe = nullptr;        
+   
 };

@@ -82,20 +82,11 @@
     <Filter Include="Src\Application\Object\Player">
       <UniqueIdentifier>{2f00b7fe-d517-4616-a95a-b0f9be48da82}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\Object\Pipe">
-      <UniqueIdentifier>{1f088743-4425-4004-9081-b66e8dee7548}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Src\Application\Object\Back">
       <UniqueIdentifier>{aefd5ecb-6ac0-44ba-a026-02aa4ea5c9d1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\Object\Ball">
-      <UniqueIdentifier>{790adc06-d66f-4466-aba0-2d3c09de6cb1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Src\Application\Object\Ball\NormalBall">
-      <UniqueIdentifier>{fec66313-582f-4cce-986d-129015fb951e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Src\Application\Object\Ball\SpikeBall">
-      <UniqueIdentifier>{aa94d277-5a51-4f86-a3d8-0fad87ee1677}</UniqueIdentifier>
+    <Filter Include="Src\Application\Object\BeltConveyor">
+      <UniqueIdentifier>{8a1dec88-47cc-402e-8362-19b166d918f5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -276,20 +267,11 @@
     <ClInclude Include="Src\Application\Object\Player\Player.h">
       <Filter>Src\Application\Object\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Object\Pipe\Pipe.h">
-      <Filter>Src\Application\Object\Pipe</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Application\Object\Back\Back.h">
       <Filter>Src\Application\Object\Back</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Object\Ball\NormalBall\NormalBall.h">
-      <Filter>Src\Application\Object\Ball\NormalBall</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Application\Object\Ball\BallBase.h">
-      <Filter>Src\Application\Object\Ball</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Application\Object\Ball\SpikeBall\SpikeBall.h">
-      <Filter>Src\Application\Object\Ball\SpikeBall</Filter>
+    <ClInclude Include="Src\Application\Object\BeltConveyor\BeltConveyor.h">
+      <Filter>Src\Application\Object\BeltConveyor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -440,20 +422,11 @@
     <ClCompile Include="Src\Application\Object\Player\Player.cpp">
       <Filter>Src\Application\Object\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\Object\Pipe\Pipe.cpp">
-      <Filter>Src\Application\Object\Pipe</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Application\Object\Back\Back.cpp">
       <Filter>Src\Application\Object\Back</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\Object\Ball\NormalBall\NormalBall.cpp">
-      <Filter>Src\Application\Object\Ball\NormalBall</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Application\Object\Ball\BallBase.cpp">
-      <Filter>Src\Application\Object\Ball</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Application\Object\Ball\SpikeBall\SpikeBall.cpp">
-      <Filter>Src\Application\Object\Ball\SpikeBall</Filter>
+    <ClCompile Include="Src\Application\Object\BeltConveyor\BeltConveyor.cpp">
+      <Filter>Src\Application\Object\BeltConveyor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

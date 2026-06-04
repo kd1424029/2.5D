@@ -10,8 +10,6 @@ void BaseScene::PreUpdate()
 	{
 		if ((*it)->IsExpired())	// IsExpired() ・・・ 無効ならtrue
 		{
-
-			OutputDebugStringA("[BaseScene] オブジェクト削除\n");
 			// 無効なオブジェクトをリストから削除
 			it = m_objList.erase(it);
 		}

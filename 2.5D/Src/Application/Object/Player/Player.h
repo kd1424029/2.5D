@@ -29,7 +29,10 @@ private:
 
 	Math::Vector3 m_TargetPos = { 0, 0, 0 };    // 移動先の目標座標
 	
-	const float MoveAmount = 2.0f;
+	const float MoveAmount = 2.3f;
+
+	const float MoveMaxAmount = 4.6f;   //移動の最大距離
+
 	const float MoveSpeed  = 0.5f;
 
 	bool MoveFlgLeft;   //移動の入力を受け付けるフラグ
@@ -37,7 +40,7 @@ private:
 
 	int MoveCoolDownCount; //クールタイムの残りフレーム数カウント
 
-	const int MoveCoolDownMax = 2;   //移動後に押しっぱなしで次へ進むまでの待ち時間
+	const int MoveCoolDownMax = 5;   //移動後に押しっぱなしで次へ進むまでの待ち時間
 
 	PlayerState m_State = PlayerState::Idle;  //プレイヤーの状態を管理する変数
 };
