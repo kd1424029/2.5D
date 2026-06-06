@@ -11,7 +11,7 @@ class Player : public KdGameObject
 {
 public:
 
-	Player() { Init(); };
+	Player() {};
 	~Player() {};
 
 	void Init() override;
@@ -22,10 +22,14 @@ public:
 
 	void DrawLit() override;
 
+	void GenerateDepthMapFromLight() override;
+
 private:
 
 	//モデルやテクスチャはポインタで管理
 	std::shared_ptr<KdModelData> m_PlayerModel;
+
+	Math::Vector3 m_pos = {};  //座標
 
 	Math::Vector3 m_TargetPos = { 0, 0, 0 };    // 移動先の目標座標
 	

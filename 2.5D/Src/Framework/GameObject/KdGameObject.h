@@ -82,8 +82,6 @@ protected:
 	// 3D空間に存在する機能
 	Math::Matrix	m_mWorld;
 
-	Math::Vector3 m_pos = {};  //座標
-
 	Math::Color m_color;
 
 	// 当たり判定クラス

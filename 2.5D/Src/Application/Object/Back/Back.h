@@ -4,7 +4,7 @@ class Back : public KdGameObject
 {
 public:
 
-	Back() { Init(); }
+	Back() {}
 	~Back() override{}
 
 	void Init() override;
@@ -14,4 +14,6 @@ public:
 private:
 
 	std::shared_ptr<KdSquarePolygon> m_BackPolygon;
+
+	Math::Vector3 m_pos = {};  //座標
 };

@@ -88,6 +88,12 @@
     <Filter Include="Src\Application\Object\BeltConveyor">
       <UniqueIdentifier>{8a1dec88-47cc-402e-8362-19b166d918f5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Ball">
+      <UniqueIdentifier>{d3f6edc0-50fd-4bc1-ad69-987e3b10a1d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Ball\BasketBall">
+      <UniqueIdentifier>{c64d1be1-5621-4660-a713-8b6a88198621}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -273,6 +279,12 @@
     <ClInclude Include="Src\Application\Object\BeltConveyor\BeltConveyor.h">
       <Filter>Src\Application\Object\BeltConveyor</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Ball\BallBase.h">
+      <Filter>Src\Application\Object\Ball</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Ball\BasketBall\BasketBall.h">
+      <Filter>Src\Application\Object\Ball\BasketBall</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -427,6 +439,12 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\BeltConveyor\BeltConveyor.cpp">
       <Filter>Src\Application\Object\BeltConveyor</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Ball\BallBase.cpp">
+      <Filter>Src\Application\Object\Ball</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Ball\BasketBall\BasketBall.cpp">
+      <Filter>Src\Application\Object\Ball\BasketBall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

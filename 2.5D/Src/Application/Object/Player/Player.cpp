@@ -6,7 +6,7 @@ void Player::Init()
 	m_PlayerModel = std::make_shared<KdModelData>();
 	m_PlayerModel->Load("Asset/Models/Player/Box.gltf");
 
-	m_pos = { 0,1.9,0 };
+	m_pos = { 0,1.9,0.2 };
 
 	MoveCoolDownCount = 0;
 
@@ -110,6 +110,11 @@ void Player::Update()
 }
 
 void Player::DrawLit()
+{
+	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_PlayerModel, m_mWorld);
+}
+
+void Player::GenerateDepthMapFromLight()
 {
 	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_PlayerModel, m_mWorld);
 }
