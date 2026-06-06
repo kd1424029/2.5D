@@ -3,12 +3,12 @@
 void Back::Init()
 {
 	//ポインタのままでは使い物にならないので、実体化
-	m_BackPolygon = std::make_shared<KdSquarePolygon>();
-	m_BackPolygon->SetMaterial("Asset/Textures/Back/Back.png");
+	m_BackModel = std::make_shared<KdModelData>();
+	m_BackModel->Load("Asset/Models/Back/Back.gltf");
 
-	m_pos = { 0,0,15 };
+	m_pos = { 0,0,4 };
 
-	Math::Matrix scaleMat = Math::Matrix::CreateScale(200, 200, 1);
+	Math::Matrix scaleMat = Math::Matrix::CreateScale(1, 2, 2);
 
 	Math::Matrix transMat = Math::Matrix::CreateTranslation(m_pos);
 
@@ -17,5 +17,5 @@ void Back::Init()
 
 void Back::DrawLit()
 {
-	//KdShaderManager::Instance().m_StandardShader.DrawPolygon(*m_BackPolygon, m_mWorld);
+	//KdShaderManager::Instance().m_StandardShader.DrawModel(*m_BackModel, m_mWorld);
 }

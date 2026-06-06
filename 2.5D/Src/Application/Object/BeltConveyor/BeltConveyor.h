@@ -8,7 +8,7 @@ public:
 	BeltConveyor() {}
 	~BeltConveyor() {}
 
-	void Init();
+	void Init() override;
 
 	void Update() override;
 

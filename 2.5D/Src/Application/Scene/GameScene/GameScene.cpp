@@ -4,7 +4,8 @@
 #include "../../Object/Player/Player.h"
 #include "../../Object/Back/Back.h"
 #include "../../Object/BeltConveyor/BeltConveyor.h"
-#include "../../Object/Ball/BasketBall/BasketBall.h"
+#include "../../Object/Ball/BallGenerate.h" 
+#include "../../Object/Pipe/Pipe.h"
 
 void GameScene::Event()
 {
@@ -17,13 +18,13 @@ void GameScene::Event()
 	}
 
 	//カメラ用
-	Math::Vector3 comPos = { 0,5,-7 };//{ 0, 10 , 0 };
+	Math::Vector3 comPos = { 0,5,-7 };//{-6, 6, -1};//{ 0, 10 , 0 };
 
 	//Math::Matrix rotation = Math::Matrix::CreateRotationX(DirectX::XMConvertToRadians(90.0f));
 
 	Math::Matrix transMat = Math::Matrix::CreateTranslation(comPos);
 
-	m_camera->SetCameraMatrix(transMat);	
+	m_camera->SetCameraMatrix(transMat);
 	
 }
 
@@ -50,9 +51,13 @@ void GameScene::Init()
 	beltConveyor->Init();
 	m_objList.push_back(beltConveyor);
 
-	//バスケットボール
-	std::shared_ptr<BasketBall> basketBall;
-	basketBall = std::make_shared<BasketBall>();
-	basketBall->Init();
-	m_objList.push_back(basketBall);
+	// ボール：BallGenerate がランダムに種類を決めて生成する
+	BallGenerate ballGenerator;
+	m_objList.push_back(ballGenerator.Generate());
+
+	//パイプ
+	std::shared_ptr<Pipe> pipe;
+	pipe = std::make_shared<Pipe>();
+	pipe->Init();
+	m_objList.push_back(pipe);
 }

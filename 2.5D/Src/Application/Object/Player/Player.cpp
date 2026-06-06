@@ -6,7 +6,7 @@ void Player::Init()
 	m_PlayerModel = std::make_shared<KdModelData>();
 	m_PlayerModel->Load("Asset/Models/Player/Box.gltf");
 
-	m_pos = { 0,1.9,0.2 };
+	m_pos = { 0,1.9,-0.1 };
 
 	MoveCoolDownCount = 0;
 

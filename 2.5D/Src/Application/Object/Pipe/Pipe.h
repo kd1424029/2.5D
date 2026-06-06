@@ -1,19 +1,23 @@
 ﻿#pragma once
 
-class Back : public KdGameObject
+class Pipe : public KdGameObject
 {
+
 public:
 
-	Back() {}
-	~Back() override{}
+	Pipe() {}
+	~Pipe() {}
 
 	void Init() override;
+
+	void Update() override;
 
 	void DrawLit() override;
 
 private:
 
-	std::shared_ptr<KdModelData> m_BackModel;
+	std::shared_ptr<KdModelData> m_PipeModel;
 
 	Math::Vector3 m_pos = {};  //座標
+
 };
