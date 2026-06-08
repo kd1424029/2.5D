@@ -8,14 +8,29 @@
 		{
 			"name":"Scene",
 			"nodes":[
-				0
+				0,
+				1
 			]
 		}
 	],
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"Solid.001"
+			"name":"COL",
+			"scale":[
+				-0.31657516956329346,
+				-0.31657516956329346,
+				-0.31657516956329346
+			]
+		},
+		{
+			"mesh":1,
+			"name":"Solid.001",
+			"scale":[
+				0.9225705862045288,
+				0.9225705862045288,
+				0.9225705862045288
+			]
 		}
 	],
 	"materials":[
@@ -40,22 +55,35 @@
 	],
 	"meshes":[
 		{
-			"name":"Solid.001",
+			"name":"\u7acb\u65b9\u4f53",
 			"primitives":[
 				{
 					"attributes":{
 						"POSITION":0,
-						"NORMAL":1
+						"NORMAL":1,
+						"TEXCOORD_0":2
 					},
-					"indices":2,
+					"indices":3
+				}
+			]
+		},
+		{
+			"name":"Solid.001",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":4,
+						"NORMAL":5
+					},
+					"indices":6,
 					"material":0
 				},
 				{
 					"attributes":{
-						"POSITION":3,
-						"NORMAL":4
+						"POSITION":7,
+						"NORMAL":8
 					},
-					"indices":5,
+					"indices":9,
 					"material":1
 				}
 			]
@@ -64,6 +92,40 @@
 	"accessors":[
 		{
 			"bufferView":0,
+			"componentType":5126,
+			"count":24,
+			"max":[
+				1,
+				1,
+				1
+			],
+			"min":[
+				-1,
+				-1,
+				-1
+			],
+			"type":"VEC3"
+		},
+		{
+			"bufferView":1,
+			"componentType":5126,
+			"count":24,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":2,
+			"componentType":5126,
+			"count":24,
+			"type":"VEC2"
+		},
+		{
+			"bufferView":3,
+			"componentType":5123,
+			"count":36,
+			"type":"SCALAR"
+		},
+		{
+			"bufferView":4,
 			"componentType":5126,
 			"count":10880,
 			"max":[
@@ -79,19 +141,19 @@
 			"type":"VEC3"
 		},
 		{
-			"bufferView":1,
+			"bufferView":5,
 			"componentType":5126,
 			"count":10880,
 			"type":"VEC3"
 		},
 		{
-			"bufferView":2,
+			"bufferView":6,
 			"componentType":5123,
 			"count":65160,
 			"type":"SCALAR"
 		},
 		{
-			"bufferView":3,
+			"bufferView":7,
 			"componentType":5126,
 			"count":5472,
 			"max":[
@@ -107,13 +169,13 @@
 			"type":"VEC3"
 		},
 		{
-			"bufferView":4,
+			"bufferView":8,
 			"componentType":5126,
 			"count":5472,
 			"type":"VEC3"
 		},
 		{
-			"bufferView":5,
+			"bufferView":9,
 			"componentType":5123,
 			"count":32580,
 			"type":"SCALAR"
@@ -122,44 +184,68 @@
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":130560,
+			"byteLength":288,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
+			"byteLength":288,
+			"byteOffset":288,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":192,
+			"byteOffset":576,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":72,
+			"byteOffset":768,
+			"target":34963
+		},
+		{
+			"buffer":0,
 			"byteLength":130560,
-			"byteOffset":130560,
+			"byteOffset":840,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":130560,
+			"byteOffset":131400,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":130320,
-			"byteOffset":261120,
+			"byteOffset":261960,
 			"target":34963
 		},
 		{
 			"buffer":0,
 			"byteLength":65664,
-			"byteOffset":391440,
+			"byteOffset":392280,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":65664,
-			"byteOffset":457104,
+			"byteOffset":457944,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":65160,
-			"byteOffset":522768,
+			"byteOffset":523608,
 			"target":34963
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":587928,
+			"byteLength":588768,
 			"uri":"SoccerBall.bin"
 		}
 	]

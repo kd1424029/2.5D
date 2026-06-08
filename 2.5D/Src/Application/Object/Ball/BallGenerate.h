@@ -14,7 +14,7 @@ public:
 
 private:
 
-	const int BallCount = 2;
+	const int BallCount = 3;
 
 
 	const Math::Vector3 FirstLeftPos = { -6,3.7,0 };//最初の左側の位置

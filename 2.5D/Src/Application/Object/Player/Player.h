@@ -13,11 +13,15 @@ public:
 
 	void Update() override;
 
+	void PostUpdate() override;
+
 	void DrawLit() override;
 
 	void GenerateDepthMapFromLight() override;
 
 private:
+
+	void UpdateCollider(); //当たり判定用
 
 	enum class PlayerState
 	{

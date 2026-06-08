@@ -31,7 +31,6 @@ public:
 	void PostUpdate() override;
 
 	void DrawLit() override;
-		
 
 	void SetPos(const Math::Vector3& pos) { m_pos = pos; }
 

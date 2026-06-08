@@ -9,7 +9,8 @@
 			"name":"Scene",
 			"nodes":[
 				0,
-				1
+				1,
+				2
 			]
 		}
 	],
@@ -36,6 +37,20 @@
 				0.010791731998324394,
 				0.04851705953478813,
 				1.0318623781204224
+			]
+		},
+		{
+			"mesh":2,
+			"name":"COL",
+			"scale":[
+				1,
+				0.26127302646636963,
+				1
+			],
+			"translation":[
+				0,
+				-0.4558497667312622,
+				0
 			]
 		}
 	],
@@ -146,6 +161,19 @@
 					},
 					"indices":17,
 					"material":4
+				}
+			]
+		},
+		{
+			"name":"\u7acb\u65b9\u4f53",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":18,
+						"NORMAL":19,
+						"TEXCOORD_0":20
+					},
+					"indices":21
 				}
 			]
 		}
@@ -308,6 +336,40 @@
 			"componentType":5123,
 			"count":32580,
 			"type":"SCALAR"
+		},
+		{
+			"bufferView":18,
+			"componentType":5126,
+			"count":24,
+			"max":[
+				1,
+				1,
+				1
+			],
+			"min":[
+				-1,
+				-1,
+				-1
+			],
+			"type":"VEC3"
+		},
+		{
+			"bufferView":19,
+			"componentType":5126,
+			"count":24,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":20,
+			"componentType":5126,
+			"count":24,
+			"type":"VEC2"
+		},
+		{
+			"bufferView":21,
+			"componentType":5123,
+			"count":36,
+			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
@@ -418,11 +480,35 @@
 			"byteLength":65160,
 			"byteOffset":753232,
 			"target":34963
+		},
+		{
+			"buffer":0,
+			"byteLength":288,
+			"byteOffset":818392,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":288,
+			"byteOffset":818680,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":192,
+			"byteOffset":818968,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":72,
+			"byteOffset":819160,
+			"target":34963
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":818392,
+			"byteLength":819232,
 			"uri":"SoccerBallBox.bin"
 		}
 	]

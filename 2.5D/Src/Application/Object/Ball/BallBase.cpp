@@ -195,6 +195,26 @@ void BallBase::PostUpdate()
 	Math::Matrix rotationZMat = Math::Matrix::CreateRotationZ(DirectX::XMConvertToRadians(RotationZ));
 
 	m_mWorld =scaleMat * rotationZMat * rotationXMat * transMat;
+
+
+	// ======================= Box（プレイヤー）との判定 ============================
+	KdCollider::SphereInfo damageSphere;
+
+	damageSphere.m_sphere.Center = m_pos;
+	damageSphere.m_sphere.Radius = 0.3f;
+	damageSphere.m_type = KdCollider::TypeDamage; //TypeDamageで探す
+
+	std::list<KdCollider::CollisionResult> retDamageList;
+
+	for (auto& obj : SceneManager::Instance().GetObjList())
+	{
+		retDamageList.clear();
+		if (obj->Intersects(damageSphere, &retDamageList))
+		{
+			m_isExpired = true;
+			break;
+		}
+	}
 }
 
 void BallBase::DrawLit()

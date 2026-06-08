@@ -1,5 +1,7 @@
 ﻿#include "Player.h"
 
+#include "../../Scene/SceneManager.h"
+
 void Player::Init()
 {
 	//ポインタのままでは使い物にならないので、実体化
@@ -25,6 +27,8 @@ void Player::Init()
 	MoveFlgLeft = true;
 
 	MoveFlgRight = true;
+
+	UpdateCollider();
 }
 
 void Player::PreUpdate()
@@ -114,6 +118,9 @@ void Player::Update()
 			if (m_pos.z > BoxPosZ)
 			{
 				m_pos.z = BoxPosZ;
+
+				UpdateCollider();
+
 				m_State = PlayerState::Idle; //待機状態へ
 			}
 		}
@@ -142,48 +149,52 @@ void Player::Update()
 	}
 
 	//Box切り替え処理
-
-	// 1. まず、どれか1つでも切り替えキーが押されているかチェック
-	if ((GetAsyncKeyState('Z') & 0x8000) ||(GetAsyncKeyState('X') & 0x8000) ||(GetAsyncKeyState('C') & 0x8000))
+	if ((GetAsyncKeyState('Z') & 0x8000) || (GetAsyncKeyState('X') & 0x8000))
 	{
-		// 待機状態(Idle)かつ、まだ押しっぱなしロックがかかっていない時だけ受け付ける
+		//待機状態かつ押しっぱなしロックがかかっていない時だけ受け付ける
 		if (KeyFlg == false && m_State == PlayerState::Idle)
 		{
-			// 押されたキーに応じて、次に切り替える箱のタイプをあらかじめ決定する
+			//BoxTypeをintに変換して循環計算する
+			int current = static_cast<int>(m_BoxType);
+
+			const int Adjustment = 1;
+
+			const int BoxTypeCount = 3; //Box種類の総数
+
 			if (GetAsyncKeyState('Z') & 0x8000)
 			{
-				m_NextBoxType = BoxType::BasketBallBox;
+				//順送り0→1→2→0
+				m_NextBoxType = static_cast<BoxType>((current + Adjustment) % BoxTypeCount);
 			}
-
 			else if (GetAsyncKeyState('X') & 0x8000)
 			{
-				m_NextBoxType = BoxType::VolleyBallBox;
+				//逆送り0→2→1→0
+				m_NextBoxType = static_cast<BoxType>((current + BoxTypeCount - Adjustment) % BoxTypeCount);
 			}
 
-			else if (GetAsyncKeyState('C') & 0x8000)
-			{
-				m_NextBoxType = BoxType::SoccerBallBox;
-			}
-
-			//すでにその箱だったら下がる必要はないという最適化を入れる
+			//すでに同じBoxなら切り替え不要
 			if (m_BoxType != m_NextBoxType)
 			{
-				m_State = PlayerState::SwitchOut; // 後ろに下がる状態へ移行！
-				KeyFlg = true;                    // 押しっぱなし防止ロック！
+				m_State = PlayerState::SwitchOut; //後ろに下がる状態へ
+				KeyFlg = true;                    //押しっぱなし防止ロック
 			}
 		}
 	}
 	else
 	{
-		// Z, X, C のどれも押されていない時だけロックを解除
+		//Z X どちらも押されていない時だけロック解除
 		KeyFlg = false;
 	}
-
 
 	Math::Matrix transMat = Math::Matrix::CreateTranslation(m_pos);
 
 	m_mWorld = transMat;
 
+}
+
+void Player::PostUpdate()
+{
+	
 }
 
 void Player::DrawLit()
@@ -216,5 +227,35 @@ void Player::GenerateDepthMapFromLight()
 	else if (m_BoxType == BoxType::SoccerBallBox)
 	{
 		KdShaderManager::Instance().m_StandardShader.DrawModel(*m_SoccerBallBoxModel, m_mWorld);
+	}
+}
+
+void Player::UpdateCollider()
+{
+	m_pCollider = std::make_unique<KdCollider>();
+
+	if (m_BoxType == BoxType::BasketBallBox)
+	{
+		m_pCollider->RegisterCollisionShape(
+			"BasketBallBoxModelCollision",
+			m_BasketBallBoxModel,
+			KdCollider::TypeDamage
+		);
+	}
+	else if (m_BoxType == BoxType::VolleyBallBox)
+	{
+		m_pCollider->RegisterCollisionShape(
+			"VolleyBallBoxModelCollision",
+			m_ValleyBallBoxModel,
+			KdCollider::TypeDamage
+		);
+	}
+	else if (m_BoxType == BoxType::SoccerBallBox)
+	{
+		m_pCollider->RegisterCollisionShape(
+			"SoccerBallBoxModelCollision",
+			m_SoccerBallBoxModel,
+			KdCollider::TypeDamage
+		);
 	}
 }

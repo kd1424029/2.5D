@@ -8,7 +8,8 @@
 		{
 			"name":"Scene",
 			"nodes":[
-				0
+				0,
+				1
 			]
 		}
 	],
@@ -16,6 +17,15 @@
 		{
 			"mesh":0,
 			"name":"basketball"
+		},
+		{
+			"mesh":1,
+			"name":"COL",
+			"scale":[
+				-0.2872333526611328,
+				-0.2872333526611328,
+				-0.2872333526611328
+			]
 		}
 	],
 	"materials":[
@@ -43,6 +53,19 @@
 					},
 					"indices":3,
 					"material":0
+				}
+			]
+		},
+		{
+			"name":"\u7acb\u65b9\u4f53",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":4,
+						"NORMAL":5,
+						"TEXCOORD_0":6
+					},
+					"indices":7
 				}
 			]
 		}
@@ -94,6 +117,40 @@
 			"componentType":5123,
 			"count":3264,
 			"type":"SCALAR"
+		},
+		{
+			"bufferView":4,
+			"componentType":5126,
+			"count":24,
+			"max":[
+				1,
+				1,
+				1
+			],
+			"min":[
+				-1,
+				-1,
+				-1
+			],
+			"type":"VEC3"
+		},
+		{
+			"bufferView":5,
+			"componentType":5126,
+			"count":24,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":6,
+			"componentType":5126,
+			"count":24,
+			"type":"VEC2"
+		},
+		{
+			"bufferView":7,
+			"componentType":5123,
+			"count":36,
+			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
@@ -120,6 +177,30 @@
 			"byteLength":6528,
 			"byteOffset":18944,
 			"target":34963
+		},
+		{
+			"buffer":0,
+			"byteLength":288,
+			"byteOffset":25472,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":288,
+			"byteOffset":25760,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":192,
+			"byteOffset":26048,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":72,
+			"byteOffset":26240,
+			"target":34963
 		}
 	],
 	"samplers":[
@@ -130,7 +211,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":25472,
+			"byteLength":26312,
 			"uri":"BasketBall.bin"
 		}
 	]

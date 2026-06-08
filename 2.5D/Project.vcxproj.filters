@@ -97,6 +97,9 @@
     <Filter Include="Src\Application\Object\Ball\VolleyBall">
       <UniqueIdentifier>{d76ca928-fcff-40e4-a349-ad0a3074b3b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Ball\SoccerBall">
+      <UniqueIdentifier>{8faa1916-50b4-4ca7-ab58-f2c4b3e69ac0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -294,6 +297,9 @@
     <ClInclude Include="Src\Application\Object\Ball\VolleyBall\VolleyBall.h">
       <Filter>Src\Application\Object\Ball\VolleyBall</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Ball\SoccerBall\SoccerBall.h">
+      <Filter>Src\Application\Object\Ball\SoccerBall</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -460,6 +466,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Ball\VolleyBall\VolleyBall.cpp">
       <Filter>Src\Application\Object\Ball\VolleyBall</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Ball\SoccerBall\SoccerBall.cpp">
+      <Filter>Src\Application\Object\Ball\SoccerBall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

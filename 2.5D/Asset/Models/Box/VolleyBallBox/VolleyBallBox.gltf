@@ -12,7 +12,8 @@
 			"name":"Scene",
 			"nodes":[
 				0,
-				1
+				1,
+				2
 			]
 		}
 	],
@@ -39,6 +40,20 @@
 				0.007291398011147976,
 				0.060897596180438995,
 				1.0304181575775146
+			]
+		},
+		{
+			"mesh":2,
+			"name":"COL",
+			"scale":[
+				1,
+				0.2891331911087036,
+				1
+			],
+			"translation":[
+				0,
+				-0.3792194426059723,
+				0
 			]
 		}
 	],
@@ -139,6 +154,19 @@
 					},
 					"indices":15,
 					"material":3
+				}
+			]
+		},
+		{
+			"name":"\u7acb\u65b9\u4f53",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":16,
+						"NORMAL":17,
+						"TEXCOORD_0":18
+					},
+					"indices":19
 				}
 			]
 		}
@@ -292,6 +320,40 @@
 			"componentType":5125,
 			"count":99702,
 			"type":"SCALAR"
+		},
+		{
+			"bufferView":16,
+			"componentType":5126,
+			"count":24,
+			"max":[
+				1,
+				1,
+				1
+			],
+			"min":[
+				-1,
+				-1,
+				-1
+			],
+			"type":"VEC3"
+		},
+		{
+			"bufferView":17,
+			"componentType":5126,
+			"count":24,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":18,
+			"componentType":5126,
+			"count":24,
+			"type":"VEC2"
+		},
+		{
+			"bufferView":19,
+			"componentType":5123,
+			"count":36,
+			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
@@ -390,6 +452,30 @@
 			"byteLength":398808,
 			"byteOffset":2224680,
 			"target":34963
+		},
+		{
+			"buffer":0,
+			"byteLength":288,
+			"byteOffset":2623488,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":288,
+			"byteOffset":2623776,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":192,
+			"byteOffset":2624064,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":72,
+			"byteOffset":2624256,
+			"target":34963
 		}
 	],
 	"samplers":[
@@ -400,7 +486,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":2623488,
+			"byteLength":2624328,
 			"uri":"VolleyBallBox.bin"
 		}
 	]

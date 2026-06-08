@@ -4,19 +4,20 @@
 
 #include "Volleyball/Volleyball.h"
 
+#include "SoccerBall/SoccerBall.h"
+
 
 std::shared_ptr<BallBase> BallGenerate::Generate()
 {
 	std::shared_ptr<BallBase> ball;
 
 	//ボールの種類数
-	const int ballTypeCount = BallCount; //BasketBall=0　VolleyBall=1
-
+	const int ballTypeCount = BallCount; //BasketBall=0　VolleyBall=1 SoccerBall=2
 
 	int ballType;
 
 	//前回と同じにならないように選び直す
-	static int lastBallType = None;
+	static int lastBallType = -1;
 
 	do
 	{
@@ -39,6 +40,12 @@ std::shared_ptr<BallBase> BallGenerate::Generate()
 		ball = std::make_shared<VolleyBall>();
 
 		break;
+
+	case 2:
+
+		ball = std::make_shared<SoccerBall>();
+
+		break;
 	}
 
 
@@ -55,6 +62,7 @@ std::shared_ptr<BallBase> BallGenerate::Generate()
 		//初回だけはランダムで 0(左) か 1(右) を決める
 		currentPosType = rand() % 2;
 	}
+
 	else
 	{
 		//2回目以降は必ず反転（0なら1、1なら0）
