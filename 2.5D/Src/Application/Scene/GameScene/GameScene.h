@@ -16,4 +16,5 @@ private:
 
 	void Init()  override;
 
+	int GenerateTimer;
 };

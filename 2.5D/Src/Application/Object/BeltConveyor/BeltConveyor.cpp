@@ -6,7 +6,7 @@ void BeltConveyor::Init()
 	m_BeltConveyorModel = std::make_shared<KdModelData>();
 	m_BeltConveyorModel->Load("Asset/Models/BeltConveyor/BeltConveyor.gltf");
 
-	m_pos = {0,3,6.4};
+	m_pos = {0,3,6.5};
 
 	Math::Matrix transMat = Math::Matrix::CreateTranslation(m_pos);
 

@@ -5,7 +5,6 @@
 #include "../../Object/Back/Back.h"
 #include "../../Object/BeltConveyor/BeltConveyor.h"
 #include "../../Object/Ball/BallGenerate.h" 
-#include "../../Object/Pipe/Pipe.h"
 
 void GameScene::Event()
 {
@@ -26,10 +25,24 @@ void GameScene::Event()
 
 	m_camera->SetCameraMatrix(transMat);
 	
+
+	GenerateTimer--;
+	if (GenerateTimer <= 0)
+	{
+		//BallGenerateがランダムに種類を決めて生成する
+		BallGenerate ballGenerator;
+		m_objList.push_back(ballGenerator.Generate());
+
+		// タイマーをリセット（次の生成までのフレーム数）
+		GenerateTimer = 180; // 2秒間隔
+	}
+
 }
 
 void GameScene::Init()
 {
+	GenerateTimer = 180;
+
 
 	m_camera = std::make_unique<KdCamera>();
 
@@ -51,13 +64,4 @@ void GameScene::Init()
 	beltConveyor->Init();
 	m_objList.push_back(beltConveyor);
 
-	// ボール：BallGenerate がランダムに種類を決めて生成する
-	BallGenerate ballGenerator;
-	m_objList.push_back(ballGenerator.Generate());
-
-	//パイプ
-	std::shared_ptr<Pipe> pipe;
-	pipe = std::make_shared<Pipe>();
-	pipe->Init();
-	m_objList.push_back(pipe);
 }

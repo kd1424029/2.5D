@@ -1,14 +1,6 @@
 ﻿#pragma once
 #include "BallBase.h"
 
-enum class BallType
-{
-	BasketBall,    //バスケットボール   (0番目)
-	SoccerBall,    //サッカーボール		(1番目)
-	VolleyBall,    //バレーボール		(2番目)
-	None,          //ボールの種類が未定義
-};
-
 class BallGenerate
 {
 public:
@@ -19,4 +11,13 @@ public:
 	// ランダムなボールを1つ生成して返す
 	std::shared_ptr<BallBase> Generate();
 
+
+private:
+
+	const int BallCount = 2;
+
+
+	const Math::Vector3 FirstLeftPos = { -6,3.7,0 };//最初の左側の位置
+
+	const Math::Vector3 FirstRightPos = { 6,3.7,0 }; //最初の右側の位置
 };

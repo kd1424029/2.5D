@@ -94,8 +94,8 @@
     <Filter Include="Src\Application\Object\Ball\BasketBall">
       <UniqueIdentifier>{c64d1be1-5621-4660-a713-8b6a88198621}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\Object\Pipe">
-      <UniqueIdentifier>{3e7743cb-e913-4edf-8467-17c9a032a36b}</UniqueIdentifier>
+    <Filter Include="Src\Application\Object\Ball\VolleyBall">
+      <UniqueIdentifier>{d76ca928-fcff-40e4-a349-ad0a3074b3b1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -288,11 +288,11 @@
     <ClInclude Include="Src\Application\Object\Ball\BasketBall\BasketBall.h">
       <Filter>Src\Application\Object\Ball\BasketBall</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Object\Pipe\Pipe.h">
-      <Filter>Src\Application\Object\Pipe</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Application\Object\Ball\BallGenerate.h">
       <Filter>Src\Application\Object\Ball</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Ball\VolleyBall\VolleyBall.h">
+      <Filter>Src\Application\Object\Ball\VolleyBall</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -455,11 +455,11 @@
     <ClCompile Include="Src\Application\Object\Ball\BasketBall\BasketBall.cpp">
       <Filter>Src\Application\Object\Ball\BasketBall</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\Object\Pipe\Pipe.cpp">
-      <Filter>Src\Application\Object\Pipe</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Application\Object\Ball\BallGenerate.cpp">
       <Filter>Src\Application\Object\Ball</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Ball\VolleyBall\VolleyBall.cpp">
+      <Filter>Src\Application\Object\Ball\VolleyBall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

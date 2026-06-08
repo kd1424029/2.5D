@@ -3,12 +3,16 @@
 		"generator":"Khronos glTF Blender I/O v5.1.19",
 		"version":"2.0"
 	},
+	"extensionsUsed":[
+		"KHR_materials_specular"
+	],
 	"scene":0,
 	"scenes":[
 		{
 			"name":"Scene",
 			"nodes":[
-				0
+				0,
+				1
 			]
 		}
 	],
@@ -21,6 +25,20 @@
 				0,
 				0,
 				0.7071068286895752
+			]
+		},
+		{
+			"mesh":1,
+			"name":"volleyball",
+			"scale":[
+				1,
+				1,
+				0.15392319858074188
+			],
+			"translation":[
+				0.007291398011147976,
+				0.060897596180438995,
+				1.0304181575775146
 			]
 		}
 	],
@@ -60,6 +78,21 @@
 				"metallicFactor":0,
 				"roughnessFactor":0.525658369064331
 			}
+		},
+		{
+			"doubleSided":true,
+			"extensions":{
+				"KHR_materials_specular":{
+					"specularFactor":0
+				}
+			},
+			"name":"orig_normal",
+			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":0
+				},
+				"metallicFactor":0
+			}
 		}
 	],
 	"meshes":[
@@ -94,6 +127,33 @@
 					"material":2
 				}
 			]
+		},
+		{
+			"name":"volleyball",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":12,
+						"NORMAL":13,
+						"TEXCOORD_0":14
+					},
+					"indices":15,
+					"material":3
+				}
+			]
+		}
+	],
+	"textures":[
+		{
+			"sampler":0,
+			"source":0
+		}
+	],
+	"images":[
+		{
+			"mimeType":"image/jpeg",
+			"name":"volleyball_diffuse_noAO",
+			"uri":"volleyball_diffuse_noAO.jpg"
 		}
 	],
 	"accessors":[
@@ -198,6 +258,40 @@
 			"componentType":5123,
 			"count":186,
 			"type":"SCALAR"
+		},
+		{
+			"bufferView":12,
+			"componentType":5126,
+			"count":69346,
+			"max":[
+				0.4482615888118744,
+				0.4482947289943695,
+				0.44883331656455994
+			],
+			"min":[
+				-0.44841471314430237,
+				-0.4481527507305145,
+				-0.4489020109176636
+			],
+			"type":"VEC3"
+		},
+		{
+			"bufferView":13,
+			"componentType":5126,
+			"count":69346,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":14,
+			"componentType":5126,
+			"count":69346,
+			"type":"VEC2"
+		},
+		{
+			"bufferView":15,
+			"componentType":5125,
+			"count":99702,
+			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
@@ -272,12 +366,42 @@
 			"byteLength":372,
 			"byteOffset":5236,
 			"target":34963
+		},
+		{
+			"buffer":0,
+			"byteLength":832152,
+			"byteOffset":5608,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":832152,
+			"byteOffset":837760,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":554768,
+			"byteOffset":1669912,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":398808,
+			"byteOffset":2224680,
+			"target":34963
+		}
+	],
+	"samplers":[
+		{
+			"magFilter":9729,
+			"minFilter":9987
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":5608,
-			"uri":"Box.bin"
+			"byteLength":2623488,
+			"uri":"VolleyBallBox.bin"
 		}
 	]
 }

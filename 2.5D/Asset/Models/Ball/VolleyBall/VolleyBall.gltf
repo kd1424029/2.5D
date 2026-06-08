@@ -3,6 +3,9 @@
 		"generator":"Khronos glTF Blender I/O v5.1.19",
 		"version":"2.0"
 	},
+	"extensionsUsed":[
+		"KHR_materials_specular"
+	],
 	"scene":0,
 	"scenes":[
 		{
@@ -15,36 +18,45 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"basketball",
+			"name":"volleyball",
 			"rotation":[
-				0,
-				0.7027896046638489,
-				0,
-				0.7113978266716003
+				0.6728560328483582,
+				-0.016640877351164818,
+				-0.19100403785705566,
+				0.7144965529441833
 			],
 			"scale":[
-				3.969102144241333,
-				3.969101905822754,
-				3.969102144241333
+				1.4242205619812012,
+				1.4242205619812012,
+				1.4242205619812012
+			],
+			"translation":[
+				0.007260873913764954,
+				0.012241661548614502,
+				-0.030894935131072998
 			]
 		}
 	],
 	"materials":[
 		{
 			"doubleSided":true,
-			"name":"\u30de\u30c6\u30ea\u30a2\u30eb",
+			"extensions":{
+				"KHR_materials_specular":{
+					"specularFactor":0
+				}
+			},
+			"name":"orig_normal",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":0
 				},
-				"metallicFactor":0,
-				"roughnessFactor":0.5
+				"metallicFactor":0
 			}
 		}
 	],
 	"meshes":[
 		{
-			"name":"basketball",
+			"name":"volleyball",
 			"primitives":[
 				{
 					"attributes":{
@@ -66,70 +78,70 @@
 	],
 	"images":[
 		{
-			"mimeType":"image/png",
-			"name":"classic_baseColor",
-			"uri":"classic_baseColor.png"
+			"mimeType":"image/jpeg",
+			"name":"volleyball_diffuse_noAO",
+			"uri":"volleyball_diffuse_noAO.jpg"
 		}
 	],
 	"accessors":[
 		{
 			"bufferView":0,
 			"componentType":5126,
-			"count":592,
+			"count":66468,
 			"max":[
-				0.11646680533885956,
-				0.11642046272754669,
-				0.1196521669626236
+				0.31779542565345764,
+				0.31623250246047974,
+				0.3169407844543457
 			],
 			"min":[
-				-0.11646673083305359,
-				-0.11642053723335266,
-				-0.11965228617191315
+				-0.31787624955177307,
+				-0.31626421213150024,
+				-0.31700587272644043
 			],
 			"type":"VEC3"
 		},
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":592,
+			"count":66468,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":592,
+			"count":66468,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":3,
-			"componentType":5123,
-			"count":3264,
+			"componentType":5125,
+			"count":99702,
 			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":7104,
+			"byteLength":797616,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":7104,
-			"byteOffset":7104,
+			"byteLength":797616,
+			"byteOffset":797616,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":4736,
-			"byteOffset":14208,
+			"byteLength":531744,
+			"byteOffset":1595232,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":6528,
-			"byteOffset":18944,
+			"byteLength":398808,
+			"byteOffset":2126976,
 			"target":34963
 		}
 	],
@@ -141,8 +153,8 @@
 	],
 	"buffers":[
 		{
-			"byteLength":25472,
-			"uri":"BasketBall.bin"
+			"byteLength":2525784,
+			"uri":"VolleyBall.bin"
 		}
 	]
 }

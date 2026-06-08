@@ -1,26 +1,26 @@
-﻿#include "BasketBall.h"
+﻿#include "VolleyBall.h"
 
-void BasketBall::Init()
+void VolleyBall::Init()
 {
 	BallBase::Init();
 
 	//ポインタのままでは使い物にならないので、実体化
 	m_BallModel = std::make_shared<KdModelData>();
-	m_BallModel->Load("Asset/Models/Ball/BasketBall/BasketBall.gltf");
+	m_BallModel->Load("Asset/Models/Ball/VolleyBall/VolleyBall.gltf");
 
 }
 
-void BasketBall::Update()
+void VolleyBall::Update()
 {
 	BallBase::Update();
 }
 
-void BasketBall::PostUpdate()
+void VolleyBall::PostUpdate()
 {
 	BallBase::PostUpdate();
 }
 
-void BasketBall::DrawLit()
+void VolleyBall::DrawLit()
 {
 	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_BallModel, m_mWorld);
 }

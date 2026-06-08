@@ -1,64 +1,79 @@
 ﻿#include "BallGenerate.h"
 
 #include "BasketBall/BasketBall.h"
-// 追加するボールはここに include する
-// #include "Football/Football.h"
-// #include "Volleyball/Volleyball.h"
+
+#include "Volleyball/Volleyball.h"
 
 
 std::shared_ptr<BallBase> BallGenerate::Generate()
 {
 	std::shared_ptr<BallBase> ball;
 
-	const int Adjustment = 1;
+	//ボールの種類数
+	const int ballTypeCount = BallCount; //BasketBall=0　VolleyBall=1
 
-	//rand() で十分だが速度差が無視できるくらい小さいのでコストゼロで質を上げられるならそうしておく判断
 
-	//高性能な乱数生成器メルセンヌ・ツイスタでランダムなBallTypeを選ぶ
-	static std::mt19937 RandomNumberGenerator{ std::random_device{}() };
+	int ballType;
 
-	//ballTypeの種類数に合わせて上限を変える
-	const int ballTypeCount = static_cast<int>(BallType::None) + Adjustment; //+1することで（ボールの種類が全部で何個あるか(3個)）を動的に計算
+	//前回と同じにならないように選び直す
+	static int lastBallType = None;
 
-	std::uniform_int_distribution<int> Distribution(0, ballTypeCount - Adjustment);//0(最小値)から 種類数 - 1(最大値) までの整数を等確率で(一様整数分布)発生させるための設定
-
-	//前回生成したボールを記憶する静的変数
-	static BallType lastBallType = BallType::None;
-
-	BallType ballType;
-
-	do 
+	do
 	{
-		ballType = static_cast<BallType>(Distribution(RandomNumberGenerator));
+		ballType = rand() % ballTypeCount;
 	}
-	while (ballType == lastBallType); //前回と同じなら選び直す
+	while (ballType == lastBallType);
 
-	lastBallType = ballType; //今回の種類を記憶
+	lastBallType = ballType;
 
 	switch (ballType)
 	{
-	case BallType::BasketBall:
+	case 0:
 
 		ball = std::make_shared<BasketBall>();
-		
+
 		break;
 
-		// 他のボールを追加するときはここに case を足す
-		// case BallType::Football:
-		//     ball = std::make_shared<Football>();
-		//     break;
-		// case BallType::Volleyball:
-		//     ball = std::make_shared<Volleyball>();
-		//     break;
+	case 1:
 
-	default:
+		ball = std::make_shared<VolleyBall>();
 
-		//フォールバック：種類が未実装でも BasketBallを返す
-		ball = std::make_shared<BasketBall>();
-		
 		break;
 	}
 
+
 	ball->Init();
+
+
+	//出現位置を決める（完全に交互）
+	static int lastPosType = -1; //前回の位置を記憶（0:左, 1:右）
+
+	int currentPosType;
+
+	if (lastPosType == -1)
+	{
+		//初回だけはランダムで 0(左) か 1(右) を決める
+		currentPosType = rand() % 2;
+	}
+	else
+	{
+		//2回目以降は必ず反転（0なら1、1なら0）
+		currentPosType = (lastPosType == 0) ? 1 : 0;
+	}
+
+	lastPosType = currentPosType; // 今回の位置を記憶
+
+
+	//初期位置を上書きして確定させる
+	//BallBase.h で定義されている座標をここで直接指定します
+	if (currentPosType == 0)
+	{
+		ball->SetPos(FirstLeftPos); // 左側の座標
+	}
+	else
+	{
+		ball->SetPos(FirstRightPos);  // 右側の座標
+	}
+
 	return ball;
 }

@@ -7,7 +7,18 @@ void BallBase::Init()
 	m_BallModel = nullptr;
 
 	MoveState = BallMove::FirstMove;
+
+	PositionState = Position::Fifth;
+
 	Gravity = 0.0f;
+
+	TargetX = 0.0f;
+
+	GoalTargetX = 0.0f;
+
+	RotationX = 0.0f;
+
+	RotationZ = 0.0f;
 
 	Count = 0;
 
@@ -21,11 +32,18 @@ void BallBase::Update()
 	{
 	case FirstMove:
 
-		m_pos.z += 0.05f;
+		m_pos.z += MoveSpeed;
 
-		if (m_pos.z >  10)
+		RotationZ = 0;
+
+		RotationX -= RotationSpeed;
+
+		if (m_pos.z > MaxPosZ)
 		{
-			m_pos = ThirdFromTheLeftPos;
+			m_pos.z = MaxPosZ;
+
+			DecisionPosition();
+
 			MoveState = BallMove::SecondMove;
 		}
 
@@ -33,27 +51,88 @@ void BallBase::Update()
 
 	case SecondMove:
 
-		Count++;
+		RotationX = 0;
 
-		if (Count >= 60 && Count <= 120)
+		switch (PositionState)
 		{
-			//重力反映
-			m_pos.y -= Gravity;
-			Gravity += 0.005f;
+		case Position::First:	
+
+			TargetX = FirstFromTheLeftPos;
+
+			break; 
+		case Position::Second:	
+
+			TargetX = SecondFromTheLeftPos;
+			
+			break;
+		case Position::Third:	
+			
+			TargetX = ThirdFromTheLeftPos;
+			
+			break; 
+		case Position::Fourth:	
+			
+			TargetX = FourthFromTheLeftPos;
+			
+			break;
+		case Position::Fifth:	
+			
+			TargetX = FifthFromTheLeftPos;
+			
+			break; 
 		}
 
-		else if (Count > 60 &&Count >= 120)
-		{
-			m_pos.z -= 0.05f;
+		//現在のX座標から目標のX座標への距離と向きを計算する
+		GoalTargetX = TargetX - m_pos.x;       //目標までの残りの距離（方向付き）
 
-			//重力反映
-			m_pos.y -= Gravity;
-			Gravity += 0.005f;
+		//1フレームの移動量が残り距離を超えないように制御して移動する 
+		if (fabs(GoalTargetX) <= MoveSpeed) //マイナスの値をプラスに変換する関数
+		{
+			//残り距離が移動速度より小さければピッタリ目標座標に到着
+			m_pos.x = TargetX;
+
+			//次の移動状態へ
+			MoveState = BallMove::ThirdMove;
+		}
+		else
+		{
+			//目標に向かって符号（プラスマイナス）を判定して進む
+			if (GoalTargetX > 0)
+			{
+				m_pos.x += MoveSpeed; //目標が右側にあるなら右へ
+
+				RotationZ += RotationSpeed;
+			}
+			else
+			{
+				m_pos.x -= MoveSpeed; //目標が左側にあるなら左へ
+
+				RotationZ -= RotationSpeed;
+			}
 		}
 
 		break;
 
+	case ThirdMove:
+
+		m_pos.z -= MoveSpeed;
+
+		RotationZ = 0;
+
+		RotationX += RotationSpeed;
+
+		break;
+
 	}
+
+	m_pos.y -= Gravity;
+	Gravity += GravitySpeed;
+
+	if (m_pos.y < -10)
+	{
+		m_isExpired = true;
+	}
+
 }
 
 void BallBase::PostUpdate()
@@ -67,7 +146,7 @@ void BallBase::PostUpdate()
 
 	sphere.m_type = KdCollider::TypeGround;
 
-	m_pDebugWire->AddDebugSphere(sphere.m_sphere.Center, sphere.m_sphere.Radius);
+	//m_pDebugWire->AddDebugSphere(sphere.m_sphere.Center, sphere.m_sphere.Radius);
 
 	std::list<KdCollider::CollisionResult> retSphereList;
 
@@ -107,7 +186,15 @@ void BallBase::PostUpdate()
 		m_pos += hitDir * maxOverlap;
 	}
 
-	m_mWorld.Translation(m_pos);
+	Math::Matrix scaleMat = Math::Matrix::CreateScale(0.6f);
+
+	Math::Matrix transMat = Math::Matrix::CreateTranslation(m_pos);
+
+	Math::Matrix rotationXMat = Math::Matrix::CreateRotationX(DirectX::XMConvertToRadians(RotationX));
+
+	Math::Matrix rotationZMat = Math::Matrix::CreateRotationZ(DirectX::XMConvertToRadians(RotationZ));
+
+	m_mWorld =scaleMat * rotationZMat * rotationXMat * transMat;
 }
 
 void BallBase::DrawLit()
@@ -117,4 +204,21 @@ void BallBase::DrawLit()
 		KdShaderManager::Instance().
 			m_StandardShader.DrawModel(*m_BallModel, m_mWorld);
 	}
+}
+
+void BallBase::DecisionPosition()
+{
+	//ポジションの種類数（Noneが5番目なので0〜4の全部で5種類）
+	const int PositionCount = static_cast<int>(Position::None);
+
+	Position PositionType;
+
+	do
+	{
+		//0〜4の乱数を生成
+		PositionType = static_cast<Position>(rand() % PositionCount);
+	} 
+	while (PositionType == PositionState); //前回と同じなら選び直す
+
+	PositionState = PositionType; //今回の種類を記憶
 }
