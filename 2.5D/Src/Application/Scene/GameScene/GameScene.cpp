@@ -34,18 +34,17 @@ void GameScene::Event()
 	if (GenerateTimer <= 0)
 	{
 		//BallGenerateがランダムに種類を決めて生成する
-		BallGenerate ballGenerator;
-		m_objList.push_back(ballGenerator.Generate());
+		m_objList.push_back(m_ballGenerator.Generate());
 
-		// タイマーをリセット（次の生成までのフレーム数）
-		GenerateTimer = 180; // 2秒間隔
+		//タイマーをリセット（次の生成までのフレーム数）
+		GenerateTimer = 300; //5秒間隔
 	}
 
 }
 
 void GameScene::Init()
 {
-	GenerateTimer = 180;
+	GenerateTimer = 300;
 
 
 	m_camera = std::make_unique<KdCamera>();
@@ -61,6 +60,8 @@ void GameScene::Init()
 	player = std::make_shared<Player>();
 	player->Init();
 	m_objList.push_back(player);
+
+	m_ballGenerator.SetTarget(player.get());
 
 	//ベルトコンベア
 	std::shared_ptr<BeltConveyor> beltConveyor;

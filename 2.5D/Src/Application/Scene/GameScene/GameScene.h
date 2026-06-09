@@ -2,6 +2,8 @@
 
 #include"../BaseScene/BaseScene.h"
 
+#include "../../Object/Ball/BallGenerate.h"
+
 class GameScene : public BaseScene
 {
 public :
@@ -15,6 +17,8 @@ private:
 	void Event() override;
 
 	void Init()  override;
+
+	BallGenerate m_ballGenerator;
 
 	int GenerateTimer;
 };

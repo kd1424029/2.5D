@@ -279,6 +279,7 @@
     <ClInclude Include="Src\Application\Object\Ball\BallGenerate.h" />
     <ClInclude Include="Src\Application\Object\Ball\BallType.h" />
     <ClInclude Include="Src\Application\Object\Ball\BasketBall\BasketBall.h" />
+    <ClInclude Include="Src\Application\Object\Ball\DirtySoccerBall\DirtySoccerBall.h" />
     <ClInclude Include="Src\Application\Object\Ball\SoccerBall\SoccerBall.h" />
     <ClInclude Include="Src\Application\Object\Ball\VolleyBall\VolleyBall.h" />
     <ClInclude Include="Src\Application\Object\BeltConveyor\BeltConveyor.h" />
@@ -340,6 +341,7 @@
     <ClCompile Include="Src\Application\Object\Ball\BallBase.cpp" />
     <ClCompile Include="Src\Application\Object\Ball\BallGenerate.cpp" />
     <ClCompile Include="Src\Application\Object\Ball\BasketBall\BasketBall.cpp" />
+    <ClCompile Include="Src\Application\Object\Ball\DirtySoccerBall\DirtySoccerBall.cpp" />
     <ClCompile Include="Src\Application\Object\Ball\SoccerBall\SoccerBall.cpp" />
     <ClCompile Include="Src\Application\Object\Ball\VolleyBall\VolleyBall.cpp" />
     <ClCompile Include="Src\Application\Object\BeltConveyor\BeltConveyor.cpp" />

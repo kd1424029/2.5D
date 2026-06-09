@@ -1,31 +1,52 @@
 ﻿#include "BallGenerate.h"
 
 #include "BasketBall/BasketBall.h"
-
 #include "Volleyball/Volleyball.h"
-
 #include "SoccerBall/SoccerBall.h"
+#include "DirtySoccerBall/DirtySoccerBall.h"
 
+BallGenerate::BallGenerate(): m_Rng(std::random_device{}()), DeckIndex(0), m_lastPosType(-1)
+{
+	ShuffleDeck();
+
+	m_BasketBallModel = std::make_shared<KdModelData>();
+	m_BasketBallModel->Load("Asset/Models/Ball/BasketBall/BasketBall.gltf");
+
+	m_VolleyBallModel = std::make_shared<KdModelData>();
+	m_VolleyBallModel->Load("Asset/Models/Ball/VolleyBall/VolleyBall.gltf");
+
+	m_SoccerBallModel = std::make_shared<KdModelData>();
+	m_SoccerBallModel->Load("Asset/Models/Ball/SoccerBall/SoccerBall.gltf");
+
+	m_DirtySoccerBallModel = std::make_shared<KdModelData>();
+	m_DirtySoccerBallModel->Load("Asset/Models/Ball/DirtySoccerBall/DirtySoccerBall.gltf");
+}
+
+void BallGenerate::ShuffleDeck()
+{
+	//種類を1枚ずつ詰める（枚数を増やせば偏りを調整できる）
+	m_Deck.clear();
+	for (int i = 0; i < BallCount; ++i)
+	{
+		m_Deck.push_back(i); // 0:BasketBall  1:VolleyBall  2:SoccerBall
+	}
+
+	std::shuffle(m_Deck.begin(), m_Deck.end(), m_Rng);
+	DeckIndex = 0;
+}
 
 std::shared_ptr<BallBase> BallGenerate::Generate()
 {
-	std::shared_ptr<BallBase> ball;
-
-	//ボールの種類数
-	const int ballTypeCount = BallCount; //BasketBall=0　VolleyBall=1 SoccerBall=2
-
-	int ballType;
-
-	//前回と同じにならないように選び直す
-	static int lastBallType = -1;
-
-	do
+	// デッキを使い切ったら再シャッフル
+	if (DeckIndex >= static_cast<int>(m_Deck.size()))
 	{
-		ballType = rand() % ballTypeCount;
+		ShuffleDeck();
 	}
-	while (ballType == lastBallType);
 
-	lastBallType = ballType;
+	int ballType = m_Deck[DeckIndex++];
+
+	// ボール生成
+	std::shared_ptr<BallBase> ball;
 
 	switch (ballType)
 	{
@@ -33,55 +54,63 @@ std::shared_ptr<BallBase> BallGenerate::Generate()
 
 		ball = std::make_shared<BasketBall>();
 
-		break;
+		ball->Init();
 
+		ball->SetModel(m_BasketBallModel);
+
+		break;
 	case 1:
 
 		ball = std::make_shared<VolleyBall>();
 
-		break;
+		ball->Init();
 
+		ball->SetModel(m_VolleyBallModel);
+
+		break;
 	case 2:
 
 		ball = std::make_shared<SoccerBall>();
 
+		ball->Init();
+
+		ball->SetModel(m_SoccerBallModel);
+		
+		break;
+	case 3:
+
+		ball = std::make_shared<DirtySoccerBall>();
+
+		ball->Init();
+
+		ball->SetModel(m_DirtySoccerBallModel);
+
 		break;
 	}
 
-
-	ball->Init();
-
-
-	//出現位置を決める（完全に交互）
-	static int lastPosType = -1; //前回の位置を記憶（0:左, 1:右）
-
-	int currentPosType;
-
-	if (lastPosType == -1)
+	//出現位置（交互）
+	if (m_lastPosType == -1)
 	{
-		//初回だけはランダムで 0(左) か 1(右) を決める
-		currentPosType = rand() % 2;
-	}
-
-	else
-	{
-		//2回目以降は必ず反転（0なら1、1なら0）
-		currentPosType = (lastPosType == 0) ? 1 : 0;
-	}
-
-	lastPosType = currentPosType; // 今回の位置を記憶
-
-
-	//初期位置を上書きして確定させる
-	//BallBase.h で定義されている座標をここで直接指定します
-	if (currentPosType == 0)
-	{
-		ball->SetPos(FirstLeftPos); // 左側の座標
+		// uniform_int_distribution を使う（% は偏りが出ることがある）
+		std::uniform_int_distribution<int> dist(0, 1);
+		m_lastPosType = dist(m_Rng);
 	}
 	else
 	{
-		ball->SetPos(FirstRightPos);  // 右側の座標
+		//確実に反転
+		m_lastPosType = 1 - m_lastPosType;
 	}
+
+	if (m_lastPosType == 0)
+	{
+		ball->SetPos(FirstLeftPos);
+	}
+	else
+	{
+		ball->SetPos(FirstRightPos);
+	}
+
+	ball->SetTarget(m_TargetPlayer); 
 
 	return ball;
 }

@@ -100,6 +100,9 @@
     <Filter Include="Src\Application\Object\Ball\SoccerBall">
       <UniqueIdentifier>{8faa1916-50b4-4ca7-ab58-f2c4b3e69ac0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Ball\DirtySoccerBall">
+      <UniqueIdentifier>{2ac22117-c4c3-42eb-aaaa-4a36e3336271}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -303,6 +306,9 @@
     <ClInclude Include="Src\Application\Object\Ball\BallType.h">
       <Filter>Src\Application\Object\Ball</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Ball\DirtySoccerBall\DirtySoccerBall.h">
+      <Filter>Src\Application\Object\Ball\DirtySoccerBall</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -472,6 +478,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Ball\SoccerBall\SoccerBall.cpp">
       <Filter>Src\Application\Object\Ball\SoccerBall</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Ball\DirtySoccerBall\DirtySoccerBall.cpp">
+      <Filter>Src\Application\Object\Ball\DirtySoccerBall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

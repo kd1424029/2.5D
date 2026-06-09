@@ -43,14 +43,19 @@ private:
 		BasketBallBox, 
 		VolleyBallBox,
 		SoccerBallBox,
+		TrashBox,
 	};
 
 	BoxType m_BoxType = BoxType::BasketBallBox; //初期状態はバスケットボール
 
 	//モデルやテクスチャはポインタで管理
 	std::shared_ptr<KdModelData> m_BasketBallBoxModel;
+
 	std::shared_ptr<KdModelData> m_ValleyBallBoxModel;
+	
 	std::shared_ptr<KdModelData> m_SoccerBallBoxModel;
+
+	std::shared_ptr<KdModelData> m_TrashBoxModel;
 
 	//Box切り替え用
 	BoxType m_NextBoxType = BoxType::BasketBallBox; //次に変更する箱のタイプ

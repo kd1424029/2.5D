@@ -5,6 +5,7 @@ enum BallKind //プレイヤーにボールタイプを渡す用
 	Kind_BasketBall,
 	Kind_VolleyBall,
 	Kind_SoccerBall,
+	Kind_DirtySoccerBall,
 };
 
 class BallType

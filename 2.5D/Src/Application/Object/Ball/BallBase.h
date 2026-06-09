@@ -2,6 +2,8 @@
 
 #include "BallType.h"
 
+class Player;
+
 enum BallMove
 {
 	FirstMove,		//最初の移動
@@ -36,9 +38,17 @@ public:
 
 	void SetPos(const Math::Vector3& pos) { m_pos = pos; }
 
+	void SetTarget(Player* player) { m_TargetPlayer = player; }
+
+	void SetModel(std::shared_ptr<KdModelData> model) { m_BallModel = model; }
+
 private:
 
+	Player* m_TargetPlayer = nullptr;
+
 	void DecisionPosition();
+
+	Math::Matrix scaleMat = Math::Matrix::CreateScale(0.6f);//Scaleは変えない
 
 	float Gravity;
 

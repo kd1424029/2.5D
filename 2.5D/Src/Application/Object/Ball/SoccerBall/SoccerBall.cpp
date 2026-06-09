@@ -4,10 +4,6 @@ void SoccerBall::Init()
 {
 	BallBase::Init();
 
-	//ポインタのままでは使い物にならないので、実体化
-	m_BallModel = std::make_shared<KdModelData>();
-	m_BallModel->Load("Asset/Models/Ball/SoccerBall/SoccerBall.gltf");
-
 	ballKind = BallKind::Kind_SoccerBall;
 }
 
@@ -23,5 +19,5 @@ void SoccerBall::PostUpdate()
 
 void SoccerBall::DrawLit()
 {
-	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_BallModel, m_mWorld);
+	BallBase::DrawLit();
 }

@@ -14,6 +14,9 @@ void Player::Init()
 	m_SoccerBallBoxModel = std::make_shared<KdModelData>();
 	m_SoccerBallBoxModel->Load("Asset/Models/Box/SoccerBallBox/SoccerBallBox.gltf");
 
+	m_TrashBoxModel = std::make_shared<KdModelData>();
+	m_TrashBoxModel->Load("Asset/Models/Box/TrashBox/TrashBox.gltf");
+
 	m_pos = { 0,1.9,-0.1 };
 
 	MoveCoolDownCount = 0;
@@ -40,8 +43,8 @@ void Player::PreUpdate()
 void Player::Update()
 {
 	//現在のオブジェクト数をデバッグ
-	//KdDebugGUI::Instance().ClearLog();
-	//KdDebugGUI::Instance().AddLog("%d", Score);
+	KdDebugGUI::Instance().ClearLog();
+	KdDebugGUI::Instance().AddLog("%d", Score);
 
 	{//移動中の処理
 		switch (m_State)
@@ -164,11 +167,11 @@ void Player::Update()
 
 			const int Adjustment = 1;
 
-			const int BoxTypeCount = 3; //Box種類の総数
+			const int BoxTypeCount = 4; //Box種類の総数
 
 			if (GetAsyncKeyState('Z') & 0x8000)
 			{
-				//順送り0→1→2→0
+				//順送り0→1→2→3→0
 				m_NextBoxType = static_cast<BoxType>((current + Adjustment) % BoxTypeCount);
 			}
 			else if (GetAsyncKeyState('X') & 0x8000)
@@ -217,6 +220,10 @@ void Player::DrawLit()
 	{
 		KdShaderManager::Instance().m_StandardShader.DrawModel(*m_SoccerBallBoxModel, m_mWorld);
 	}
+	else if (m_BoxType == BoxType::TrashBox)
+	{
+		KdShaderManager::Instance().m_StandardShader.DrawModel(*m_TrashBoxModel, m_mWorld);
+	}
 }
 
 void Player::GenerateDepthMapFromLight()
@@ -232,6 +239,10 @@ void Player::GenerateDepthMapFromLight()
 	else if (m_BoxType == BoxType::SoccerBallBox)
 	{
 		KdShaderManager::Instance().m_StandardShader.DrawModel(*m_SoccerBallBoxModel, m_mWorld);
+	}
+	else if (m_BoxType == BoxType::TrashBox)
+	{
+		KdShaderManager::Instance().m_StandardShader.DrawModel(*m_TrashBoxModel, m_mWorld);
 	}
 }
 
@@ -251,6 +262,11 @@ void Player::OnHit(BallKind ballKind)
 	}
 
 	else if (ballKind == BallKind::Kind_SoccerBall && m_BoxType == BoxType::SoccerBallBox)
+	{
+		Match = true;
+	}
+
+	else if (ballKind == BallKind::Kind_DirtySoccerBall && m_BoxType == BoxType::TrashBox)
 	{
 		Match = true;
 	}
@@ -293,6 +309,14 @@ void Player::UpdateCollider()
 		m_pCollider->RegisterCollisionShape(
 			"SoccerBallBoxModelCollision",
 			m_SoccerBallBoxModel,
+			KdCollider::TypeDamage
+		);
+	}
+	else if (m_BoxType == BoxType::TrashBox)
+	{
+		m_pCollider->RegisterCollisionShape(
+			"TrashBoxModelCollision",
+			m_TrashBoxModel,
 			KdCollider::TypeDamage
 		);
 	}

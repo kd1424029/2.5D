@@ -139,28 +139,26 @@ void BallBase::Update()
 
 void BallBase::PostUpdate()
 {
-	// ======================= 球（スフィア）判定だけ ============================
+	// ========== TypeGround 判定 ==========
 	KdCollider::SphereInfo sphere;
-
 	sphere.m_sphere.Center = m_pos;
-
 	sphere.m_sphere.Radius = 0.3f;
-
 	sphere.m_type = KdCollider::TypeGround;
-
-	//m_pDebugWire->AddDebugSphere(sphere.m_sphere.Center, sphere.m_sphere.Radius);
 
 	std::list<KdCollider::CollisionResult> retSphereList;
 
-	for (auto& obj : SceneManager::Instance().GetObjList())
+	retSphereList.clear();
+
+	const auto& objList = SceneManager::Instance().GetObjList(); //毎回取得せず1回だけ
+
+	for (auto& obj : objList)
 	{
+		if (obj.get() == this)continue;
 		obj->Intersects(sphere, &retSphereList);
 	}
 
-	float maxOverlap = 0;
-
+	float maxOverlap = 0.0f;
 	bool hit = false;
-
 	Math::Vector3 hitDir;
 
 	for (auto& ret : retSphereList)
@@ -168,27 +166,37 @@ void BallBase::PostUpdate()
 		if (maxOverlap < ret.m_overlapDistance)
 		{
 			maxOverlap = ret.m_overlapDistance;
-
 			hitDir = ret.m_hitDir;
-
 			hit = true;
 		}
 	}
 
-	if (hit == true)
+	if (hit)
 	{
-		//Z方向の無効化をなくし、ぶつかった方向に100%正しく押し戻す
-		//もし地面に当たったら hitDir は「真上」を向くので、勝手に重力もリセットできる
 		if (hitDir.y > 0.5f)
 		{
-			Gravity = 0.0f; // 上向きの押し戻しが発生＝接地した、なので重力を止める
+			Gravity = 0.0f;
 		}
-
-		// 押し戻し処理
 		m_pos += hitDir * maxOverlap;
 	}
 
-	Math::Matrix scaleMat = Math::Matrix::CreateScale(0.6f);
+	// ========== TypeDamage 判定（Playerに直接判定）==========
+	if (m_TargetPlayer != nullptr)
+	{
+		KdCollider::SphereInfo damageSphere;
+		damageSphere.m_sphere.Center = m_pos;
+		damageSphere.m_sphere.Radius = 0.3f;
+		damageSphere.m_type = KdCollider::TypeDamage;
+
+		std::list<KdCollider::CollisionResult> retDamageList;
+
+		//ループなしPlayerオブジェクト1つにだけ判定する
+		if (m_TargetPlayer->Intersects(damageSphere, &retDamageList))
+		{
+			m_TargetPlayer->OnHit(ballKind);
+			m_isExpired = true;
+		}
+	}
 
 	Math::Matrix transMat = Math::Matrix::CreateTranslation(m_pos);
 
@@ -196,35 +204,7 @@ void BallBase::PostUpdate()
 
 	Math::Matrix rotationZMat = Math::Matrix::CreateRotationZ(DirectX::XMConvertToRadians(RotationZ));
 
-	m_mWorld =scaleMat * rotationZMat * rotationXMat * transMat;
-
-
-	// ======================= Box（プレイヤー）との判定 ============================
-	KdCollider::SphereInfo damageSphere;
-
-	damageSphere.m_sphere.Center = m_pos;
-	damageSphere.m_sphere.Radius = 0.3f;
-	damageSphere.m_type = KdCollider::TypeDamage; //TypeDamageで探す
-
-	std::list<KdCollider::CollisionResult> retDamageList;
-
-	for (auto& obj : SceneManager::Instance().GetObjList())
-	{
-		retDamageList.clear();
-
-		if (obj->Intersects(damageSphere, &retDamageList))
-		{
-			auto* player = dynamic_cast<Player*>(obj.get());
-
-			if (player)
-			{
-				player->OnHit(ballKind);
-			}
-
-			m_isExpired = true;
-			break;
-		}
-	}
+	m_mWorld = scaleMat * rotationZMat * rotationXMat * transMat;
 }
 
 void BallBase::DrawLit()
