@@ -8,6 +8,7 @@ void BasketBall::Init()
 	m_BallModel = std::make_shared<KdModelData>();
 	m_BallModel->Load("Asset/Models/Ball/BasketBall/BasketBall.gltf");
 
+	ballKind = BallKind::Kind_BasketBall;
 }
 
 void BasketBall::Update()

@@ -300,6 +300,9 @@
     <ClInclude Include="Src\Application\Object\Ball\SoccerBall\SoccerBall.h">
       <Filter>Src\Application\Object\Ball\SoccerBall</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Ball\BallType.h">
+      <Filter>Src\Application\Object\Ball</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">

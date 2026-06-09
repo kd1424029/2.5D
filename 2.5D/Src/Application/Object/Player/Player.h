@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include "../../Object/Ball/BallBase.h"
+
 class Player : public KdGameObject
 {
 public:
@@ -18,6 +20,10 @@ public:
 	void DrawLit() override;
 
 	void GenerateDepthMapFromLight() override;
+
+	void OnHit(BallKind ballKind);
+
+	int GetScore() { return Score; }
 
 private:
 
@@ -76,4 +82,7 @@ private:
 	const int MoveCoolDownMax = 5;   //移動後に押しっぱなしで次へ進むまでの待ち時間
 
 	PlayerState m_State = PlayerState::Idle;  //プレイヤーの状態を管理する変数
+
+	//スコア用
+	int Score;     //合計スコア
 };

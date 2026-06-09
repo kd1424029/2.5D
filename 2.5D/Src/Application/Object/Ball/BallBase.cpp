@@ -2,6 +2,8 @@
 
 #include "../../Scene/SceneManager.h"
 
+#include "../../Object/Player/Player.h" //当たり判定で必要
+
 void BallBase::Init()
 {
 	m_BallModel = nullptr;
@@ -209,8 +211,16 @@ void BallBase::PostUpdate()
 	for (auto& obj : SceneManager::Instance().GetObjList())
 	{
 		retDamageList.clear();
+
 		if (obj->Intersects(damageSphere, &retDamageList))
 		{
+			auto* player = dynamic_cast<Player*>(obj.get());
+
+			if (player)
+			{
+				player->OnHit(ballKind);
+			}
+
 			m_isExpired = true;
 			break;
 		}

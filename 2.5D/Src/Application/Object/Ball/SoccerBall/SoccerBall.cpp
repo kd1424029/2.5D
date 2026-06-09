@@ -7,6 +7,8 @@ void SoccerBall::Init()
 	//ポインタのままでは使い物にならないので、実体化
 	m_BallModel = std::make_shared<KdModelData>();
 	m_BallModel->Load("Asset/Models/Ball/SoccerBall/SoccerBall.gltf");
+
+	ballKind = BallKind::Kind_SoccerBall;
 }
 
 void SoccerBall::Update()

@@ -66,9 +66,6 @@ public:
 	bool Intersects(const KdCollider::BoxInfo& targetBox, std::list<KdCollider::CollisionResult>* pResults);
 	bool Intersects(const KdCollider::RayInfo& targetShape, std::list<KdCollider::CollisionResult>* pResults);
 
-	//6月8日　Boxに当たった時用
-	virtual void OnHit() {};
-
 protected:
 
 	void Release() {}

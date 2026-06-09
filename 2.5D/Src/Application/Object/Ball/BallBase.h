@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include "BallType.h"
+
 enum BallMove
 {
 	FirstMove,		//最初の移動
@@ -17,7 +19,7 @@ enum Position
 	None,
 };
 
-class BallBase : public KdGameObject
+class BallBase : public KdGameObject , public BallType
 {
 public:
 

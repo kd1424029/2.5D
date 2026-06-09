@@ -28,6 +28,8 @@ void Player::Init()
 
 	MoveFlgRight = true;
 
+	Score = 0;
+
 	UpdateCollider();
 }
 
@@ -37,6 +39,9 @@ void Player::PreUpdate()
 
 void Player::Update()
 {
+	//現在のオブジェクト数をデバッグ
+	//KdDebugGUI::Instance().ClearLog();
+	//KdDebugGUI::Instance().AddLog("%d", Score);
 
 	{//移動中の処理
 		switch (m_State)
@@ -227,6 +232,39 @@ void Player::GenerateDepthMapFromLight()
 	else if (m_BoxType == BoxType::SoccerBallBox)
 	{
 		KdShaderManager::Instance().m_StandardShader.DrawModel(*m_SoccerBallBoxModel, m_mWorld);
+	}
+}
+
+void Player::OnHit(BallKind ballKind)
+{
+	// BallTypeとBoxTypeの対応チェック
+	bool Match = false;
+
+	if (ballKind == BallKind::Kind_BasketBall && m_BoxType == BoxType::BasketBallBox)
+	{
+		Match = true;
+	}
+
+	else if (ballKind == BallKind::Kind_VolleyBall && m_BoxType == BoxType::VolleyBallBox)
+	{
+		Match = true;
+	}
+
+	else if (ballKind == BallKind::Kind_SoccerBall && m_BoxType == BoxType::SoccerBallBox)
+	{
+		Match = true;
+	}
+
+	if (Match)
+	{
+		//正解：スコア加算など
+		Score++;
+	}
+
+	else
+	{
+		//不正解：ペナルティ
+		Score--;
 	}
 }
 
