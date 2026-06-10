@@ -2,20 +2,20 @@
 
 void Back::Init()
 {
-	//ポインタのままでは使い物にならないので、実体化
-	m_BackModel = std::make_shared<KdModelData>();
-	m_BackModel->Load("Asset/Models/Back/Back.gltf");
+	m_polygon.SetMaterial("Asset/Textures/Back/Back.png");
 
-	m_pos = { 0,0,4 };
+	//サイズ拡大
+	m_polygon.SetScale(220.0f);
 
-	Math::Matrix scaleMat = Math::Matrix::CreateScale(1, 2, 2);
+	//板ポリの原点 (真ん中下段を指定)
+	m_polygon.SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
 
-	Math::Matrix transMat = Math::Matrix::CreateTranslation(m_pos);
-
-	m_mWorld = scaleMat * transMat;
+	// ワールド行列の更新
+	m_mWorld = Math::Matrix::CreateTranslation(0, -45, 100);
 }
-
-void Back::DrawLit()
+void Back::DrawUnLit()
 {
-	//KdShaderManager::Instance().m_StandardShader.DrawModel(*m_BackModel, m_mWorld);
+	//背景描画
+	//背景に陰影がつくのはおかしいので、DrawLit()で描画する
+	KdShaderManager::Instance().m_StandardShader.DrawPolygon(m_polygon, m_mWorld);
 }

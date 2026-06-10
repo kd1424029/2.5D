@@ -283,6 +283,7 @@
     <ClInclude Include="Src\Application\Object\Ball\SoccerBall\SoccerBall.h" />
     <ClInclude Include="Src\Application\Object\Ball\VolleyBall\VolleyBall.h" />
     <ClInclude Include="Src\Application\Object\BeltConveyor\BeltConveyor.h" />
+    <ClInclude Include="Src\Application\Object\Ground\Ground.h" />
     <ClInclude Include="Src\Application\Object\Player\Player.h" />
     <ClInclude Include="Src\Application\Scene\BaseScene\BaseScene.h" />
     <ClInclude Include="Src\Application\Scene\GameScene\GameScene.h" />
@@ -345,6 +346,7 @@
     <ClCompile Include="Src\Application\Object\Ball\SoccerBall\SoccerBall.cpp" />
     <ClCompile Include="Src\Application\Object\Ball\VolleyBall\VolleyBall.cpp" />
     <ClCompile Include="Src\Application\Object\BeltConveyor\BeltConveyor.cpp" />
+    <ClCompile Include="Src\Application\Object\Ground\Ground.cpp" />
     <ClCompile Include="Src\Application\Object\Player\Player.cpp" />
     <ClCompile Include="Src\Application\Scene\BaseScene\BaseScene.cpp" />
     <ClCompile Include="Src\Application\Scene\GameScene\GameScene.cpp" />

@@ -2,18 +2,18 @@
 
 class Back : public KdGameObject
 {
+
 public:
 
 	Back() {}
-	~Back() override{}
+	~Back() override {}
 
 	void Init() override;
 
-	void DrawLit() override;
+	void DrawUnLit() override;
 
 private:
 
-	std::shared_ptr<KdModelData> m_BackModel;
-
-	Math::Vector3 m_pos = {};  //座標
+	//板ポリゴン
+	KdSquarePolygon m_polygon;
 };

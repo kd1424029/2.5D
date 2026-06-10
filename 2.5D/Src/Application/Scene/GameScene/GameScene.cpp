@@ -5,6 +5,7 @@
 #include "../../Object/Back/Back.h"
 #include "../../Object/BeltConveyor/BeltConveyor.h"
 #include "../../Object/Ball/BallGenerate.h" 
+#include "../../Object/Ground/Ground.h"
 
 void GameScene::Event()
 {
@@ -37,17 +38,23 @@ void GameScene::Event()
 		m_objList.push_back(m_ballGenerator.Generate());
 
 		//タイマーをリセット（次の生成までのフレーム数）
-		GenerateTimer = 300; //5秒間隔
+		GenerateTimer = 120; //5秒間隔
 	}
 
 }
 
 void GameScene::Init()
 {
-	GenerateTimer = 300;
+	GenerateTimer = 120;
 
 
 	m_camera = std::make_unique<KdCamera>();
+
+	//地面
+	std::shared_ptr<Ground> ground;
+	ground = std::make_shared<Ground>();
+	ground->Init();
+	m_objList.push_back(ground);
 
 	//背景
 	std::shared_ptr<Back> back;

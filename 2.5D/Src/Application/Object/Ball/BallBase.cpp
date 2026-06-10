@@ -10,8 +10,6 @@ void BallBase::Init()
 
 	MoveState = BallMove::FirstMove;
 
-	PositionState = Position::Fifth;
-
 	Gravity = 0.0f;
 
 	TargetX = 0.0f;
@@ -22,7 +20,15 @@ void BallBase::Init()
 
 	RotationZ = 0.0f;
 
-	Count = 0;
+	Scale = 0.6;
+
+	m_Rng.seed(std::random_device{}());
+
+	DeckIndex = 0;
+
+	SecondPosition = 0;
+
+	ShuffleDeck();
 
 	//デバッグ用：KdGameObjectにポインタを用意しているので実体化
 	m_pDebugWire = std::make_unique<KdDebugWireFrame>();
@@ -30,6 +36,7 @@ void BallBase::Init()
 
 void BallBase::Update()
 {
+
 	switch (MoveState)	
 	{
 	case FirstMove:
@@ -44,7 +51,12 @@ void BallBase::Update()
 		{
 			m_pos.z = MaxPosZ;
 
-			DecisionPosition();
+			//1回だけカードを引いて確定させる
+			if (DeckIndex >= static_cast<int>(m_Deck.size()))
+			{
+				ShuffleDeck();
+			}
+			SecondPosition = m_Deck[DeckIndex++];
 
 			MoveState = BallMove::SecondMove;
 		}
@@ -55,29 +67,29 @@ void BallBase::Update()
 
 		RotationX = 0;
 
-		switch (PositionState)
+		switch (SecondPosition)
 		{
-		case Position::First:	
+		case 0:	
 
 			TargetX = FirstFromTheLeftPos;
 
 			break; 
-		case Position::Second:	
+		case 1:	
 
 			TargetX = SecondFromTheLeftPos;
 			
 			break;
-		case Position::Third:	
+		case 2:	
 			
 			TargetX = ThirdFromTheLeftPos;
 			
 			break; 
-		case Position::Fourth:	
+		case 3:	
 			
 			TargetX = FourthFromTheLeftPos;
 			
 			break;
-		case Position::Fifth:	
+		case 4:	
 			
 			TargetX = FifthFromTheLeftPos;
 			
@@ -194,9 +206,12 @@ void BallBase::PostUpdate()
 		if (m_TargetPlayer->Intersects(damageSphere, &retDamageList))
 		{
 			m_TargetPlayer->OnHit(ballKind);
+
 			m_isExpired = true;
 		}
 	}
+
+	Math::Matrix scaleMat = Math::Matrix::CreateScale(Scale);
 
 	Math::Matrix transMat = Math::Matrix::CreateTranslation(m_pos);
 
@@ -216,19 +231,15 @@ void BallBase::DrawLit()
 	}
 }
 
-void BallBase::DecisionPosition()
+
+void BallBase::ShuffleDeck()
 {
-	//ポジションの種類数（Noneが5番目なので0〜4の全部で5種類）
-	const int PositionCount = static_cast<int>(Position::None);
-
-	Position PositionType;
-
-	do
+	//種類を1枚ずつ詰める（枚数を増やせば偏りを調整できる）
+	m_Deck.clear();
+	for (int i = 0; i < PositionCount; ++i)
 	{
-		//0〜4の乱数を生成
-		PositionType = static_cast<Position>(rand() % PositionCount);
-	} 
-	while (PositionType == PositionState); //前回と同じなら選び直す
-
-	PositionState = PositionType; //今回の種類を記憶
+		m_Deck.push_back(i);
+	}
+	std::shuffle(m_Deck.begin(), m_Deck.end(), m_Rng);
+	DeckIndex = 0;
 }

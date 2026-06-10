@@ -29,7 +29,7 @@ private:
 
 	Player* m_TargetPlayer = nullptr;
 
-	// デッキを(再)シャッフルして先頭から配り直す
+	// デッキをシャッフルして先頭から配り直す
 	void ShuffleDeck();
 
 	const int BallCount = 4;

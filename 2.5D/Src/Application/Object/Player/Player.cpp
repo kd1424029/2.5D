@@ -33,6 +33,10 @@ void Player::Init()
 
 	Score = 0;
 
+	Scale = 1;
+
+	ScaleSpeed = 5.0;
+
 	UpdateCollider();
 }
 
@@ -176,7 +180,7 @@ void Player::Update()
 			}
 			else if (GetAsyncKeyState('X') & 0x8000)
 			{
-				//逆送り0→2→1→0
+				//逆送り0→3→2→1→0
 				m_NextBoxType = static_cast<BoxType>((current + BoxTypeCount - Adjustment) % BoxTypeCount);
 			}
 
@@ -194,9 +198,34 @@ void Player::Update()
 		KeyFlg = false;
 	}
 
+	//もし Scale が 1.0 より大きければ、毎フレーム少しずつ小さくして 1.0 に近づける
+	if (Scale > 1.0f)
+	{
+		// 経過時間(秒)を使って滑らかに減算（1秒間に ScaleSpeed 分小さくなる）
+		// ※デルタタイム（KdEffekseer等で使う1フレームの時間）が取れるなら、そちらを掛けるとより安定します
+		Scale -= ScaleSpeed * (1.0f / 60.0f); // 60fpsを想定
+
+		// 行き過ぎて1.0未満にならないようにガード
+		if (Scale < 1.0f)
+		{
+			Scale = 1.0f;
+		}
+	}
+	// もし Match 失敗時に小さくする演出も入れるなら、以下を追加
+	else if (Scale < 1.0f)
+	{
+		Scale += ScaleSpeed * (1.0f / 60.0f);
+		if (Scale > 1.0f)
+		{
+			Scale = 1.0f;
+		}
+	}
+
 	Math::Matrix transMat = Math::Matrix::CreateTranslation(m_pos);
 
-	m_mWorld = transMat;
+	Math::Matrix scaleMat = Math::Matrix::CreateScale(Scale);
+
+	m_mWorld = scaleMat * transMat;
 
 }
 
@@ -273,14 +302,15 @@ void Player::OnHit(BallKind ballKind)
 
 	if (Match)
 	{
-		//正解：スコア加算など
 		Score++;
-	}
 
+		Scale = 1.5f;
+	}
 	else
 	{
-		//不正解：ペナルティ
 		Score--;
+
+		Scale = 0.5f;
 	}
 }
 

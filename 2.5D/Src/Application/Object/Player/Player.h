@@ -90,4 +90,8 @@ private:
 
 	//スコア用
 	int Score;     //合計スコア
+
+	// スケールアニメーション用
+	float Scale;        
+	float ScaleSpeed;  
 };

@@ -103,6 +103,9 @@
     <Filter Include="Src\Application\Object\Ball\DirtySoccerBall">
       <UniqueIdentifier>{2ac22117-c4c3-42eb-aaaa-4a36e3336271}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Ground">
+      <UniqueIdentifier>{08315c88-6c31-4572-8f0c-4a257d4f2219}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -309,6 +312,9 @@
     <ClInclude Include="Src\Application\Object\Ball\DirtySoccerBall\DirtySoccerBall.h">
       <Filter>Src\Application\Object\Ball\DirtySoccerBall</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Ground\Ground.h">
+      <Filter>Src\Application\Object\Ground</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -481,6 +487,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Ball\DirtySoccerBall\DirtySoccerBall.cpp">
       <Filter>Src\Application\Object\Ball\DirtySoccerBall</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Ground\Ground.cpp">
+      <Filter>Src\Application\Object\Ground</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

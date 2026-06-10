@@ -2,6 +2,9 @@
 
 #include "BallType.h"
 
+#include <vector>
+#include <random>
+
 class Player;
 
 enum BallMove
@@ -9,16 +12,6 @@ enum BallMove
 	FirstMove,		//最初の移動
 	SecondMove,		//2回目の移動
 	ThirdMove,		//3回目の移動
-};
-
-enum Position
-{
-	First,
-	Second,
-	Third,
-	Fourth,
-	Fifth,
-	None,
 };
 
 class BallBase : public KdGameObject , public BallType
@@ -46,9 +39,10 @@ private:
 
 	Player* m_TargetPlayer = nullptr;
 
-	void DecisionPosition();
+	// デッキをシャッフルして先頭から配り直す
+	void ShuffleDeck();
 
-	Math::Matrix scaleMat = Math::Matrix::CreateScale(0.6f);//Scaleは変えない
+	float Scale;
 
 	float Gravity;
 
@@ -60,13 +54,16 @@ private:
 
 	float RotationZ;
 
-	int Count;
+	// --- シャッフルデッキ用 ---
+	std::mt19937            m_Rng;       //乱数エンジン
+	std::vector<int>        m_Deck;      //今のデッキ（Positionのint値が入る）
+	int                     DeckIndex; //次に配るインデックス
 
-	int NextCount;
+	int SecondPosition;
+
+	const int PositionCount = 5;
 
 	BallMove MoveState;//移動状態
-
-	Position PositionState;//位置状態
 
 	const float MoveSpeed = 0.04f; //移動速度
 
