@@ -2,6 +2,8 @@
 
 #include "../../Scene/SceneManager.h"
 
+#include "../Effect/Effect.h"
+
 void Player::Init()
 {
 	//ポインタのままでは使い物にならないので、実体化
@@ -37,6 +39,10 @@ void Player::Init()
 
 	ScaleSpeed = 5.0;
 
+	OneFrame = 1.0f;
+
+	MaxFrame = 60.0f;
+
 	UpdateCollider();
 }
 
@@ -46,7 +52,7 @@ void Player::PreUpdate()
 
 void Player::Update()
 {
-	//現在のオブジェクト数をデバッグ
+	//現在のScoreをデバッグ
 	KdDebugGUI::Instance().ClearLog();
 	KdDebugGUI::Instance().AddLog("%d", Score);
 
@@ -198,26 +204,26 @@ void Player::Update()
 		KeyFlg = false;
 	}
 
-	//もし Scale が 1.0 より大きければ、毎フレーム少しずつ小さくして 1.0 に近づける
-	if (Scale > 1.0f)
+	//もしScaleがNormalScaleより大きければ毎フレーム少しずつ小さくしてNormalScaleに近づける
+	if (Scale > NormalScale)
 	{
-		// 経過時間(秒)を使って滑らかに減算（1秒間に ScaleSpeed 分小さくなる）
-		// ※デルタタイム（KdEffekseer等で使う1フレームの時間）が取れるなら、そちらを掛けるとより安定します
-		Scale -= ScaleSpeed * (1.0f / 60.0f); // 60fpsを想定
+		//経過時間(秒)を使って滑らかに減算（1秒間に ScaleSpeed 分小さくなる）
+		Scale -= ScaleSpeed * (OneFrame / MaxFrame); 
 
-		// 行き過ぎて1.0未満にならないようにガード
-		if (Scale < 1.0f)
+		//行き過ぎて1.0未満にならないようにガード
+		if (Scale < NormalScale)
 		{
-			Scale = 1.0f;
+			Scale = NormalScale;
 		}
 	}
-	// もし Match 失敗時に小さくする演出も入れるなら、以下を追加
-	else if (Scale < 1.0f)
+	//Match失敗時に小さくする演出も入れる
+	else if (Scale < NormalScale)
 	{
-		Scale += ScaleSpeed * (1.0f / 60.0f);
-		if (Scale > 1.0f)
+		Scale += ScaleSpeed * (OneFrame / MaxFrame);
+
+		if (Scale > NormalScale)
 		{
-			Scale = 1.0f;
+			Scale = NormalScale;
 		}
 	}
 
@@ -236,7 +242,7 @@ void Player::PostUpdate()
 
 void Player::DrawLit()
 {
-	// 現在のタイプに応じて描画するモデルを切り替える！
+	//現在のタイプに応じて描画するモデルを切り替える！
 	if (m_BoxType == BoxType::BasketBallBox)
 	{
 		KdShaderManager::Instance().m_StandardShader.DrawModel(*m_BasketBallBoxModel, m_mWorld);
@@ -304,13 +310,43 @@ void Player::OnHit(BallKind ballKind)
 	{
 		Score++;
 
-		Scale = 1.5f;
+		Scale = MaxScale;
+
+		for (int i = 0; i < 20; i++)
+		{
+			auto effect = std::make_shared<Effect>();
+			effect->Init();
+
+			Math::Vector3 move = {
+				((rand() % 100) / 100.0f - 0.5f) * 0.3f,
+				((rand() % 100) / 100.0f) * 0.3f,
+				((rand() % 100) / 100.0f - 0.5f) * 0.3f
+			};
+
+			effect->SetParam(m_pos, move, 30.0f, Math::Color(0, 1, 0, 1));
+			SceneManager::Instance().AddObject(effect); 
+		}
 	}
 	else
 	{
 		Score--;
 
-		Scale = 0.5f;
+		Scale = SmallScale;
+
+		for (int i = 0; i < 20; i++)
+		{
+			auto effect = std::make_shared<Effect>();
+			effect->Init();
+
+			Math::Vector3 move = {
+				((rand() % 100) / 100.0f - 0.5f) * 0.3f,
+				((rand() % 100) / 100.0f) * 0.3f,
+				((rand() % 100) / 100.0f - 0.5f) * 0.3f
+			};
+			
+			effect->SetParam(m_pos, move, 30.0f, Math::Color(1, 0, 0, 1));
+			SceneManager::Instance().AddObject(effect);
+		}
 	}
 }
 

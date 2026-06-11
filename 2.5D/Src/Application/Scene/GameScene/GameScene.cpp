@@ -30,7 +30,8 @@ void GameScene::Event()
 
 	m_camera->SetCameraMatrix(transMat);
 	
-
+	//一定間隔でボールを1つ生成してゲーム世界へ追加する
+	//種類・出現位置の決定はBallGenerateに任せている
 	GenerateTimer--;
 	if (GenerateTimer <= 0)
 	{
@@ -38,7 +39,7 @@ void GameScene::Event()
 		m_objList.push_back(m_ballGenerator.Generate());
 
 		//タイマーをリセット（次の生成までのフレーム数）
-		GenerateTimer = 120; //5秒間隔
+		GenerateTimer = 120; //2秒間隔
 	}
 
 }
@@ -68,6 +69,8 @@ void GameScene::Init()
 	player->Init();
 	m_objList.push_back(player);
 
+	//ボール工場にプレイヤーを登録する
+	//当たり判定の通知先として生成された各ボールへ渡される
 	m_ballGenerator.SetTarget(player.get());
 
 	//ベルトコンベア

@@ -18,6 +18,8 @@ private:
 
 	void Init()  override;
 
+	//ボールの種類・出現位置をランダムに決めて生成する工場
+	//ゲームオブジェクトではないのでm_objListには入らない
 	BallGenerate m_ballGenerator;
 
 	int GenerateTimer;

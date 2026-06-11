@@ -23,8 +23,6 @@ public:
 
 	void OnHit(BallKind ballKind);
 
-	int GetScore() { return Score; }
-
 private:
 
 	void UpdateCollider(); //当たり判定用
@@ -94,4 +92,12 @@ private:
 	// スケールアニメーション用
 	float Scale;        
 	float ScaleSpeed;  
+
+	float OneFrame;
+
+	float MaxFrame;
+
+	const float MaxScale = 1.5f;
+	const float NormalScale = 1.0f;
+	const float SmallScale = 0.5f;
 };
