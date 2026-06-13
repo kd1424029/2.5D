@@ -4,6 +4,10 @@
 
 #include "../Effect/Effect.h"
 
+#include "../../Object/Ball/BallBase.h"
+
+#include "../Ball/BallGenerate.h"
+
 void Player::Init()
 {
 	//ポインタのままでは使い物にならないので、実体化
@@ -42,6 +46,18 @@ void Player::Init()
 	OneFrame = 1.0f;
 
 	MaxFrame = 60.0f;
+
+	GoldCnt = 0;
+
+	FeverCount = 0;
+
+	FeverFlg = false;
+
+	NormalBallMoveSpeed = 0.04;
+	NormalBallRotationSpeed = 3.0;
+
+	MaxBallMoveSpeed = 0.08;
+	MaxBallRotationSpeed = 6.0;
 
 	UpdateCollider();
 }
@@ -227,6 +243,11 @@ void Player::Update()
 		}
 	}
 
+	if (GoldCnt > 15)
+	{
+		GoldCnt = 0;
+	}
+
 	Math::Matrix transMat = Math::Matrix::CreateTranslation(m_pos);
 
 	Math::Matrix scaleMat = Math::Matrix::CreateScale(Scale);
@@ -286,6 +307,8 @@ void Player::OnHit(BallKind ballKind)
 	// BallTypeとBoxTypeの対応チェック
 	bool Match = false;
 
+	bool GoldMatch = false;
+
 	if (ballKind == BallKind::Kind_BasketBall && m_BoxType == BoxType::BasketBallBox)
 	{
 		Match = true;
@@ -306,45 +329,97 @@ void Player::OnHit(BallKind ballKind)
 		Match = true;
 	}
 
+	else if (ballKind == BallKind::Kind_GoldBall)
+	{
+		Match = true;
+		GoldMatch = true;  
+	}
+
 	if (Match)
 	{
-		Score++;
+		Score += FeverFlg ? FeverAddition : Addition;
 
 		Scale = MaxScale;
 
-		for (int i = 0; i < 20; i++)
+		if (GoldMatch)
+		{
+			//GoldBall取得→フィーバー開始
+			FeverFlg = true;
+
+			GoldCnt = 0;  // リセット
+
+			const auto& objList = SceneManager::Instance().GetObjList();
+			for (auto& obj : objList)
+			{
+				BallBase* ball = dynamic_cast<BallBase*>(obj.get());
+				if (ball != nullptr)
+				{
+					ball->SetMoveSpeed(MaxBallMoveSpeed);
+					ball->SetRotationSpeed(MaxBallRotationSpeed);
+				}
+			}
+
+			//以降生成されるボールにも反映
+			if (m_pBallGenerate != nullptr)
+			{
+				m_pBallGenerate->SetMoveSpeed(MaxBallMoveSpeed);
+				m_pBallGenerate->SetRotationSpeed(MaxBallRotationSpeed);
+			}
+		}
+		else if (FeverFlg)
+		{
+			//フィーバー中：FeverCount を増やす
+			FeverCount++;
+
+			if (FeverCount > MaxFeverCnt)  //10個でフィーバー終了
+			{
+				FeverFlg = false;
+				FeverCount = 0;
+				GoldCnt = 0;
+
+				//スピードを通常に戻す
+				const auto& objList = SceneManager::Instance().GetObjList();
+				for (auto& obj : objList)
+				{
+					BallBase* ball = dynamic_cast<BallBase*>(obj.get());
+					if (ball) ball->SetMoveSpeed(NormalBallMoveSpeed);
+					if (ball) ball->SetRotationSpeed(NormalBallRotationSpeed);
+				}
+				if (m_pBallGenerate)
+				{
+					m_pBallGenerate->SetMoveSpeed(NormalBallMoveSpeed);
+					m_pBallGenerate->SetRotationSpeed(NormalBallRotationSpeed);
+				}
+			}
+		}
+		else
+		{
+			//通常時：GoldCnt を増やす
+			GoldCnt++;
+		}
+
+		// エフェクト（緑）
+		for (int i = 0; i < EffectCount; i++)
 		{
 			auto effect = std::make_shared<Effect>();
 			effect->Init();
-
-			Math::Vector3 move = {
-				((rand() % 100) / 100.0f - 0.5f) * 0.3f,
-				((rand() % 100) / 100.0f) * 0.3f,
-				((rand() % 100) / 100.0f - 0.5f) * 0.3f
-			};
-
-			effect->SetParam(m_pos, move, 30.0f, Math::Color(0, 1, 0, 1));
-			SceneManager::Instance().AddObject(effect); 
+			Math::Vector3 move = { RandRange(EffectSpeed), RandRange(EffectSpeed), RandRange(EffectSpeed) };
+			effect->SetParam(m_pos, move, EffectLifeSpan, EffectColorGreen);
+			SceneManager::Instance().AddObject(effect);
 		}
 	}
-	else
+	else  //ミス
 	{
-		Score--;
-
+		Score-= Subtraction;
 		Scale = SmallScale;
 
-		for (int i = 0; i < 20; i++)
+		//エフェクト（赤）
+		for (int i = 0; i < EffectCount; i++)
 		{
 			auto effect = std::make_shared<Effect>();
 			effect->Init();
-
-			Math::Vector3 move = {
-				((rand() % 100) / 100.0f - 0.5f) * 0.3f,
-				((rand() % 100) / 100.0f) * 0.3f,
-				((rand() % 100) / 100.0f - 0.5f) * 0.3f
-			};
-			
-			effect->SetParam(m_pos, move, 30.0f, Math::Color(1, 0, 0, 1));
+			Math::Vector3 move = { RandRange(EffectSpeed), RandRange(EffectSpeed), RandRange(EffectSpeed) };
+			effect->SetParam(m_pos, move, EffectLifeSpan, EffectColorRed);
 			SceneManager::Instance().AddObject(effect);
 		}
 	}

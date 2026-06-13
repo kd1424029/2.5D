@@ -17,6 +17,12 @@ public:
 
 	void SetTarget(Player* player) { m_TargetPlayer = player; }
 
+	void ResetGoldFlg() { GoldFlg = false; }
+
+	void SetMoveSpeed(float move) { MoveSpeed = move; }
+
+	void SetRotationSpeed(float rotationspeed) { RotationSpeed = rotationspeed; }
+
 private:
 
 	std::shared_ptr<KdModelData> m_BasketBallModel;
@@ -27,12 +33,20 @@ private:
 
 	std::shared_ptr<KdModelData> m_DirtySoccerBallModel;
 
+	std::shared_ptr<KdModelData> m_GoldBallModel;
+
 	Player* m_TargetPlayer = nullptr;
 
 	// デッキをシャッフルして先頭から配り直す
 	void ShuffleDeck();
 
 	const int BallCount = 4;
+
+	bool GoldFlg = false; 
+
+	const int Left = 1;
+	const int Right = 0;
+	const int None = -1;
 
 	const Math::Vector3 FirstLeftPos = { -6, 3.23f, -2 };
 	const Math::Vector3 FirstRightPos = { 6, 3.23f, -2 };
@@ -44,4 +58,8 @@ private:
 
 	//出現位置用
 	int m_lastPosType; //前回の位置 (0:左 / 1:右 / -1:未設定)
+
+	//BallSpeed用
+	float MoveSpeed = 0.04f;
+	float RotationSpeed = 3.0f;
 };

@@ -3,7 +3,10 @@
 #include "BasketBall/BasketBall.h"
 #include "Volleyball/Volleyball.h"
 #include "SoccerBall/SoccerBall.h"
+#include "GoldBall/GoldBall.h"
 #include "DirtySoccerBall/DirtySoccerBall.h"
+
+#include "../Player/Player.h"
 
 BallGenerate::BallGenerate(): m_Rng(std::random_device{}()), DeckIndex(0), m_lastPosType(-1)
 {
@@ -20,6 +23,9 @@ BallGenerate::BallGenerate(): m_Rng(std::random_device{}()), DeckIndex(0), m_las
 
 	m_DirtySoccerBallModel = std::make_shared<KdModelData>();
 	m_DirtySoccerBallModel->Load("Asset/Models/Ball/DirtySoccerBall/DirtySoccerBall.gltf");
+
+	m_GoldBallModel = std::make_shared<KdModelData>();
+	m_GoldBallModel->Load("Asset/Models/Ball/GoldBall/GoldBall.gltf");
 }
 
 void BallGenerate::ShuffleDeck()
@@ -37,6 +43,36 @@ void BallGenerate::ShuffleDeck()
 
 std::shared_ptr<BallBase> BallGenerate::Generate()
 {
+	// ボール生成
+	std::shared_ptr<BallBase> ball;
+
+	if (m_TargetPlayer->GetGoldCnt() <= 0)
+	{
+		GoldFlg = false;
+	}
+
+	if (m_TargetPlayer->GetGoldCnt() >= 5 && GoldFlg == false)
+	{
+		ball = std::make_shared<GoldBall>();
+
+		ball->Init();
+
+		ball->SetModel(m_GoldBallModel);
+
+		ball->SetPos(FirstRightPos);
+
+		ball->SetMoveSpeed(MoveSpeed);
+
+		ball->SetRotationSpeed(RotationSpeed);
+
+		ball->SetTarget(m_TargetPlayer);
+
+
+		GoldFlg = true;
+
+		return ball;
+	}
+
 	// デッキを使い切ったら再シャッフル
 	if (DeckIndex >= static_cast<int>(m_Deck.size()))
 	{
@@ -44,9 +80,6 @@ std::shared_ptr<BallBase> BallGenerate::Generate()
 	}
 
 	int ballType = m_Deck[DeckIndex++];
-
-	// ボール生成
-	std::shared_ptr<BallBase> ball;
 
 	switch (ballType)
 	{
@@ -58,6 +91,10 @@ std::shared_ptr<BallBase> BallGenerate::Generate()
 
 		ball->SetModel(m_BasketBallModel);
 
+		ball->SetMoveSpeed(MoveSpeed);
+
+		ball->SetRotationSpeed(RotationSpeed);
+
 		break;
 	case 1:
 
@@ -67,6 +104,10 @@ std::shared_ptr<BallBase> BallGenerate::Generate()
 
 		ball->SetModel(m_VolleyBallModel);
 
+		ball->SetMoveSpeed(MoveSpeed);
+
+		ball->SetRotationSpeed(RotationSpeed);
+
 		break;
 	case 2:
 
@@ -75,6 +116,10 @@ std::shared_ptr<BallBase> BallGenerate::Generate()
 		ball->Init();
 
 		ball->SetModel(m_SoccerBallModel);
+
+		ball->SetMoveSpeed(MoveSpeed);
+
+		ball->SetRotationSpeed(RotationSpeed);
 		
 		break;
 	case 3:
@@ -84,6 +129,10 @@ std::shared_ptr<BallBase> BallGenerate::Generate()
 		ball->Init();
 
 		ball->SetModel(m_DirtySoccerBallModel);
+
+		ball->SetMoveSpeed(MoveSpeed);
+
+		ball->SetRotationSpeed(RotationSpeed);
 
 		break;
 	}
@@ -110,7 +159,7 @@ std::shared_ptr<BallBase> BallGenerate::Generate()
 		ball->SetPos(FirstRightPos);
 	}
 
-	ball->SetTarget(m_TargetPlayer); 
+	ball->SetTarget(m_TargetPlayer);
 
 	return ball;
 }

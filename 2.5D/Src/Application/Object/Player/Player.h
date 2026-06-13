@@ -2,6 +2,13 @@
 
 #include "../../Object/Ball/BallBase.h"
 
+static float RandRange(float range)
+{
+	return ((rand() % 100) / 100.0f - 0.5f) * range;
+}
+
+class BallGenerate;
+
 class Player : public KdGameObject
 {
 public:
@@ -23,6 +30,10 @@ public:
 
 	void OnHit(BallKind ballKind);
 
+	int GetGoldCnt() { return GoldCnt; }
+
+	void SetBallGenerate(BallGenerate* gen) { m_pBallGenerate = gen; }
+
 private:
 
 	void UpdateCollider(); //当たり判定用
@@ -43,6 +54,8 @@ private:
 		SoccerBallBox,
 		TrashBox,
 	};
+
+	BallGenerate* m_pBallGenerate = nullptr;
 
 	BoxType m_BoxType = BoxType::BasketBallBox; //初期状態はバスケットボール
 
@@ -89,6 +102,30 @@ private:
 	//スコア用
 	int Score;     //合計スコア
 
+	const int Addition = 100;
+
+	const int FeverAddition = 200;
+
+	const int Subtraction = 100;
+
+	//ゴールドボール用
+	int GoldCnt;
+
+	const int MaxGoldCnt = 20;
+
+	const int MaxFeverCnt = 10;
+
+	int FeverCount;     //フィーバー中のヒット数
+
+	bool FeverFlg;      //フィーバー中かどうか
+
+	//ボールスピード用
+	float NormalBallMoveSpeed;
+	float NormalBallRotationSpeed;
+
+	float MaxBallMoveSpeed;
+	float MaxBallRotationSpeed;
+
 	// スケールアニメーション用
 	float Scale;        
 	float ScaleSpeed;  
@@ -100,4 +137,12 @@ private:
 	const float MaxScale = 1.5f;
 	const float NormalScale = 1.0f;
 	const float SmallScale = 0.5f;
+
+	//エフェクト用
+	const int   EffectCount = 20;
+	const float EffectSpeed = 0.3f;
+	const float EffectLifeSpan = 30.0f;
+
+	const Math::Color EffectColorGreen = { 0, 1, 0, 1 }; // 緑
+	const Math::Color EffectColorRed = { 1, 0, 0, 1 }; // 赤
 };

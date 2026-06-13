@@ -5,6 +5,7 @@
 #include "../../Object/Back/Back.h"
 #include "../../Object/BeltConveyor/BeltConveyor.h"
 #include "../../Object/Ball/BallGenerate.h" 
+#include "../../Object/Ball/BallBase.h" 
 #include "../../Object/Ground/Ground.h"
 
 void GameScene::Event()
@@ -48,7 +49,6 @@ void GameScene::Init()
 {
 	GenerateTimer = 120;
 
-
 	m_camera = std::make_unique<KdCamera>();
 
 	//地面
@@ -72,6 +72,8 @@ void GameScene::Init()
 	//ボール工場にプレイヤーを登録する
 	//当たり判定の通知先として生成された各ボールへ渡される
 	m_ballGenerator.SetTarget(player.get());
+
+	player->SetBallGenerate(&m_ballGenerator);
 
 	//ベルトコンベア
 	std::shared_ptr<BeltConveyor> beltConveyor;

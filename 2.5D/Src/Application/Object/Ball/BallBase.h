@@ -29,7 +29,15 @@ public:
 
 	void DrawLit() override;
 
+	float GetMoveSpeed() const { return MoveSpeed; }
+
+	float GetRotationSpeed() const { return RotationSpeed; }
+
 	void SetPos(const Math::Vector3& pos) { m_pos = pos; }
+
+	void SetMoveSpeed(float move) { MoveSpeed = move; }
+
+	void SetRotationSpeed(float rotationspeed) { RotationSpeed = rotationspeed; }
 
 	void SetTarget(Player* player) { m_TargetPlayer = player; }
 
@@ -65,11 +73,11 @@ private:
 
 	BallMove MoveState;//移動状態
 
-	const float MoveSpeed = 0.04f; //移動速度
+	float MoveSpeed;//移動速度
+
+	float RotationSpeed;
 
 	const float GravitySpeed = 0.005f; //重力の加速度
-
-	const float RotationSpeed = 3.0f;
 
 	const float MaxPosZ = 12.3f; //最初の移動での最大のZ座標
 

@@ -22,5 +22,7 @@ private:
 	//ゲームオブジェクトではないのでm_objListには入らない
 	BallGenerate m_ballGenerator;
 
+	Player* m_pPlayer = nullptr;
+
 	int GenerateTimer;
 };

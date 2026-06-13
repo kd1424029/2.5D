@@ -22,6 +22,10 @@ void BallBase::Init()
 
 	Scale = 0.6;
 
+	MoveSpeed = 0.04f; 
+
+	RotationSpeed = 3.0f;
+
 	m_Rng.seed(std::random_device{}());
 
 	DeckIndex = 0;

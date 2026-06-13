@@ -109,6 +109,9 @@
     <Filter Include="Src\Application\Object\Effect">
       <UniqueIdentifier>{6d2072e2-b0f3-4347-a4ff-650844a7715d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Ball\GoldBall">
+      <UniqueIdentifier>{8f6f217e-e371-4cd5-905f-85336fa997ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -321,6 +324,9 @@
     <ClInclude Include="Src\Application\Object\Effect\Effect.h">
       <Filter>Src\Application\Object\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Ball\GoldBall\GoldBall.h">
+      <Filter>Src\Application\Object\Ball\GoldBall</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -499,6 +505,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Effect\Effect.cpp">
       <Filter>Src\Application\Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Ball\GoldBall\GoldBall.cpp">
+      <Filter>Src\Application\Object\Ball\GoldBall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
