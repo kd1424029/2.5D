@@ -26,13 +26,7 @@ void BallBase::Init()
 
 	RotationSpeed = 3.0f;
 
-	m_Rng.seed(std::random_device{}());
-
-	DeckIndex = 0;
-
 	SecondPosition = 0;
-
-	ShuffleDeck();
 
 	//デバッグ用：KdGameObjectにポインタを用意しているので実体化
 	m_pDebugWire = std::make_unique<KdDebugWireFrame>();
@@ -54,13 +48,6 @@ void BallBase::Update()
 		if (m_pos.z > MaxPosZ)
 		{
 			m_pos.z = MaxPosZ;
-
-			//1回だけカードを引いて確定させる
-			if (DeckIndex >= static_cast<int>(m_Deck.size()))
-			{
-				ShuffleDeck();
-			}
-			SecondPosition = m_Deck[DeckIndex++];
 
 			MoveState = BallMove::SecondMove;
 		}
@@ -233,17 +220,4 @@ void BallBase::DrawLit()
 		KdShaderManager::Instance().
 			m_StandardShader.DrawModel(*m_BallModel, m_mWorld);
 	}
-}
-
-
-void BallBase::ShuffleDeck()
-{
-	//種類を1枚ずつ詰める（枚数を増やせば偏りを調整できる）
-	m_Deck.clear();
-	for (int i = 0; i < PositionCount; ++i)
-	{
-		m_Deck.push_back(i);
-	}
-	std::shuffle(m_Deck.begin(), m_Deck.end(), m_Rng);
-	DeckIndex = 0;
 }

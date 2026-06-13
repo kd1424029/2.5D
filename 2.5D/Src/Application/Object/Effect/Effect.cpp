@@ -21,9 +21,14 @@ void Effect::Update()
 	// 毎フレーム移動
 	m_pos += m_Move;
 
+	//寿命が尽きるその瞬間に綺麗にサイズを0にする計算
+	float scale = LifeSpan / MaxLifeSpan;
+
+	Math::Matrix scaleMat = Math::Matrix::CreateScale(scale);
+
 	Math::Matrix transMat = Math::Matrix::CreateTranslation(m_pos);
 
-	m_mWorld = transMat;
+	m_mWorld = scaleMat * transMat;
 }
 
 void Effect::DrawLit()
@@ -36,5 +41,6 @@ void Effect::SetParam(Math::Vector3 pos, Math::Vector3 move, float lifeSpan , Ma
 	m_pos = pos;
 	m_Move = move;
 	LifeSpan = lifeSpan;
+	MaxLifeSpan = lifeSpan;
 	m_Color = color;
 }

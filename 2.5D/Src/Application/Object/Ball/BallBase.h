@@ -43,12 +43,11 @@ public:
 
 	void SetModel(std::shared_ptr<KdModelData> model) { m_BallModel = model; }
 
+	void SetSecondPosition(int pos) { SecondPosition = pos; }
+
 private:
 
 	Player* m_TargetPlayer = nullptr;
-
-	// デッキをシャッフルして先頭から配り直す
-	void ShuffleDeck();
 
 	float Scale;
 
@@ -61,11 +60,6 @@ private:
 	float RotationX;
 
 	float RotationZ;
-
-	// --- シャッフルデッキ用 ---
-	std::mt19937            m_Rng;       //乱数エンジン
-	std::vector<int>        m_Deck;      //今のデッキ（Positionのint値が入る）
-	int                     DeckIndex; //次に配るインデックス
 
 	int SecondPosition;
 

@@ -126,7 +126,7 @@ private:
 	float MaxBallMoveSpeed;
 	float MaxBallRotationSpeed;
 
-	// スケールアニメーション用
+	//スケールアニメーション用
 	float Scale;        
 	float ScaleSpeed;  
 
@@ -140,7 +140,7 @@ private:
 
 	//エフェクト用
 	const int   EffectCount = 20;
-	const float EffectSpeed = 0.3f;
+	const float EffectSpeed = 0.2f;
 	const float EffectLifeSpan = 30.0f;
 
 	const Math::Color EffectColorGreen = { 0, 1, 0, 1 }; // 緑

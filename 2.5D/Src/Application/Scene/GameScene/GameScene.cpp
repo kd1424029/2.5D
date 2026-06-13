@@ -11,8 +11,8 @@
 void GameScene::Event()
 {
 	//現在のオブジェクト数をデバッグ
-	KdDebugGUI::Instance().ClearLog();
-	KdDebugGUI::Instance().AddLog("%d", (int)m_objList.size());
+	//KdDebugGUI::Instance().ClearLog();
+	//KdDebugGUI::Instance().AddLog("%d", (int)m_objList.size());
 
 	if (GetAsyncKeyState('T') & 0x8000)
 	{

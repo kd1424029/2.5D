@@ -26,4 +26,6 @@ private:
 	Math::Color m_Color; 
 
 	float LifeSpan;
+
+	float MaxLifeSpan = 30.0f; //Playerと同じ寿命数値にする!
 };

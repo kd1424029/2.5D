@@ -40,6 +40,8 @@ private:
 	// デッキをシャッフルして先頭から配り直す
 	void ShuffleDeck();
 
+	void ShuffleLaneDeck(); //レーン配置用デッキシャッフル
+
 	const int BallCount = 4;
 
 	bool GoldFlg = false; 
@@ -54,7 +56,11 @@ private:
 	// --- シャッフルデッキ用 ---
 	std::mt19937            m_Rng;       //乱数エンジン
 	std::vector<int>        m_Deck;      //今のデッキ（BallTypeのint値が入る）
-	int                     DeckIndex; //次に配るインデックス
+	int                     DeckIndex;   //次に配るインデックス
+
+	//レーン配置用（0〜4のレーン番号が入る）
+	std::vector<int>        m_LaneDeck;
+	int                     m_LaneDeckIndex;
 
 	//出現位置用
 	int m_lastPosType; //前回の位置 (0:左 / 1:右 / -1:未設定)

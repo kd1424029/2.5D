@@ -404,7 +404,7 @@ void Player::OnHit(BallKind ballKind)
 			auto effect = std::make_shared<Effect>();
 			effect->Init();
 			Math::Vector3 move = { RandRange(EffectSpeed), RandRange(EffectSpeed), RandRange(EffectSpeed) };
-			effect->SetParam(m_pos, move, EffectLifeSpan, EffectColorGreen);
+			effect->SetParam(Math::Vector3(m_pos.x,m_pos.y + 0.5,m_pos.z), move, EffectLifeSpan, EffectColorGreen);
 			SceneManager::Instance().AddObject(effect);
 		}
 	}
@@ -419,7 +419,7 @@ void Player::OnHit(BallKind ballKind)
 			auto effect = std::make_shared<Effect>();
 			effect->Init();
 			Math::Vector3 move = { RandRange(EffectSpeed), RandRange(EffectSpeed), RandRange(EffectSpeed) };
-			effect->SetParam(m_pos, move, EffectLifeSpan, EffectColorRed);
+			effect->SetParam(Math::Vector3(m_pos.x, m_pos.y + 0.5, m_pos.z), move, EffectLifeSpan, EffectColorRed);
 			SceneManager::Instance().AddObject(effect);
 		}
 	}
