@@ -7,6 +7,10 @@
 #include "../../Object/Ball/BallGenerate.h" 
 #include "../../Object/Ball/BallBase.h" 
 #include "../../Object/Ground/Ground.h"
+#include "../../Object/BoxUi/BasketBallUi/BasketBallUi.h"
+#include "../../Object/BoxUi/VolleyBallUi/VolleyBallUi.h"
+#include "../../Object/BoxUi/SoccerBallUi/SoccerBallUi.h"
+#include "../../Object/BoxUi/TrashBoxUi/TrashBoxUi.h"
 
 void GameScene::Event()
 {
@@ -23,7 +27,7 @@ void GameScene::Event()
 	}
 
 	//カメラ用
-	Math::Vector3 comPos = { 0,5,-7 };//{-6, 6, -1};//{ 0, 10 , 0 };
+	Math::Vector3 comPos = { 0,5,-7.2 };//{-6, 6, -1};//{ 0, 10 , 0 };
 
 	//Math::Matrix rotation = Math::Matrix::CreateRotationX(DirectX::XMConvertToRadians(90.0f));
 
@@ -80,5 +84,29 @@ void GameScene::Init()
 	beltConveyor = std::make_shared<BeltConveyor>();
 	beltConveyor->Init();
 	m_objList.push_back(beltConveyor);
+
+	//バスケットボールUI
+	std::shared_ptr<BasketBallUi> basketballui;
+	basketballui = std::make_shared<BasketBallUi>();
+	basketballui->Init();
+	m_objList.push_back(basketballui);
+
+	//バレーボールUI
+	std::shared_ptr<VolleyBallUi> volleyballui;
+	volleyballui = std::make_shared<VolleyBallUi>();
+	volleyballui->Init();
+	m_objList.push_back(volleyballui);
+
+	//サッカーボールUI
+	std::shared_ptr<SoccerBallUi> soccerballui;
+	soccerballui = std::make_shared<SoccerBallUi>();
+	soccerballui->Init();
+	m_objList.push_back(soccerballui);
+
+	//ゴミ箱UI
+	std::shared_ptr<TrashBoxUi> trashboxui;
+	trashboxui = std::make_shared<TrashBoxUi>();
+	trashboxui->Init();
+	m_objList.push_back(trashboxui);
 
 }

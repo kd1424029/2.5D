@@ -284,6 +284,11 @@
     <ClInclude Include="Src\Application\Object\Ball\SoccerBall\SoccerBall.h" />
     <ClInclude Include="Src\Application\Object\Ball\VolleyBall\VolleyBall.h" />
     <ClInclude Include="Src\Application\Object\BeltConveyor\BeltConveyor.h" />
+    <ClInclude Include="Src\Application\Object\BoxUi\BasketBallUi\BasketBallUi.h" />
+    <ClInclude Include="Src\Application\Object\BoxUi\BoxUiBase.h" />
+    <ClInclude Include="Src\Application\Object\BoxUi\SoccerBallUi\SoccerBallUi.h" />
+    <ClInclude Include="Src\Application\Object\BoxUi\TrashBoxUi\TrashBoxUi.h" />
+    <ClInclude Include="Src\Application\Object\BoxUi\VolleyBallUi\VolleyBallUi.h" />
     <ClInclude Include="Src\Application\Object\Effect\Effect.h" />
     <ClInclude Include="Src\Application\Object\Ground\Ground.h" />
     <ClInclude Include="Src\Application\Object\Player\Player.h" />
@@ -349,6 +354,11 @@
     <ClCompile Include="Src\Application\Object\Ball\SoccerBall\SoccerBall.cpp" />
     <ClCompile Include="Src\Application\Object\Ball\VolleyBall\VolleyBall.cpp" />
     <ClCompile Include="Src\Application\Object\BeltConveyor\BeltConveyor.cpp" />
+    <ClCompile Include="Src\Application\Object\BoxUi\BasketBallUi\BasketBallUi.cpp" />
+    <ClCompile Include="Src\Application\Object\BoxUi\BoxUiBase.cpp" />
+    <ClCompile Include="Src\Application\Object\BoxUi\SoccerBallUi\SoccerBallUi.cpp" />
+    <ClCompile Include="Src\Application\Object\BoxUi\TrashBoxUi\TrashBoxUi.cpp" />
+    <ClCompile Include="Src\Application\Object\BoxUi\VolleyBallUi\VolleyBallUi.cpp" />
     <ClCompile Include="Src\Application\Object\Effect\Effect.cpp" />
     <ClCompile Include="Src\Application\Object\Ground\Ground.cpp" />
     <ClCompile Include="Src\Application\Object\Player\Player.cpp" />

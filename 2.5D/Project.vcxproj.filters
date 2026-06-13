@@ -112,6 +112,21 @@
     <Filter Include="Src\Application\Object\Ball\GoldBall">
       <UniqueIdentifier>{8f6f217e-e371-4cd5-905f-85336fa997ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\BoxUi">
+      <UniqueIdentifier>{036b2fd4-d168-49a7-be10-d4f286a13959}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\BoxUi\BasketBallUi">
+      <UniqueIdentifier>{46c34067-0ce1-4d62-ace1-320da462855e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\BoxUi\SoccerBallUi">
+      <UniqueIdentifier>{5c3046e5-b6b1-453b-98d1-dd1e20310be1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\BoxUi\TrashBoxUi">
+      <UniqueIdentifier>{6dfe1946-7822-47fb-b866-fc44cebca81c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\BoxUi\VolleyBallUi">
+      <UniqueIdentifier>{3f4348c2-7eb7-49dd-a058-dd7a1fa60cd8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -327,6 +342,21 @@
     <ClInclude Include="Src\Application\Object\Ball\GoldBall\GoldBall.h">
       <Filter>Src\Application\Object\Ball\GoldBall</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\BoxUi\BoxUiBase.h">
+      <Filter>Src\Application\Object\BoxUi</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\BoxUi\BasketBallUi\BasketBallUi.h">
+      <Filter>Src\Application\Object\BoxUi\BasketBallUi</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\BoxUi\SoccerBallUi\SoccerBallUi.h">
+      <Filter>Src\Application\Object\BoxUi\SoccerBallUi</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\BoxUi\TrashBoxUi\TrashBoxUi.h">
+      <Filter>Src\Application\Object\BoxUi\TrashBoxUi</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\BoxUi\VolleyBallUi\VolleyBallUi.h">
+      <Filter>Src\Application\Object\BoxUi\VolleyBallUi</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -508,6 +538,21 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Ball\GoldBall\GoldBall.cpp">
       <Filter>Src\Application\Object\Ball\GoldBall</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\BoxUi\BoxUiBase.cpp">
+      <Filter>Src\Application\Object\BoxUi</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\BoxUi\BasketBallUi\BasketBallUi.cpp">
+      <Filter>Src\Application\Object\BoxUi\BasketBallUi</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\BoxUi\SoccerBallUi\SoccerBallUi.cpp">
+      <Filter>Src\Application\Object\BoxUi\SoccerBallUi</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\BoxUi\TrashBoxUi\TrashBoxUi.cpp">
+      <Filter>Src\Application\Object\BoxUi\TrashBoxUi</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\BoxUi\VolleyBallUi\VolleyBallUi.cpp">
+      <Filter>Src\Application\Object\BoxUi\VolleyBallUi</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
