@@ -2,6 +2,8 @@
 
 #include "../BoxUiBase.h"
 
+class KdCamera;
+
 class SoccerBallUi : public BoxUiBase
 {
 public:
@@ -17,8 +19,10 @@ public:
 
 	void DrawSprite() override;
 
+	void SetCamera(std::shared_ptr<KdCamera> camera) { m_wpCamera = camera; }
 
 private:
 
+	std::weak_ptr<KdCamera>   m_wpCamera;
 
 };

@@ -291,6 +291,10 @@
     <ClInclude Include="Src\Application\Object\BoxUi\VolleyBallUi\VolleyBallUi.h" />
     <ClInclude Include="Src\Application\Object\Effect\Effect.h" />
     <ClInclude Include="Src\Application\Object\Ground\Ground.h" />
+    <ClInclude Include="Src\Application\Object\KeyUi\KeyUiBase.h" />
+    <ClInclude Include="Src\Application\Object\KeyUi\XUi\XUi.h" />
+    <ClInclude Include="Src\Application\Object\KeyUi\ZUi\ZUi.h" />
+    <ClInclude Include="Src\Application\Object\Line\Line.h" />
     <ClInclude Include="Src\Application\Object\Player\Player.h" />
     <ClInclude Include="Src\Application\Scene\BaseScene\BaseScene.h" />
     <ClInclude Include="Src\Application\Scene\GameScene\GameScene.h" />
@@ -361,6 +365,10 @@
     <ClCompile Include="Src\Application\Object\BoxUi\VolleyBallUi\VolleyBallUi.cpp" />
     <ClCompile Include="Src\Application\Object\Effect\Effect.cpp" />
     <ClCompile Include="Src\Application\Object\Ground\Ground.cpp" />
+    <ClCompile Include="Src\Application\Object\KeyUi\KeyUiBase.cpp" />
+    <ClCompile Include="Src\Application\Object\KeyUi\XUi\XUi.cpp" />
+    <ClCompile Include="Src\Application\Object\KeyUi\ZUi\ZUi.cpp" />
+    <ClCompile Include="Src\Application\Object\Line\Line.cpp" />
     <ClCompile Include="Src\Application\Object\Player\Player.cpp" />
     <ClCompile Include="Src\Application\Scene\BaseScene\BaseScene.cpp" />
     <ClCompile Include="Src\Application\Scene\GameScene\GameScene.cpp" />

@@ -11,6 +11,9 @@
 #include "../../Object/BoxUi/VolleyBallUi/VolleyBallUi.h"
 #include "../../Object/BoxUi/SoccerBallUi/SoccerBallUi.h"
 #include "../../Object/BoxUi/TrashBoxUi/TrashBoxUi.h"
+#include "../../Object/KeyUi/XUi/XUi.h"
+#include "../../Object/KeyUi/ZUi/ZUi.h"
+#include "../../Object/Line/Line.h"
 
 void GameScene::Event()
 {
@@ -53,7 +56,7 @@ void GameScene::Init()
 {
 	GenerateTimer = 120;
 
-	m_camera = std::make_unique<KdCamera>();
+	m_camera = std::make_shared<KdCamera>();
 
 	//地面
 	std::shared_ptr<Ground> ground;
@@ -89,24 +92,57 @@ void GameScene::Init()
 	std::shared_ptr<BasketBallUi> basketballui;
 	basketballui = std::make_shared<BasketBallUi>();
 	basketballui->Init();
+	basketballui->SetCamera(m_camera);
+	AddObject(basketballui);
 	m_objList.push_back(basketballui);
 
 	//バレーボールUI
 	std::shared_ptr<VolleyBallUi> volleyballui;
 	volleyballui = std::make_shared<VolleyBallUi>();
 	volleyballui->Init();
+	volleyballui->SetCamera(m_camera);
+	AddObject(volleyballui);
 	m_objList.push_back(volleyballui);
 
 	//サッカーボールUI
 	std::shared_ptr<SoccerBallUi> soccerballui;
 	soccerballui = std::make_shared<SoccerBallUi>();
 	soccerballui->Init();
+	soccerballui->SetCamera(m_camera);
+	AddObject(soccerballui);
 	m_objList.push_back(soccerballui);
 
 	//ゴミ箱UI
 	std::shared_ptr<TrashBoxUi> trashboxui;
 	trashboxui = std::make_shared<TrashBoxUi>();
 	trashboxui->Init();
+	trashboxui->SetCamera(m_camera);
+	AddObject(trashboxui);
 	m_objList.push_back(trashboxui);
+
+	//XキーUI
+	std::shared_ptr<XUi> xui;
+	xui = std::make_shared<XUi>();
+	xui->Init();
+	xui->SetCamera(m_camera);
+	AddObject(xui);
+	m_objList.push_back(xui);
+
+	//ZキーUI
+	std::shared_ptr<ZUi> zui;
+	zui = std::make_shared<ZUi>();
+	zui->Init();
+	zui->SetCamera(m_camera);
+	AddObject(zui);
+	m_objList.push_back(zui);
+
+	//ライン
+	std::shared_ptr<Line> line;
+	line = std::make_shared<Line>();
+	line->Init();
+	line->SetCamera(m_camera);
+	line->SetPlayer(player.get());
+	AddObject(line);
+	m_objList.push_back(line);
 
 }

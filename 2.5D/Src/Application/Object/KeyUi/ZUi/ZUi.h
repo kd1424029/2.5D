@@ -1,15 +1,15 @@
 ﻿#pragma once
 
-#include "../BoxUiBase.h"
+#include "../KeyUiBase.h"
 
 class KdCamera;
 
-class BasketBallUi : public BoxUiBase
+class ZUi : public KeyUiBase
 {
 public:
 
-	BasketBallUi() {}
-	~BasketBallUi() {}
+	ZUi() {}
+	~ZUi() {}
 
 	void Init() override;
 
@@ -25,4 +25,7 @@ private:
 
 	std::weak_ptr<KdCamera>   m_wpCamera;
 
+
+	const float PosX = 6.7;
+	const float PosY = 8.7;
 };

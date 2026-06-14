@@ -127,6 +127,18 @@
     <Filter Include="Src\Application\Object\BoxUi\VolleyBallUi">
       <UniqueIdentifier>{3f4348c2-7eb7-49dd-a058-dd7a1fa60cd8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\KeyUi">
+      <UniqueIdentifier>{4a73729f-6276-4d4c-8a22-233987b5956c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\KeyUi\XUi">
+      <UniqueIdentifier>{63b1d895-7e8a-48d7-8d9e-0c7a3b7ab54b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\KeyUi\ZUi">
+      <UniqueIdentifier>{cf716dc3-8e61-4b99-8b56-fcc5cd449dbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Line">
+      <UniqueIdentifier>{fd3a04d8-08b2-4a8d-898d-23a45f329f6e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -357,6 +369,18 @@
     <ClInclude Include="Src\Application\Object\BoxUi\VolleyBallUi\VolleyBallUi.h">
       <Filter>Src\Application\Object\BoxUi\VolleyBallUi</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\KeyUi\KeyUiBase.h">
+      <Filter>Src\Application\Object\KeyUi</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\KeyUi\XUi\XUi.h">
+      <Filter>Src\Application\Object\KeyUi\XUi</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\KeyUi\ZUi\ZUi.h">
+      <Filter>Src\Application\Object\KeyUi\ZUi</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Line\Line.h">
+      <Filter>Src\Application\Object\Line</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -553,6 +577,18 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\BoxUi\VolleyBallUi\VolleyBallUi.cpp">
       <Filter>Src\Application\Object\BoxUi\VolleyBallUi</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\KeyUi\KeyUiBase.cpp">
+      <Filter>Src\Application\Object\KeyUi</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\KeyUi\XUi\XUi.cpp">
+      <Filter>Src\Application\Object\KeyUi\XUi</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\KeyUi\ZUi\ZUi.cpp">
+      <Filter>Src\Application\Object\KeyUi\ZUi</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Line\Line.cpp">
+      <Filter>Src\Application\Object\Line</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

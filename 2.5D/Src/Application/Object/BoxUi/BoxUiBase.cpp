@@ -13,5 +13,6 @@ void BoxUiBase::PostUpdate()
 }
 
 void BoxUiBase::DrawSprite()
-{}
+{
+}
 

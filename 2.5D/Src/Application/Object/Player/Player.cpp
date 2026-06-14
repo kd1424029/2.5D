@@ -70,7 +70,7 @@ void Player::Update()
 {
 	//現在のScoreをデバッグ
 	KdDebugGUI::Instance().ClearLog();
-	KdDebugGUI::Instance().AddLog("%d", Score);
+	KdDebugGUI::Instance().AddLog("%d", FeverCount);
 
 	{//移動中の処理
 		switch (m_State)
@@ -412,6 +412,33 @@ void Player::OnHit(BallKind ballKind)
 	{
 		Score-= Subtraction;
 		Scale = SmallScale;
+
+		if (FeverFlg)
+		{
+			//フィーバー中：FeverCount を増やす
+			FeverCount++;
+
+			if (FeverCount > MaxFeverCnt)  //10個でフィーバー終了
+			{
+				FeverFlg = false;
+				FeverCount = 0;
+				GoldCnt = 0;
+
+				//スピードを通常に戻す
+				const auto& objList = SceneManager::Instance().GetObjList();
+				for (auto& obj : objList)
+				{
+					BallBase* ball = dynamic_cast<BallBase*>(obj.get());
+					if (ball) ball->SetMoveSpeed(NormalBallMoveSpeed);
+					if (ball) ball->SetRotationSpeed(NormalBallRotationSpeed);
+				}
+				if (m_pBallGenerate)
+				{
+					m_pBallGenerate->SetMoveSpeed(NormalBallMoveSpeed);
+					m_pBallGenerate->SetRotationSpeed(NormalBallRotationSpeed);
+				}
+			}
+		}
 
 		//エフェクト（赤）
 		for (int i = 0; i < EffectCount; i++)

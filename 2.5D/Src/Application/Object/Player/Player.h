@@ -32,6 +32,8 @@ public:
 
 	int GetGoldCnt() { return GoldCnt; }
 
+	int GetBoxType() { return static_cast<int>(m_BoxType); }
+
 	void SetBallGenerate(BallGenerate* gen) { m_pBallGenerate = gen; }
 
 private:
