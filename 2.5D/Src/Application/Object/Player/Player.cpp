@@ -70,7 +70,7 @@ void Player::Update()
 {
 	//現在のScoreをデバッグ
 	KdDebugGUI::Instance().ClearLog();
-	KdDebugGUI::Instance().AddLog("%d", FeverCount);
+	KdDebugGUI::Instance().AddLog("%d", Score);
 
 	{//移動中の処理
 		switch (m_State)
