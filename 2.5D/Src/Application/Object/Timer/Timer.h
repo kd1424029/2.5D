@@ -27,11 +27,17 @@ private:
 
 	std::shared_ptr<KdTexture> m_Timer;
 
+	std::shared_ptr<KdTexture> m_RestUi;
+
 	std::weak_ptr<KdCamera>    m_wpCamera;
 
+	const int MaxTime = 180;
+
+	//RestUi用
+	const int RestCharSize = 128;
 
 	//残り時間
-	float RemainTime;   //1分30秒
+	float RemainTime;   //3分00秒
 
 	bool  TimeUpFlg = false;
 
@@ -51,7 +57,7 @@ private:
 	int Digits[MaxDigits] = {};   //0 = 分 1 = コロン 2 = 秒十の位 3 = 秒一の位
 
 	//表示位置オフセット(3D→2D変換後の調整)
-	const float PosX = 5.0f;
+	const float PosX = 5.3f;
 
 	const float PosY = 8.5f;
 

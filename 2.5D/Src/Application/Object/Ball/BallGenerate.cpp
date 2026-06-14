@@ -46,7 +46,7 @@ void BallGenerate::ShuffleDeck()
 void BallGenerate::ShuffleLaneDeck()
 {
 	m_LaneDeck.clear();
-	for (int i = 0; i < 5; ++i) //レーンは5本（0〜4）
+	for (int i = 0; i < MaxLane; ++i) //レーンは5本（0〜4）
 	{
 		m_LaneDeck.push_back(i);
 	}
@@ -75,7 +75,7 @@ std::shared_ptr<BallBase> BallGenerate::Generate()
 	// ========================================================
 	// 1. ボールのインスタンス生成と 出現位置(座標) の決定
 	// ========================================================
-	if (m_TargetPlayer->GetGoldCnt() >= 5 && GoldFlg == false)
+	if (m_TargetPlayer->GetGoldCnt() >= MaxGoldCnt && GoldFlg == false)
 	{
 		// ------------------------------------------
 		// 【金のボールが生成されるときの処理】

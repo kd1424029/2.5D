@@ -44,6 +44,8 @@ private:
 
 	const int BallCount = 4;
 
+	const int MaxGoldCnt = 5;
+
 	bool GoldFlg = false; 
 
 	const int Left = 1;
@@ -61,6 +63,8 @@ private:
 	//レーン配置用（0〜4のレーン番号が入る）
 	std::vector<int>        m_LaneDeck;
 	int                     m_LaneDeckIndex;
+
+	const int MaxLane = 5;
 
 	//出現位置用
 	int m_lastPosType; //前回の位置 (0:左 / 1:右 / -1:未設定)

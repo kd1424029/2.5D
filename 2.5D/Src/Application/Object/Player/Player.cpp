@@ -243,11 +243,6 @@ void Player::Update()
 		}
 	}
 
-	if (GoldCnt > 15)
-	{
-		GoldCnt = 0;
-	}
-
 	Math::Matrix transMat = Math::Matrix::CreateTranslation(m_pos);
 
 	Math::Matrix scaleMat = Math::Matrix::CreateScale(Scale);
@@ -394,11 +389,11 @@ void Player::OnHit(BallKind ballKind)
 		}
 		else
 		{
-			//通常時：GoldCnt を増やす
+			//通常時GoldCntを増やす
 			GoldCnt++;
 		}
 
-		// エフェクト（緑）
+		// エフェクト(緑)
 		for (int i = 0; i < EffectCount; i++)
 		{
 			auto effect = std::make_shared<Effect>();
@@ -413,9 +408,11 @@ void Player::OnHit(BallKind ballKind)
 		Score-= Subtraction;
 		Scale = SmallScale;
 
+		GoldCnt++;//ミスでもGoldCntは増やす
+
 		if (FeverFlg)
 		{
-			//フィーバー中：FeverCount を増やす
+			//フィーバー中FeverCountを増やす
 			FeverCount++;
 
 			if (FeverCount > MaxFeverCnt)  //10個でフィーバー終了
@@ -440,7 +437,7 @@ void Player::OnHit(BallKind ballKind)
 			}
 		}
 
-		//エフェクト（赤）
+		//エフェクト(赤)
 		for (int i = 0; i < EffectCount; i++)
 		{
 			auto effect = std::make_shared<Effect>();
