@@ -51,27 +51,21 @@ private:
 
 	enum class BoxType
 	{
-		BasketBallBox, 
-		//VolleyBallBox,
-		//SoccerBallBox,
+		NormalBox, 
 		TrashBox,
 	};
 
 	BallGenerate* m_pBallGenerate = nullptr;
 
-	BoxType m_BoxType = BoxType::BasketBallBox; //初期状態はバスケットボール
+	BoxType m_BoxType = BoxType::NormalBox; //初期状態はバスケットボール
 
 	//モデルやテクスチャはポインタで管理
-	std::shared_ptr<KdModelData> m_BasketBallBoxModel;
-
-	std::shared_ptr<KdModelData> m_ValleyBallBoxModel;
-	
-	std::shared_ptr<KdModelData> m_SoccerBallBoxModel;
+	std::shared_ptr<KdModelData> m_NormalBoxModel;
 
 	std::shared_ptr<KdModelData> m_TrashBoxModel;
 
 	//Box切り替え用
-	BoxType m_NextBoxType = BoxType::BasketBallBox; //次に変更する箱のタイプ
+	BoxType m_NextBoxType = BoxType::NormalBox; //次に変更する箱のタイプ
 
 	float BoxPosZ;    //元のZ座標
 

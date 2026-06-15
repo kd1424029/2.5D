@@ -11,14 +11,8 @@
 void Player::Init()
 {
 	//ポインタのままでは使い物にならないので、実体化
-	m_BasketBallBoxModel = std::make_shared<KdModelData>();
-	m_BasketBallBoxModel->Load("Asset/Models/Box/Box/Box.gltf");
-
-	//m_ValleyBallBoxModel = std::make_shared<KdModelData>();
-	//m_ValleyBallBoxModel->Load("Asset/Models/Box/VolleyBallBox/VolleyBallBox.gltf");
-
-	//m_SoccerBallBoxModel = std::make_shared<KdModelData>();
-	//m_SoccerBallBoxModel->Load("Asset/Models/Box/SoccerBallBox/SoccerBallBox.gltf");
+	m_NormalBoxModel = std::make_shared<KdModelData>();
+	m_NormalBoxModel->Load("Asset/Models/Box/Box/Box.gltf");
 
 	m_TrashBoxModel = std::make_shared<KdModelData>();
 	m_TrashBoxModel->Load("Asset/Models/Box/TrashBox/TrashBox.gltf");
@@ -259,18 +253,11 @@ void Player::PostUpdate()
 void Player::DrawLit()
 {
 	//現在のタイプに応じて描画するモデルを切り替える！
-	if (m_BoxType == BoxType::BasketBallBox)
+	if (m_BoxType == BoxType::NormalBox)
 	{
-		KdShaderManager::Instance().m_StandardShader.DrawModel(*m_BasketBallBoxModel, m_mWorld);
+		KdShaderManager::Instance().m_StandardShader.DrawModel(*m_NormalBoxModel, m_mWorld);
 	}
-	//else if(m_BoxType == BoxType::VolleyBallBox)
-	//{
-	//	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_ValleyBallBoxModel, m_mWorld);
-	//}
-	//else if (m_BoxType == BoxType::SoccerBallBox)
-	//{
-	//	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_SoccerBallBoxModel, m_mWorld);
-	//}
+
 	else if (m_BoxType == BoxType::TrashBox)
 	{
 		KdShaderManager::Instance().m_StandardShader.DrawModel(*m_TrashBoxModel, m_mWorld);
@@ -279,18 +266,11 @@ void Player::DrawLit()
 
 void Player::GenerateDepthMapFromLight()
 {
-	if (m_BoxType == BoxType::BasketBallBox)
+	if (m_BoxType == BoxType::NormalBox)
 	{
-		KdShaderManager::Instance().m_StandardShader.DrawModel(*m_BasketBallBoxModel, m_mWorld);
+		KdShaderManager::Instance().m_StandardShader.DrawModel(*m_NormalBoxModel, m_mWorld);
 	}
-	//else if (m_BoxType == BoxType::VolleyBallBox)
-	//{
-	//	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_ValleyBallBoxModel, m_mWorld);
-	//}
-	//else if (m_BoxType == BoxType::SoccerBallBox)
-	//{
-	//	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_SoccerBallBoxModel, m_mWorld);
-	//}
+	
 	else if (m_BoxType == BoxType::TrashBox)
 	{
 		KdShaderManager::Instance().m_StandardShader.DrawModel(*m_TrashBoxModel, m_mWorld);
@@ -304,20 +284,10 @@ void Player::OnHit(BallKind ballKind)
 
 	bool GoldMatch = false;
 
-	if (ballKind == BallKind::Kind_BasketBall && m_BoxType != BoxType::TrashBox)
+	if (ballKind == BallKind::Kind_NormalBall && m_BoxType == BoxType::NormalBox)
 	{
 		Match = true;
 	}
-
-	//else if (ballKind == BallKind::Kind_VolleyBall && m_BoxType == BoxType::VolleyBallBox)
-	//{
-	//	Match = true;
-	//}
-
-	//else if (ballKind == BallKind::Kind_SoccerBall && m_BoxType == BoxType::SoccerBallBox)
-	//{
-	//	Match = true;
-	//}
 
 	else if (ballKind == BallKind::Kind_DirtySoccerBall && m_BoxType == BoxType::TrashBox)
 	{
@@ -453,11 +423,11 @@ void Player::UpdateCollider()
 {
 	m_pCollider = std::make_unique<KdCollider>();
 
-	if (m_BoxType == BoxType::BasketBallBox)
+	if (m_BoxType == BoxType::NormalBox)
 	{
 		m_pCollider->RegisterCollisionShape(
-			"BasketBallBoxModelCollision",
-			m_BasketBallBoxModel,
+			"NormalBoxModelCollision",
+			m_NormalBoxModel,
 			KdCollider::TypeDamage
 		);
 	}

@@ -4,7 +4,7 @@ void VolleyBall::Init()
 {
 	BallBase::Init();
 
-	ballKind = BallKind::Kind_VolleyBall;
+	ballKind = BallKind::Kind_NormalBall;
 
 }
 

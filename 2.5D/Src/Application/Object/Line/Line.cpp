@@ -9,8 +9,6 @@ void Line::Init()
 
 	//Playerのenum class BoxType と同じ順番で登録
 	m_PosList.push_back(BasketBallPos);
-	//m_PosList.push_back(VolleyBallPos);
-	//m_PosList.push_back(SoccerBallPos);
 	m_PosList.push_back(TrashBoxPos);
 
 	m_CurrentPos = BasketBallPos; //Playerの初期値と合わせる

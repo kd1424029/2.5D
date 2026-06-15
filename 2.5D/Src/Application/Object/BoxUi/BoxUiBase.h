@@ -29,7 +29,7 @@ protected:
 
 	const float SecondTopPosY = 6.8;
 
-	const float ThirdTopPosY = 5.9;
+	const float PosY = 1;
 
 	const float BottomPosY = 4.9;
 };

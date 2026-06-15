@@ -4,7 +4,7 @@ void SoccerBall::Init()
 {
 	BallBase::Init();
 
-	ballKind = BallKind::Kind_SoccerBall;
+	ballKind = BallKind::Kind_NormalBall;
 }
 
 void SoccerBall::Update()

@@ -26,6 +26,6 @@ private:
 	std::weak_ptr<KdCamera>   m_wpCamera;
 
 
-	const float PosX = 6.7;
-	const float PosY = 8.7;
+	const float PosX = 1.7;
+	const float PosY = 1.0;
 };

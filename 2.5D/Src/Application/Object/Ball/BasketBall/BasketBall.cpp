@@ -4,7 +4,7 @@ void BasketBall::Init()
 {
 	BallBase::Init();
 
-	ballKind = BallKind::Kind_BasketBall;
+	ballKind = BallKind::Kind_NormalBall;
 }
 
 void BasketBall::Update()

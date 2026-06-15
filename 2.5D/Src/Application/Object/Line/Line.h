@@ -35,9 +35,9 @@ private:
 
 	const Math::Vector3 VolleyBallPos = { -6.7 ,6.78 ,0 };
 
-	const Math::Vector3 BasketBallPos = { -6.7 ,5.85 ,0 };
+	const Math::Vector3 BasketBallPos = { -0.6 ,1 ,0 };
 
-	const Math::Vector3 TrashBoxPos = { -6.7 ,4.9 ,0 };
+	const Math::Vector3 TrashBoxPos = { 0.6 ,1 ,0 };
 
 
 	//座標を切り替えるための管理用変数

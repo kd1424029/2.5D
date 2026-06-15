@@ -31,7 +31,7 @@ void GameScene::Event()
 	}
 
 	//カメラ用
-	Math::Vector3 comPos = { 0,5,-7.2 };//{-6, 6, -1};//{ 0, 10 , 0 };
+	Math::Vector3 comPos = { 0,4.5,-7.2 };//{-6, 6, -1};//{ 0, 10 , 0 };
 
 	//Math::Matrix rotation = Math::Matrix::CreateRotationX(DirectX::XMConvertToRadians(90.0f));
 
