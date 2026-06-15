@@ -4,6 +4,8 @@
 
 #include "../../Object/Ball/BallGenerate.h"
 
+class Timer;
+
 class GameScene : public BaseScene
 {
 public :
@@ -24,5 +26,11 @@ private:
 
 	Player* m_pPlayer = nullptr;
 
+	Timer* m_pTimer = nullptr;
+
 	int GenerateTimer;
+
+	const int NormalInterval = 120;
+
+	const int FeverInterval = 60;
 };

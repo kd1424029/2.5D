@@ -8,7 +8,7 @@ void Timer::Init()
 	m_RestUi = std::make_shared<KdTexture>();
 	m_RestUi->Load("Asset/Textures/Timer/RestUi.png");
 
-	RemainTime = 180.0f;   //3分00秒
+	RemainTime = 120.0f;   //2分00秒
 
 	TimeUpFlg = false;
 }

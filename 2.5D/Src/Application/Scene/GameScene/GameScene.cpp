@@ -42,13 +42,26 @@ void GameScene::Event()
 	//一定間隔でボールを1つ生成してゲーム世界へ追加する
 	//種類・出現位置の決定はBallGenerateに任せている
 	GenerateTimer--;
+
 	if (GenerateTimer < 0)
 	{
+		if (m_pTimer)
+		{
+			m_ballGenerator.SetRemainingTime(static_cast<int>(m_pTimer->GetRemainingTime()));
+		}
+
 		//BallGenerateがランダムに種類を決めて生成する
 		m_objList.push_back(m_ballGenerator.Generate());
 
 		//タイマーをリセット（次の生成までのフレーム数）
-		GenerateTimer = 120; //2秒間隔
+		if (m_pPlayer && m_pPlayer->GetFeverFlg())
+		{
+			GenerateTimer = FeverInterval;
+		}
+		else
+		{
+			GenerateTimer = NormalInterval;
+		}
 	}
 
 }
@@ -75,6 +88,9 @@ void GameScene::Init()
 	std::shared_ptr<Player> player;
 	player = std::make_shared<Player>();
 	player->Init();
+
+	m_pPlayer = player.get();
+
 	m_objList.push_back(player);
 
 	//ボール工場にプレイヤーを登録する
@@ -144,6 +160,8 @@ void GameScene::Init()
 	timer = std::make_shared<Timer>();
 	timer->Init();
 	timer->SetCamera(m_camera);
+	m_pTimer = timer.get();
+
 	m_objList.push_back(timer);
 
 }

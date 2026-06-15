@@ -156,25 +156,25 @@ void Player::Update()
 		}
 	}
 
-	{//移動範囲の制限
-		if (m_pos.x >= MoveMaxAmount)
-		{
-			MoveFlgRight = false;
-		}
-		else
-		{
-			MoveFlgRight = true;
-		}
-
-		if (m_pos.x <= -MoveMaxAmount)
-		{
-			MoveFlgLeft = false;
-		}
-		else
-		{
-			MoveFlgLeft = true;
-		}
+	//移動範囲の制限
+	if (m_pos.x >= MoveMaxAmount)
+	{
+		MoveFlgRight = false;
 	}
+	else
+	{
+		MoveFlgRight = true;
+	}
+
+	if (m_pos.x <= -MoveMaxAmount)
+	{
+		MoveFlgLeft = false;
+	}
+	else
+	{
+		MoveFlgLeft = true;
+	}
+	
 
 	//Box切り替え処理
 	if ((GetAsyncKeyState('Z') & 0x8000) || (GetAsyncKeyState('X') & 0x8000))
@@ -226,16 +226,16 @@ void Player::Update()
 			Scale = NormalScale;
 		}
 	}
-	//Match失敗時に小さくする演出も入れる
-	else if (Scale < NormalScale)
-	{
-		Scale += ScaleSpeed * (OneFrame / MaxFrame);
+	////Match失敗時に小さくする演出も入れる
+	//else if (Scale < NormalScale)
+	//{
+	//	Scale += ScaleSpeed * (OneFrame / MaxFrame);
 
-		if (Scale > NormalScale)
-		{
-			Scale = NormalScale;
-		}
-	}
+	//	if (Scale > NormalScale)
+	//	{
+	//		Scale = NormalScale;
+	//	}
+	//}
 
 	Math::Matrix transMat = Math::Matrix::CreateTranslation(m_pos);
 
@@ -311,8 +311,6 @@ void Player::OnHit(BallKind ballKind)
 			//GoldBall取得→フィーバー開始
 			FeverFlg = true;
 
-			GoldCnt = 0;  // リセット
-
 			const auto& objList = SceneManager::Instance().GetObjList();
 			for (auto& obj : objList)
 			{
@@ -376,7 +374,7 @@ void Player::OnHit(BallKind ballKind)
 	else  //ミス
 	{
 		Score-= Subtraction;
-		Scale = SmallScale;
+		//Scale = SmallScale;
 
 		GoldCnt++;//ミスでもGoldCntは増やす
 
@@ -431,22 +429,6 @@ void Player::UpdateCollider()
 			KdCollider::TypeDamage
 		);
 	}
-	//else if (m_BoxType == BoxType::VolleyBallBox)
-	//{
-	//	m_pCollider->RegisterCollisionShape(
-	//		"VolleyBallBoxModelCollision",
-	//		m_ValleyBallBoxModel,
-	//		KdCollider::TypeDamage
-	//	);
-	//}
-	//else if (m_BoxType == BoxType::SoccerBallBox)
-	//{
-	//	m_pCollider->RegisterCollisionShape(
-	//		"SoccerBallBoxModelCollision",
-	//		m_SoccerBallBoxModel,
-	//		KdCollider::TypeDamage
-	//	);
-	//}
 	else if (m_BoxType == BoxType::TrashBox)
 	{
 		m_pCollider->RegisterCollisionShape(

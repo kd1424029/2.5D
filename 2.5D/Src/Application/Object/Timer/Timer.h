@@ -17,11 +17,9 @@ public:
 
 	void SetCamera(std::shared_ptr<KdCamera> camera) { m_wpCamera = camera; }
 
-	
 	bool GetTimeUp() const { return TimeUpFlg; }  //タイマーが0になったか
 
-	
-	float GetRemainTime() const { return RemainTime; } //残り秒数を取得
+	float GetRemainingTime() const { return RemainTime; } //残り秒数を取得
 
 private:
 
@@ -31,7 +29,7 @@ private:
 
 	std::weak_ptr<KdCamera>    m_wpCamera;
 
-	const int MaxTime = 180;
+	const int MaxTime = 120.0f;
 
 	//RestUi用
 	const int RestCharSize = 128;

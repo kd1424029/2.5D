@@ -23,6 +23,8 @@ public:
 
 	void SetRotationSpeed(float rotationspeed) { RotationSpeed = rotationspeed; }
 
+	void SetRemainingTime(int time) { RemainingTime = time; }
+
 private:
 
 	std::shared_ptr<KdModelData> m_BasketBallModel;
@@ -36,6 +38,15 @@ private:
 	std::shared_ptr<KdModelData> m_GoldBallModel;
 
 	Player* m_TargetPlayer = nullptr;
+
+	//ウェーブ設定を定数で管理
+	const int WaveTime1 = 100; //100秒以上 → SoccerBallのみ
+	const int WaveTime2 = 85;  //85秒以上 → + DirtySoccerBall
+	const int WaveTime3 = 65;  //65秒以上 → + BasketBall
+	const int WaveTime4 = 50;  //50秒以上 → + VolleyBall
+
+	int RemainingTime = 60;
+	int LastWaveLevel = -1; // 前回のウェーブレベル(デッキ再構築判定用)
 
 	// デッキをシャッフルして先頭から配り直す
 	void ShuffleDeck();

@@ -34,6 +34,8 @@ public:
 
 	int GetBoxType() { return static_cast<int>(m_BoxType); }
 
+	bool GetFeverFlg() { return FeverFlg; }
+
 	void SetBallGenerate(BallGenerate* gen) { m_pBallGenerate = gen; }
 
 private:
@@ -98,16 +100,14 @@ private:
 	//スコア用
 	int Score;     //合計スコア
 
-	const int Addition = 100;
+	const int Addition = 250;
 
-	const int FeverAddition = 200;
+	const int FeverAddition = 500;
 
 	const int Subtraction = 100;
 
 	//ゴールドボール用
 	int GoldCnt;
-
-	const int MaxGoldCnt = 20;
 
 	const int MaxFeverCnt = 5;
 
