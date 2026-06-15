@@ -17,6 +17,8 @@ public:
 
 	void DrawLit() override;
 
+	void DrawBright() override;
+
 
 private:
 

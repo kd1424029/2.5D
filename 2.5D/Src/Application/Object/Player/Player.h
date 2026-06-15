@@ -4,7 +4,7 @@
 
 static float RandRange(float range)
 {
-	return ((rand() % 100) / 100.0f - 0.5f) * range;
+	return ((float)rand() / RAND_MAX - 0.5f)* range;
 }
 
 class BallGenerate;
@@ -52,8 +52,8 @@ private:
 	enum class BoxType
 	{
 		BasketBallBox, 
-		VolleyBallBox,
-		SoccerBallBox,
+		//VolleyBallBox,
+		//SoccerBallBox,
 		TrashBox,
 	};
 
@@ -115,7 +115,7 @@ private:
 
 	const int MaxGoldCnt = 20;
 
-	const int MaxFeverCnt = 10;
+	const int MaxFeverCnt = 5;
 
 	int FeverCount;     //フィーバー中のヒット数
 
@@ -144,6 +144,8 @@ private:
 	const int   EffectCount = 20;
 	const float EffectSpeed = 0.2f;
 	const float EffectLifeSpan = 30.0f;
+
+	const float EffectAdjust = 0.5;
 
 	const Math::Color EffectColorGreen = { 0, 1, 0, 1 }; // 緑
 	const Math::Color EffectColorRed = { 1, 0, 0, 1 }; // 赤

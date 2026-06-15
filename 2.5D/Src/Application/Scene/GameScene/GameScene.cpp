@@ -42,7 +42,7 @@ void GameScene::Event()
 	//一定間隔でボールを1つ生成してゲーム世界へ追加する
 	//種類・出現位置の決定はBallGenerateに任せている
 	GenerateTimer--;
-	if (GenerateTimer <= 0)
+	if (GenerateTimer < 0)
 	{
 		//BallGenerateがランダムに種類を決めて生成する
 		m_objList.push_back(m_ballGenerator.Generate());

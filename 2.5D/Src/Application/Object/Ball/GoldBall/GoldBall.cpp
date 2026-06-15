@@ -22,3 +22,8 @@ void GoldBall::DrawLit()
 {
 	BallBase::DrawLit();
 }
+
+void GoldBall::DrawBright()
+{
+	BallBase::DrawLit();
+}

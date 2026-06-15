@@ -137,7 +137,6 @@ void BallBase::Update()
 	{
 		m_isExpired = true;
 	}
-
 }
 
 void BallBase::PostUpdate()

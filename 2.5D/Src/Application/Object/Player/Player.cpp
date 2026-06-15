@@ -12,13 +12,13 @@ void Player::Init()
 {
 	//ポインタのままでは使い物にならないので、実体化
 	m_BasketBallBoxModel = std::make_shared<KdModelData>();
-	m_BasketBallBoxModel->Load("Asset/Models/Box/BasketBallBox/BasketBallBox.gltf");
+	m_BasketBallBoxModel->Load("Asset/Models/Box/Box/Box.gltf");
 
-	m_ValleyBallBoxModel = std::make_shared<KdModelData>();
-	m_ValleyBallBoxModel->Load("Asset/Models/Box/VolleyBallBox/VolleyBallBox.gltf");
+	//m_ValleyBallBoxModel = std::make_shared<KdModelData>();
+	//m_ValleyBallBoxModel->Load("Asset/Models/Box/VolleyBallBox/VolleyBallBox.gltf");
 
-	m_SoccerBallBoxModel = std::make_shared<KdModelData>();
-	m_SoccerBallBoxModel->Load("Asset/Models/Box/SoccerBallBox/SoccerBallBox.gltf");
+	//m_SoccerBallBoxModel = std::make_shared<KdModelData>();
+	//m_SoccerBallBoxModel->Load("Asset/Models/Box/SoccerBallBox/SoccerBallBox.gltf");
 
 	m_TrashBoxModel = std::make_shared<KdModelData>();
 	m_TrashBoxModel->Load("Asset/Models/Box/TrashBox/TrashBox.gltf");
@@ -193,7 +193,7 @@ void Player::Update()
 
 			const int Adjustment = 1;
 
-			const int BoxTypeCount = 4; //Box種類の総数
+			const int BoxTypeCount = 2; //Box種類の総数
 
 			if (GetAsyncKeyState('Z') & 0x8000)
 			{
@@ -263,14 +263,14 @@ void Player::DrawLit()
 	{
 		KdShaderManager::Instance().m_StandardShader.DrawModel(*m_BasketBallBoxModel, m_mWorld);
 	}
-	else if(m_BoxType == BoxType::VolleyBallBox)
-	{
-		KdShaderManager::Instance().m_StandardShader.DrawModel(*m_ValleyBallBoxModel, m_mWorld);
-	}
-	else if (m_BoxType == BoxType::SoccerBallBox)
-	{
-		KdShaderManager::Instance().m_StandardShader.DrawModel(*m_SoccerBallBoxModel, m_mWorld);
-	}
+	//else if(m_BoxType == BoxType::VolleyBallBox)
+	//{
+	//	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_ValleyBallBoxModel, m_mWorld);
+	//}
+	//else if (m_BoxType == BoxType::SoccerBallBox)
+	//{
+	//	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_SoccerBallBoxModel, m_mWorld);
+	//}
 	else if (m_BoxType == BoxType::TrashBox)
 	{
 		KdShaderManager::Instance().m_StandardShader.DrawModel(*m_TrashBoxModel, m_mWorld);
@@ -283,14 +283,14 @@ void Player::GenerateDepthMapFromLight()
 	{
 		KdShaderManager::Instance().m_StandardShader.DrawModel(*m_BasketBallBoxModel, m_mWorld);
 	}
-	else if (m_BoxType == BoxType::VolleyBallBox)
-	{
-		KdShaderManager::Instance().m_StandardShader.DrawModel(*m_ValleyBallBoxModel, m_mWorld);
-	}
-	else if (m_BoxType == BoxType::SoccerBallBox)
-	{
-		KdShaderManager::Instance().m_StandardShader.DrawModel(*m_SoccerBallBoxModel, m_mWorld);
-	}
+	//else if (m_BoxType == BoxType::VolleyBallBox)
+	//{
+	//	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_ValleyBallBoxModel, m_mWorld);
+	//}
+	//else if (m_BoxType == BoxType::SoccerBallBox)
+	//{
+	//	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_SoccerBallBoxModel, m_mWorld);
+	//}
 	else if (m_BoxType == BoxType::TrashBox)
 	{
 		KdShaderManager::Instance().m_StandardShader.DrawModel(*m_TrashBoxModel, m_mWorld);
@@ -304,20 +304,20 @@ void Player::OnHit(BallKind ballKind)
 
 	bool GoldMatch = false;
 
-	if (ballKind == BallKind::Kind_BasketBall && m_BoxType == BoxType::BasketBallBox)
+	if (ballKind == BallKind::Kind_BasketBall && m_BoxType != BoxType::TrashBox)
 	{
 		Match = true;
 	}
 
-	else if (ballKind == BallKind::Kind_VolleyBall && m_BoxType == BoxType::VolleyBallBox)
-	{
-		Match = true;
-	}
+	//else if (ballKind == BallKind::Kind_VolleyBall && m_BoxType == BoxType::VolleyBallBox)
+	//{
+	//	Match = true;
+	//}
 
-	else if (ballKind == BallKind::Kind_SoccerBall && m_BoxType == BoxType::SoccerBallBox)
-	{
-		Match = true;
-	}
+	//else if (ballKind == BallKind::Kind_SoccerBall && m_BoxType == BoxType::SoccerBallBox)
+	//{
+	//	Match = true;
+	//}
 
 	else if (ballKind == BallKind::Kind_DirtySoccerBall && m_BoxType == BoxType::TrashBox)
 	{
@@ -366,7 +366,7 @@ void Player::OnHit(BallKind ballKind)
 			//フィーバー中：FeverCount を増やす
 			FeverCount++;
 
-			if (FeverCount > MaxFeverCnt)  //10個でフィーバー終了
+			if (FeverCount > MaxFeverCnt)  //5個でフィーバー終了
 			{
 				FeverFlg = false;
 				FeverCount = 0;
@@ -399,7 +399,7 @@ void Player::OnHit(BallKind ballKind)
 			auto effect = std::make_shared<Effect>();
 			effect->Init();
 			Math::Vector3 move = { RandRange(EffectSpeed), RandRange(EffectSpeed), RandRange(EffectSpeed) };
-			effect->SetParam(Math::Vector3(m_pos.x,m_pos.y + 0.5,m_pos.z), move, EffectLifeSpan, EffectColorGreen);
+			effect->SetParam(Math::Vector3(m_pos.x,m_pos.y + EffectAdjust,m_pos.z), move, EffectLifeSpan, EffectColorGreen);
 			SceneManager::Instance().AddObject(effect);
 		}
 	}
@@ -415,7 +415,7 @@ void Player::OnHit(BallKind ballKind)
 			//フィーバー中FeverCountを増やす
 			FeverCount++;
 
-			if (FeverCount > MaxFeverCnt)  //10個でフィーバー終了
+			if (FeverCount > MaxFeverCnt)  //5個でフィーバー終了
 			{
 				FeverFlg = false;
 				FeverCount = 0;
@@ -443,7 +443,7 @@ void Player::OnHit(BallKind ballKind)
 			auto effect = std::make_shared<Effect>();
 			effect->Init();
 			Math::Vector3 move = { RandRange(EffectSpeed), RandRange(EffectSpeed), RandRange(EffectSpeed) };
-			effect->SetParam(Math::Vector3(m_pos.x, m_pos.y + 0.5, m_pos.z), move, EffectLifeSpan, EffectColorRed);
+			effect->SetParam(Math::Vector3(m_pos.x, m_pos.y + EffectAdjust, m_pos.z), move, EffectLifeSpan, EffectColorRed);
 			SceneManager::Instance().AddObject(effect);
 		}
 	}
@@ -461,22 +461,22 @@ void Player::UpdateCollider()
 			KdCollider::TypeDamage
 		);
 	}
-	else if (m_BoxType == BoxType::VolleyBallBox)
-	{
-		m_pCollider->RegisterCollisionShape(
-			"VolleyBallBoxModelCollision",
-			m_ValleyBallBoxModel,
-			KdCollider::TypeDamage
-		);
-	}
-	else if (m_BoxType == BoxType::SoccerBallBox)
-	{
-		m_pCollider->RegisterCollisionShape(
-			"SoccerBallBoxModelCollision",
-			m_SoccerBallBoxModel,
-			KdCollider::TypeDamage
-		);
-	}
+	//else if (m_BoxType == BoxType::VolleyBallBox)
+	//{
+	//	m_pCollider->RegisterCollisionShape(
+	//		"VolleyBallBoxModelCollision",
+	//		m_ValleyBallBoxModel,
+	//		KdCollider::TypeDamage
+	//	);
+	//}
+	//else if (m_BoxType == BoxType::SoccerBallBox)
+	//{
+	//	m_pCollider->RegisterCollisionShape(
+	//		"SoccerBallBoxModelCollision",
+	//		m_SoccerBallBoxModel,
+	//		KdCollider::TypeDamage
+	//	);
+	//}
 	else if (m_BoxType == BoxType::TrashBox)
 	{
 		m_pCollider->RegisterCollisionShape(
