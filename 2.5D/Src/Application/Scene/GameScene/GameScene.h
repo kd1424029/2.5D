@@ -2,17 +2,18 @@
 
 #include"../BaseScene/BaseScene.h"
 
-#include "../../Object/Ball/BallGenerate.h"
+class BallGenerate; 
 
 class Timer;
+
+class Player;
 
 class GameScene : public BaseScene
 {
 public :
 
-	GameScene()  { Init(); }
-	~GameScene() {}
-
+	GameScene();
+	~GameScene();
 	
 private:
 
@@ -22,7 +23,7 @@ private:
 
 	//ボールの種類・出現位置をランダムに決めて生成する工場
 	//ゲームオブジェクトではないのでm_objListには入らない
-	BallGenerate m_ballGenerator;
+	std::unique_ptr<BallGenerate> m_BallGenerator;
 
 	Player* m_pPlayer = nullptr;
 
@@ -32,5 +33,5 @@ private:
 
 	const int NormalInterval = 120;
 
-	const int FeverInterval = 60;
+	const int FeverInterval = 10;
 };

@@ -16,6 +16,13 @@
 #include "../../Object/Line/Line.h"
 #include "../../Object/Timer/Timer.h"
 
+GameScene::GameScene()
+{
+	Init();
+}
+
+GameScene::~GameScene() {}
+
 void GameScene::Event()
 {
 	//現在のオブジェクト数をデバッグ
@@ -47,11 +54,11 @@ void GameScene::Event()
 	{
 		if (m_pTimer)
 		{
-			m_ballGenerator.SetRemainingTime(static_cast<int>(m_pTimer->GetRemainingTime()));
+			m_BallGenerator->SetRemainingTime(static_cast<int>(m_pTimer->GetRemainingTime()));
 		}
 
 		//BallGenerateがランダムに種類を決めて生成する
-		m_objList.push_back(m_ballGenerator.Generate());
+		m_objList.push_back(m_BallGenerator->Generate());
 
 		//タイマーをリセット（次の生成までのフレーム数）
 		if (m_pPlayer && m_pPlayer->GetFeverFlg())
@@ -95,9 +102,10 @@ void GameScene::Init()
 
 	//ボール工場にプレイヤーを登録する
 	//当たり判定の通知先として生成された各ボールへ渡される
-	m_ballGenerator.SetTarget(player.get());
+	m_BallGenerator = std::make_unique<BallGenerate>(); // ここで生成
 
-	player->SetBallGenerate(&m_ballGenerator);
+	m_BallGenerator->SetTarget(player.get());
+	player->SetBallGenerate(m_BallGenerator.get());
 
 	//ベルトコンベア
 	std::shared_ptr<BeltConveyor> beltConveyor;

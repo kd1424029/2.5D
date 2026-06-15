@@ -311,6 +311,8 @@ void Player::OnHit(BallKind ballKind)
 			//GoldBall取得→フィーバー開始
 			FeverFlg = true;
 
+			m_pBallGenerate->SetStartFever();//フィーバーボールを抽選
+
 			const auto& objList = SceneManager::Instance().GetObjList();
 			for (auto& obj : objList)
 			{

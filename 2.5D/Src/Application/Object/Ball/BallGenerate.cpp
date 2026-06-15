@@ -142,12 +142,22 @@ std::shared_ptr<BallBase> BallGenerate::Generate()
 		if (CurrentWave != LastWaveLevel || DeckIndex >= static_cast<int>(m_Deck.size()))
 		{
 			LastWaveLevel = CurrentWave;
+
 			ShuffleDeck();
 		}
 
-		int ballType = m_Deck[DeckIndex++];
+		int BallType;
 
-		switch (ballType)
+		if (m_TargetPlayer->GetFeverFlg())
+		{
+			BallType = FeverBallType;    //フィーバー中は固定
+		}
+		else
+		{
+			BallType = m_Deck[DeckIndex++]; //通常はデッキから
+		}
+
+		switch (BallType)
 		{
 		case 0:
 

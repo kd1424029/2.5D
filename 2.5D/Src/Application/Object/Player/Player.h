@@ -104,12 +104,12 @@ private:
 
 	const int FeverAddition = 500;
 
-	const int Subtraction = 100;
+	const int Subtraction = 250;
 
 	//ゴールドボール用
 	int GoldCnt;
 
-	const int MaxFeverCnt = 5;
+	const int MaxFeverCnt = 20;
 
 	int FeverCount;     //フィーバー中のヒット数
 

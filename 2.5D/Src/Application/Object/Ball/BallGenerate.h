@@ -25,6 +25,18 @@ public:
 
 	void SetRemainingTime(int time) { RemainingTime = time; }
 
+	void SetStartFever()
+	{
+		int waveMax;
+		if (RemainingTime >= WaveTime1) waveMax = 1;
+		else if (RemainingTime >= WaveTime2) waveMax = 2;
+		else if (RemainingTime >= WaveTime3) waveMax = 3;
+		else                                 waveMax = 4;
+
+		std::uniform_int_distribution<int> dist(0, waveMax - 1);
+		FeverBallType = dist(m_Rng);
+	}
+
 private:
 
 	std::shared_ptr<KdModelData> m_BasketBallModel;
@@ -83,4 +95,7 @@ private:
 	//BallSpeed用
 	float MoveSpeed = 0.04f;
 	float RotationSpeed = 3.0f;
+
+	//フィーバータイムのボールを決めるよう
+	int FeverBallType = -1;
 };
