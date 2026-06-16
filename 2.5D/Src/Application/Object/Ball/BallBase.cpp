@@ -147,7 +147,7 @@ void BallBase::Update()
 
 void BallBase::PostUpdate()
 {
-	// ========== TypeGround 判定 ==========
+	//========== TypeGround 判定 ==========
 	KdCollider::SphereInfo sphere;
 	sphere.m_sphere.Center = m_pos;
 	sphere.m_sphere.Radius = 0.3f;

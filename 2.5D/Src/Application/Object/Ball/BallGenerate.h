@@ -28,10 +28,23 @@ public:
 	void SetStartFever()
 	{
 		int waveMax;
-		if (RemainingTime >= WaveTime1) waveMax = 1;
-		else if (RemainingTime >= WaveTime2) waveMax = 2;
-		else if (RemainingTime >= WaveTime3) waveMax = 3;
-		else                                 waveMax = 4;
+
+		if (RemainingTime >= WaveTime1)
+		{
+			waveMax = 1;
+		}
+		else if (RemainingTime >= WaveTime2)
+		{
+			waveMax = 2;
+		}
+		else if (RemainingTime >= WaveTime3)
+		{
+			waveMax = 3;
+		}
+		else
+		{
+			waveMax = 4;
+		}
 
 		std::uniform_int_distribution<int> dist(0, waveMax - 1);
 		FeverBallType = dist(m_Rng);

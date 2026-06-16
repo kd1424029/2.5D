@@ -63,8 +63,8 @@ void Player::PreUpdate()
 void Player::Update()
 {
 	//現在のScoreをデバッグ
-	KdDebugGUI::Instance().ClearLog();
-	KdDebugGUI::Instance().AddLog("%d", Score);
+	//KdDebugGUI::Instance().ClearLog();
+	//KdDebugGUI::Instance().AddLog("%d", GoldCnt);
 
 	{//移動中の処理
 		switch (m_State)
@@ -279,7 +279,7 @@ void Player::GenerateDepthMapFromLight()
 
 void Player::OnHit(BallKind ballKind)
 {
-	// BallTypeとBoxTypeの対応チェック
+	//BallTypeとBoxTypeの対応チェック
 	bool Match = false;
 
 	bool GoldMatch = false;
@@ -363,7 +363,7 @@ void Player::OnHit(BallKind ballKind)
 			GoldCnt++;
 		}
 
-		// エフェクト(緑)
+		//エフェクト(緑)
 		for (int i = 0; i < EffectCount; i++)
 		{
 			auto effect = std::make_shared<Effect>();
@@ -376,7 +376,6 @@ void Player::OnHit(BallKind ballKind)
 	else  //ミス
 	{
 		Score-= Subtraction;
-		//Scale = SmallScale;
 
 		GoldCnt++;//ミスでもGoldCntは増やす
 

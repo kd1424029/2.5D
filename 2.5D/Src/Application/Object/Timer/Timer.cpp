@@ -63,5 +63,5 @@ void Timer::DrawSprite()
 		KdShaderManager::Instance().m_spriteShader.DrawTex(m_Timer, _2dPos.x + (i * CharSpacing), _2dPos.y, CharSize, CharHeight, &Rect);
 	}
 
-	KdShaderManager::Instance().m_spriteShader.DrawTex(m_RestUi, _2dPos.x - 100, _2dPos.y, RestCharSize, CharHeight);
+	KdShaderManager::Instance().m_spriteShader.DrawTex(m_RestUi, _2dPos.x - RestAdjustment, _2dPos.y, RestCharSize, CharHeight);
 }

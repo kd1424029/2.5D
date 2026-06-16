@@ -59,6 +59,8 @@ private:
 
 	const float PosY = 8.0f;
 
+	const float RestAdjustment = 100;
+
 	//画像の1文字サイズ
 	const int CharSize = 64;    //画像1文字分の幅・高さ(px)
 

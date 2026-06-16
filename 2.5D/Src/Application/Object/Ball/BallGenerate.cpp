@@ -76,9 +76,12 @@ void BallGenerate::ShuffleLaneDeck()
 
 std::shared_ptr<BallBase> BallGenerate::Generate()
 {
+	KdDebugGUI::Instance().ClearLog();
+	KdDebugGUI::Instance().AddLog("GoldFlg: %d", GoldFlg);
+
 	std::shared_ptr<BallBase> ball = nullptr;
 
-	if (m_TargetPlayer->GetGoldCnt() <= 0)
+	if (m_TargetPlayer->GetGoldCnt() < MaxGoldCnt)
 	{
 		GoldFlg = false;
 	}
@@ -89,7 +92,7 @@ std::shared_ptr<BallBase> BallGenerate::Generate()
 		ShuffleLaneDeck();
 	}
 
-	int assignedLane = m_LaneDeck[m_LaneDeckIndex++];
+	int AssignedLane = m_LaneDeck[m_LaneDeckIndex++];
 
 
 	// ========================================================
@@ -216,7 +219,7 @@ std::shared_ptr<BallBase> BallGenerate::Generate()
 	//========================================================
 	//最後に共通のデータ（レーン番号、ターゲット）をセットする
 	//========================================================
-	ball->SetSecondPosition(assignedLane); //金・通常どちらにも綺麗に分配される
+	ball->SetSecondPosition(AssignedLane); //金・通常どちらにも綺麗に分配される
 	ball->SetTarget(m_TargetPlayer);
 
 	return ball;

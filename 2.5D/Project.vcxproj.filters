@@ -112,12 +112,6 @@
     <Filter Include="Src\Application\Object\Ball\GoldBall">
       <UniqueIdentifier>{8f6f217e-e371-4cd5-905f-85336fa997ac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\Object\BoxUi">
-      <UniqueIdentifier>{036b2fd4-d168-49a7-be10-d4f286a13959}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Src\Application\Object\BoxUi\TrashBoxUi">
-      <UniqueIdentifier>{6dfe1946-7822-47fb-b866-fc44cebca81c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Src\Application\Object\KeyUi">
       <UniqueIdentifier>{4a73729f-6276-4d4c-8a22-233987b5956c}</UniqueIdentifier>
     </Filter>
@@ -135,6 +129,12 @@
     </Filter>
     <Filter Include="Src\Application\Object\Score">
       <UniqueIdentifier>{31cb601c-910b-4157-92c6-0201670c3a6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\BoxUi">
+      <UniqueIdentifier>{036b2fd4-d168-49a7-be10-d4f286a13959}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\BoxUi\TrashBoxUi">
+      <UniqueIdentifier>{6dfe1946-7822-47fb-b866-fc44cebca81c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Src\Application\Object\BoxUi\NormalBoxUi">
       <UniqueIdentifier>{46c34067-0ce1-4d62-ace1-320da462855e}</UniqueIdentifier>
@@ -345,9 +345,6 @@
     <ClInclude Include="Src\Application\Object\Ball\DirtySoccerBall\DirtySoccerBall.h">
       <Filter>Src\Application\Object\Ball\DirtySoccerBall</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Object\Ground\Ground.h">
-      <Filter>Src\Application\Object\Ground</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Application\Object\Effect\Effect.h">
       <Filter>Src\Application\Object\Effect</Filter>
     </ClInclude>
@@ -380,6 +377,9 @@
     </ClInclude>
     <ClInclude Include="Src\Application\Object\BoxUi\NormalBoxUi\NormalBoxUi.h">
       <Filter>Src\Application\Object\BoxUi\NormalBoxUi</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Ground\Ground.h">
+      <Filter>Src\Application\Object\BoxUi\TrashBoxUi</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
