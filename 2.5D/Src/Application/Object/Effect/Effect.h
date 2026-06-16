@@ -13,6 +13,8 @@ public:
 
 	void DrawLit() override;
 
+	void DrawBright() override;
+
 	void SetParam(Math::Vector3 pos, Math::Vector3 move, float lifeSpan, Math::Color color); 
 
 private:

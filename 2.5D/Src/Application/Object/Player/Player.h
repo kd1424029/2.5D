@@ -30,6 +30,8 @@ public:
 
 	void OnHit(BallKind ballKind);
 
+	int GetScore() { return Score; }
+
 	int GetGoldCnt() { return GoldCnt; }
 
 	int GetBoxType() { return static_cast<int>(m_BoxType); }
@@ -37,6 +39,8 @@ public:
 	bool GetFeverFlg() { return FeverFlg; }
 
 	void SetBallGenerate(BallGenerate* gen) { m_pBallGenerate = gen; }
+
+	void SetResetGoldCnt() { GoldCnt = 0; }
 
 private:
 

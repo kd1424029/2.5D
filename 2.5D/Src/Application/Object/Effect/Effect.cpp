@@ -36,6 +36,11 @@ void Effect::DrawLit()
 	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_Model,m_mWorld,m_Color);
 }
 
+void Effect::DrawBright()
+{
+	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_Model, m_mWorld, m_Color);
+}
+
 void Effect::SetParam(Math::Vector3 pos, Math::Vector3 move, float lifeSpan , Math::Color color)
 {
 	m_pos = pos;

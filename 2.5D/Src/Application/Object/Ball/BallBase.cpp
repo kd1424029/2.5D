@@ -135,6 +135,12 @@ void BallBase::Update()
 
 	if (m_pos.y < -10)
 	{
+		//ゴールドボールを逃したらカウントをリセット
+		if (ballKind == BallKind::Kind_GoldBall && m_TargetPlayer != nullptr)
+		{
+			m_TargetPlayer->SetResetGoldCnt();
+		}
+
 		m_isExpired = true;
 	}
 }

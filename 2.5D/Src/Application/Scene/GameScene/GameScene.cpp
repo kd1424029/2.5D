@@ -15,6 +15,7 @@
 #include "../../Object/KeyUi/ZUi/ZUi.h"
 #include "../../Object/Line/Line.h"
 #include "../../Object/Timer/Timer.h"
+#include "../../Object/Score/Score.h"
 
 GameScene::GameScene()
 {
@@ -171,5 +172,13 @@ void GameScene::Init()
 	m_pTimer = timer.get();
 
 	m_objList.push_back(timer);
+
+	//スコア
+	std::shared_ptr<Score> score;
+	score = std::make_shared<Score>();
+	score->Init();
+	score->SetCamera(m_camera);
+	score->SetPlayer(player.get());
+	m_objList.push_back(score);
 
 }

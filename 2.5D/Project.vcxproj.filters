@@ -142,6 +142,9 @@
     <Filter Include="Src\Application\Object\Timer">
       <UniqueIdentifier>{b4a01e2d-0272-4194-b528-1b96501b1247}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Score">
+      <UniqueIdentifier>{31cb601c-910b-4157-92c6-0201670c3a6e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -387,6 +390,9 @@
     <ClInclude Include="Src\Application\Object\Timer\Timer.h">
       <Filter>Src\Application\Object\Timer</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Score\Score.h">
+      <Filter>Src\Application\Object\Score</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -598,6 +604,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Timer\Timer.cpp">
       <Filter>Src\Application\Object\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Score\Score.cpp">
+      <Filter>Src\Application\Object\Score</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
