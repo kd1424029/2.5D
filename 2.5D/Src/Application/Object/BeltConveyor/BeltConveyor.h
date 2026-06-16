@@ -10,8 +10,6 @@ public:
 
 	void Init() override;
 
-	void Update() override;
-
 	void DrawLit() override;
 
 	void SetPos(const Math::Vector3& pos)override { m_pos = pos; }

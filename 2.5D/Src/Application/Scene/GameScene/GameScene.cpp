@@ -7,9 +7,7 @@
 #include "../../Object/Ball/BallGenerate.h" 
 #include "../../Object/Ball/BallBase.h" 
 #include "../../Object/Ground/Ground.h"
-#include "../../Object/BoxUi/BasketBallUi/BasketBallUi.h"
-#include "../../Object/BoxUi/VolleyBallUi/VolleyBallUi.h"
-#include "../../Object/BoxUi/SoccerBallUi/SoccerBallUi.h"
+#include "../../Object/BoxUi/NormalBoxUi/NormalBoxUi.h"
 #include "../../Object/BoxUi/TrashBoxUi/TrashBoxUi.h"
 #include "../../Object/KeyUi/XUi/XUi.h"
 #include "../../Object/KeyUi/ZUi/ZUi.h"
@@ -76,7 +74,7 @@ void GameScene::Event()
 
 void GameScene::Init()
 {
-	GenerateTimer = 120;
+	GenerateTimer = NormalInterval;
 
 	m_camera = std::make_shared<KdCamera>();
 
@@ -104,7 +102,6 @@ void GameScene::Init()
 	//ボール工場にプレイヤーを登録する
 	//当たり判定の通知先として生成された各ボールへ渡される
 	m_BallGenerator = std::make_unique<BallGenerate>(); // ここで生成
-
 	m_BallGenerator->SetTarget(player.get());
 	player->SetBallGenerate(m_BallGenerator.get());
 
@@ -114,26 +111,12 @@ void GameScene::Init()
 	beltConveyor->Init();
 	m_objList.push_back(beltConveyor);
 
-	//バスケットボールUI
-	std::shared_ptr<BasketBallUi> basketballui;
-	basketballui = std::make_shared<BasketBallUi>();
-	basketballui->Init();
-	basketballui->SetCamera(m_camera);
-	m_objList.push_back(basketballui);
-
-	//バレーボールUI
-	std::shared_ptr<VolleyBallUi> volleyballui;
-	volleyballui = std::make_shared<VolleyBallUi>();
-	volleyballui->Init();
-	volleyballui->SetCamera(m_camera);
-	m_objList.push_back(volleyballui);
-
-	//サッカーボールUI
-	std::shared_ptr<SoccerBallUi> soccerballui;
-	soccerballui = std::make_shared<SoccerBallUi>();
-	soccerballui->Init();
-	soccerballui->SetCamera(m_camera);
-	m_objList.push_back(soccerballui);
+	//ノーマルボックスUI
+	std::shared_ptr<NormalBoxUi> normalboxui;
+	normalboxui = std::make_shared<NormalBoxUi>();
+	normalboxui->Init();
+	normalboxui->SetCamera(m_camera);
+	m_objList.push_back(normalboxui);
 
 	//ゴミ箱UI
 	std::shared_ptr<TrashBoxUi> trashboxui;

@@ -7,14 +7,6 @@ void XUi::Init()
 
 }
 
-void XUi::Update()
-{
-	
-}
-
-void XUi::PostUpdate()
-{}
-
 void XUi::DrawSprite()
 {
 	std::shared_ptr<KdCamera> _spCamera = m_wpCamera.lock();

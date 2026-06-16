@@ -4,18 +4,14 @@
 
 class KdCamera;
 
-class VolleyBallUi : public BoxUiBase
+class NormalBoxUi : public BoxUiBase
 {
 public:
 
-	VolleyBallUi() {}
-	~VolleyBallUi() {}
+	NormalBoxUi() {}
+	~NormalBoxUi() {}
 
 	void Init() override;
-
-	void Update() override;
-
-	void PostUpdate() override;
 
 	void DrawSprite() override;
 
@@ -25,4 +21,5 @@ private:
 
 	std::weak_ptr<KdCamera>   m_wpCamera;
 
+	const float PosX = 0.58;
 };

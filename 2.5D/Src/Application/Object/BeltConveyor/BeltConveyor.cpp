@@ -25,10 +25,6 @@ void BeltConveyor::Init()
 	//==========================
 }
 
-void BeltConveyor::Update()
-{
-}
-
 void BeltConveyor::DrawLit()
 {
 	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_BeltConveyorModel, m_mWorld);

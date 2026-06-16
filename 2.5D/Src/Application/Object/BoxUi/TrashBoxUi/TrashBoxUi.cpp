@@ -3,17 +3,9 @@
 void TrashBoxUi::Init()
 {
 	m_BoxUi = std::make_shared<KdTexture>();
-	m_BoxUi->Load("Asset/Textures/BallUi/TrashBoxUi.png");
+	m_BoxUi->Load("Asset/Textures/BoxUi/TrashBoxUi.png");
 
 }
-
-void TrashBoxUi::Update()
-{
-
-}
-
-void TrashBoxUi::PostUpdate()
-{}
 
 void TrashBoxUi::DrawSprite()
 {
