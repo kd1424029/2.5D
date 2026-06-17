@@ -25,7 +25,7 @@ void Player::Init()
 
 	KeyFlg = false;
 
-	m_TargetPos = m_pos; 
+	m_TargetPos = m_pos;
 
 	MoveFlgLeft = true;
 
@@ -57,14 +57,36 @@ void Player::Init()
 }
 
 void Player::PreUpdate()
-{
-}
+{}
 
 void Player::Update()
 {
 	//現在のScoreをデバッグ
 	//KdDebugGUI::Instance().ClearLog();
 	//KdDebugGUI::Instance().AddLog("%d", GoldCnt);
+
+	//フィーバー終了判定 決められた個数を出し切りかつ画面上にフィーバーボールが1つも残っていなければ終了
+	if (FeverFlg && m_pBallGenerate != nullptr && m_pBallGenerate->IsFeverSpawnFinished())
+	{
+		bool feverBallRemains = false;
+
+		const auto& objList = SceneManager::Instance().GetObjList();
+
+		for (auto& obj : objList)
+		{
+			BallBase* ball = dynamic_cast<BallBase*>(obj.get());
+
+			if (ball != nullptr && ball->GetIsFeverBall())
+			{
+				feverBallRemains = true;
+			}
+		}
+
+		if (feverBallRemains == false)
+		{
+			EndFever();
+		}
+	}
 
 	{//移動中の処理
 		switch (m_State)
@@ -174,7 +196,7 @@ void Player::Update()
 	{
 		MoveFlgLeft = true;
 	}
-	
+
 
 	//Box切り替え処理
 	if ((GetAsyncKeyState('Z') & 0x8000) || (GetAsyncKeyState('X') & 0x8000))
@@ -191,12 +213,12 @@ void Player::Update()
 
 			if (GetAsyncKeyState('Z') & 0x8000)
 			{
-				//順送り0→1→2→3→0
+				//順送り0→1→0→1
 				m_NextBoxType = static_cast<BoxType>((current + Adjustment) % BoxTypeCount);
 			}
 			else if (GetAsyncKeyState('X') & 0x8000)
 			{
-				//逆送り0→3→2→1→0
+				//逆送り1→0→1→0
 				m_NextBoxType = static_cast<BoxType>((current + BoxTypeCount - Adjustment) % BoxTypeCount);
 			}
 
@@ -218,7 +240,7 @@ void Player::Update()
 	if (Scale > NormalScale)
 	{
 		//経過時間(秒)を使って滑らかに減算（1秒間に ScaleSpeed 分小さくなる）
-		Scale -= ScaleSpeed * (OneFrame / MaxFrame); 
+		Scale -= ScaleSpeed * (OneFrame / MaxFrame);
 
 		//行き過ぎて1.0未満にならないようにガード
 		if (Scale < NormalScale)
@@ -247,7 +269,7 @@ void Player::Update()
 
 void Player::PostUpdate()
 {
-	
+
 }
 
 void Player::DrawLit()
@@ -270,7 +292,7 @@ void Player::GenerateDepthMapFromLight()
 	{
 		KdShaderManager::Instance().m_StandardShader.DrawModel(*m_NormalBoxModel, m_mWorld);
 	}
-	
+
 	else if (m_BoxType == BoxType::TrashBox)
 	{
 		KdShaderManager::Instance().m_StandardShader.DrawModel(*m_TrashBoxModel, m_mWorld);
@@ -297,7 +319,7 @@ void Player::OnHit(BallKind ballKind)
 	else if (ballKind == BallKind::Kind_GoldBall)
 	{
 		Match = true;
-		GoldMatch = true;  
+		GoldMatch = true;
 	}
 
 	if (Match)
@@ -333,29 +355,8 @@ void Player::OnHit(BallKind ballKind)
 		}
 		else if (FeverFlg)
 		{
-			//フィーバー中：FeverCount を増やす
+			//フィーバー中：FeverCount を増やす（デバッグ表示等に利用、終了判定には使わない）
 			FeverCount++;
-
-			if (FeverCount > MaxFeverCnt)  //5個でフィーバー終了
-			{
-				FeverFlg = false;
-				FeverCount = 0;
-				GoldCnt = 0;
-
-				//スピードを通常に戻す
-				const auto& objList = SceneManager::Instance().GetObjList();
-				for (auto& obj : objList)
-				{
-					BallBase* ball = dynamic_cast<BallBase*>(obj.get());
-					if (ball) ball->SetMoveSpeed(NormalBallMoveSpeed);
-					if (ball) ball->SetRotationSpeed(NormalBallRotationSpeed);
-				}
-				if (m_pBallGenerate)
-				{
-					m_pBallGenerate->SetMoveSpeed(NormalBallMoveSpeed);
-					m_pBallGenerate->SetRotationSpeed(NormalBallRotationSpeed);
-				}
-			}
 		}
 		else
 		{
@@ -369,7 +370,7 @@ void Player::OnHit(BallKind ballKind)
 			auto effect = std::make_shared<Effect>();
 			effect->Init();
 			Math::Vector3 move = { RandRange(EffectSpeed), RandRange(EffectSpeed), RandRange(EffectSpeed) };
-			effect->SetParam(Math::Vector3(m_pos.x,m_pos.y + EffectAdjust,m_pos.z), move, EffectLifeSpan, EffectColorGreen);
+			effect->SetParam(Math::Vector3(m_pos.x, m_pos.y + EffectAdjust, m_pos.z), move, EffectLifeSpan, EffectColorGreen);
 			SceneManager::Instance().AddObject(effect);
 		}
 	}
@@ -386,29 +387,8 @@ void Player::OnHit(BallKind ballKind)
 
 		if (FeverFlg)
 		{
-			//フィーバー中FeverCountを増やす
+			//フィーバー中FeverCountを増やす（デバッグ表示等に利用、終了判定には使わない）
 			FeverCount++;
-
-			if (FeverCount > MaxFeverCnt)  //5個でフィーバー終了
-			{
-				FeverFlg = false;
-				FeverCount = 0;
-				GoldCnt = 0;
-
-				//スピードを通常に戻す
-				const auto& objList = SceneManager::Instance().GetObjList();
-				for (auto& obj : objList)
-				{
-					BallBase* ball = dynamic_cast<BallBase*>(obj.get());
-					if (ball) ball->SetMoveSpeed(NormalBallMoveSpeed);
-					if (ball) ball->SetRotationSpeed(NormalBallRotationSpeed);
-				}
-				if (m_pBallGenerate)
-				{
-					m_pBallGenerate->SetMoveSpeed(NormalBallMoveSpeed);
-					m_pBallGenerate->SetRotationSpeed(NormalBallRotationSpeed);
-				}
-			}
 		}
 
 		//エフェクト(赤)
@@ -420,6 +400,28 @@ void Player::OnHit(BallKind ballKind)
 			effect->SetParam(Math::Vector3(m_pos.x, m_pos.y + EffectAdjust, m_pos.z), move, EffectLifeSpan, EffectColorRed);
 			SceneManager::Instance().AddObject(effect);
 		}
+	}
+}
+
+void Player::EndFever()
+{
+	FeverFlg = false;
+	FeverCount = 0;
+	GoldCnt = 0;
+
+	//スピードを通常に戻す
+	const auto& objList = SceneManager::Instance().GetObjList();
+	for (auto& obj : objList)
+	{
+		BallBase* ball = dynamic_cast<BallBase*>(obj.get());
+		if (ball) ball->SetMoveSpeed(NormalBallMoveSpeed);
+		if (ball) ball->SetRotationSpeed(NormalBallRotationSpeed);
+	}
+
+	if (m_pBallGenerate)
+	{
+		m_pBallGenerate->SetMoveSpeed(NormalBallMoveSpeed);
+		m_pBallGenerate->SetRotationSpeed(NormalBallRotationSpeed);
 	}
 }
 

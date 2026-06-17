@@ -32,16 +32,16 @@ private:
 	Player* m_pPlayer = nullptr;
 
 	//座標
-	const float PosX = 1.9;
-	const float PosY = 8;
+	const float PosX = 1.75;
+	const float PosY = 7.7f;
 
 	const float Interval = 84;
 
 	const float ScoreUiAdjustment = 160;
 
 	//画像の大きさ
-	const float Width = 120;
-	const float Height = 120;
+	const float Width = 110;
+	const float Height = 110;
 
 	const float ScoreUiWidth = 220;
 	const float ScoreUiHeight = 110;

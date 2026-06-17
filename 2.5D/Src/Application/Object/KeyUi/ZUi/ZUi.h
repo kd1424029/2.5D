@@ -23,5 +23,5 @@ private:
 
 
 	const float PosX = 1.7;
-	const float PosY = 1.0;
+	const float PosY = 1.23;
 };

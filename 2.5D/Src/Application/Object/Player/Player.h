@@ -4,7 +4,7 @@
 
 static float RandRange(float range)
 {
-	return ((float)rand() / RAND_MAX - 0.5f)* range;
+	return ((float)rand() / RAND_MAX - 0.5f) * range;
 }
 
 class BallGenerate;
@@ -46,6 +46,8 @@ private:
 
 	void UpdateCollider(); //当たり判定用
 
+	void EndFever(); //フィーバー終了処理（共通化）
+
 	enum class PlayerState
 	{
 		Idle,      //待機状態
@@ -57,7 +59,7 @@ private:
 
 	enum class BoxType
 	{
-		NormalBox, 
+		NormalBox,
 		TrashBox,
 	};
 
@@ -76,7 +78,7 @@ private:
 	float BoxPosZ;    //元のZ座標
 
 	const float SwitchDepth = -10.0f; //どれくらい奥に引っ込めるか
-	
+
 	const float SwitchSpeed = 1.0f; //引っ込むスピード
 
 	bool KeyFlg;
@@ -85,12 +87,12 @@ private:
 	Math::Vector3 m_pos = {};  //座標
 
 	Math::Vector3 m_TargetPos = {};    // 移動先の目標座標
-	
+
 	const float MoveAmount = 2.0f;
 
 	const float MoveMaxAmount = 3.3f;   //移動の最大距離
 
-	const float MoveSpeed  = 0.5f;
+	const float MoveSpeed = 0.5f;
 
 	bool MoveFlgLeft;   //移動の入力を受け付けるフラグ
 	bool MoveFlgRight;
@@ -113,9 +115,7 @@ private:
 	//ゴールドボール用
 	int GoldCnt;
 
-	const int MaxFeverCnt = 30;
-
-	int FeverCount;     //フィーバー中のヒット数
+	int FeverCount;     //フィーバー中のヒット数（デバッグ表示等で利用、終了判定には使わない）
 
 	bool FeverFlg;      //フィーバー中かどうか
 
@@ -127,8 +127,8 @@ private:
 	float MaxBallRotationSpeed;
 
 	//スケールアニメーション用
-	float Scale;        
-	float ScaleSpeed;  
+	float Scale;
+	float ScaleSpeed;
 
 	float OneFrame;
 

@@ -21,6 +21,6 @@ protected:
 
 	Math::Vector2 m_pos;
 
-	const float PosY = 1;
+	const float PosY = 1.23;
 
 };

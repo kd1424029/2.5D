@@ -38,7 +38,7 @@ void GameScene::Event()
 	}
 
 	//カメラ用
-	Math::Vector3 comPos = { 0,4.5,-7.2 };//{-6, 6, -1};//{ 0, 10 , 0 };
+	Math::Vector3 comPos = { 0,4.5,-6.5 };//{-6, 6, -1};//{ 0, 10 , 0 };
 
 	//Math::Matrix rotation = Math::Matrix::CreateRotationX(DirectX::XMConvertToRadians(90.0f));
 
@@ -58,7 +58,13 @@ void GameScene::Event()
 		}
 
 		//BallGenerateがランダムに種類を決めて生成する
-		m_objList.push_back(m_BallGenerator->Generate());
+		//フィーバー中に決められた個数を出し切った場合はnullptrが返るので、その場合はリストに追加しない
+		std::shared_ptr<BallBase> newBall = m_BallGenerator->Generate();
+
+		if (newBall != nullptr)
+		{
+			m_objList.push_back(newBall);
+		}
 
 		//タイマーをリセット（次の生成までのフレーム数）
 		if (m_pPlayer && m_pPlayer->GetFeverFlg())

@@ -60,14 +60,22 @@ void BallGenerate::ShuffleLaneDeck()
 
 std::shared_ptr<BallBase> BallGenerate::Generate()
 {
+	//フィーバー中に決められた個数を出し切ったらフィーバーが終わるまで何も生成しない
+	if (m_TargetPlayer->GetFeverFlg() && FeverRemainingSpawnCount <= 0)
+	{
+		return nullptr;
+	}
+
 	std::shared_ptr<BallBase> ball = nullptr;
+
+	bool isFeverSpawn = false; //このボールがフィーバー固定タイプとして生成されたか
 
 	if (m_TargetPlayer->GetGoldCnt() < MaxGoldCnt)
 	{
 		GoldFlg = false;
 	}
 
-	// 先にレーン用デッキから配置するレーン番号を引いておく（金・通常共通で使うため）
+	// 先にレーン用デッキから配置するレーン番号を引いておく(金 通常共通で使うた)
 	if (m_LaneDeckIndex >= static_cast<int>(m_LaneDeck.size()))
 	{
 		ShuffleLaneDeck();
@@ -76,9 +84,9 @@ std::shared_ptr<BallBase> BallGenerate::Generate()
 	int AssignedLane = m_LaneDeck[m_LaneDeckIndex++];
 
 
-	// ========================================================
-	// 1. ボールのインスタンス生成と 出現位置(座標) の決定
-	// ========================================================
+	//========================================================
+	//ボールのインスタンス生成と出現位置(座標)の決定
+	//========================================================
 	if (m_TargetPlayer->GetGoldCnt() >= MaxGoldCnt && GoldFlg == false)
 	{
 		// ------------------------------------------
@@ -115,9 +123,14 @@ std::shared_ptr<BallBase> BallGenerate::Generate()
 
 		int BallType;
 
-		if (m_TargetPlayer->GetFeverFlg())
+		//フィーバー中でかつ流すべき残り個数がある間だけフィーバー固定タイプにする
+		isFeverSpawn = (m_TargetPlayer->GetFeverFlg() && FeverRemainingSpawnCount > 0);
+
+		if (isFeverSpawn)
 		{
 			BallType = FeverBallType;    //フィーバー中は固定
+
+			FeverRemainingSpawnCount--;   //フィーバー分の残り生成数を消費
 		}
 		else
 		{
@@ -181,10 +194,11 @@ std::shared_ptr<BallBase> BallGenerate::Generate()
 	}
 
 	//========================================================
-	//最後に共通のデータ（レーン番号、ターゲット）をセットする
+	//最後に共通のデータ(レーン番号 ターゲット)をセットする
 	//========================================================
-	ball->SetSecondPosition(AssignedLane); //金・通常どちらにも綺麗に分配される
+	ball->SetSecondPosition(AssignedLane); //金 通常どちらにも綺麗に分配される
 	ball->SetTarget(m_TargetPlayer);
+	ball->SetIsFeverBall(isFeverSpawn); //フィーバー固定タイプとして生成されたボールには印をつける
 
 	return ball;
 }

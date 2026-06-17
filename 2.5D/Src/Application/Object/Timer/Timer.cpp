@@ -3,10 +3,10 @@
 void Timer::Init()
 {
 	m_Timer = std::make_shared<KdTexture>();
-	m_Timer->Load("Asset/Textures/Timer/Timer.png");
+	m_Timer->Load("Asset/Textures/Timer/Time.png");
 
 	m_RestUi = std::make_shared<KdTexture>();
-	m_RestUi->Load("Asset/Textures/Timer/RestUi.png");
+	m_RestUi->Load("Asset/Textures/Timer/TimeUi.png");
 
 	RemainTime = 120.0f;   //2分00秒
 
@@ -63,5 +63,5 @@ void Timer::DrawSprite()
 		KdShaderManager::Instance().m_spriteShader.DrawTex(m_Timer, _2dPos.x + (i * CharSpacing), _2dPos.y, CharSize, CharHeight, &Rect);
 	}
 
-	KdShaderManager::Instance().m_spriteShader.DrawTex(m_RestUi, _2dPos.x - RestAdjustment, _2dPos.y, RestCharSize, CharHeight);
+	KdShaderManager::Instance().m_spriteShader.DrawTex(m_RestUi, _2dPos.x - RestAdjustment, _2dPos.y, RestCharSize, RestCharHeight);
 }

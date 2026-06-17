@@ -22,11 +22,13 @@ void BallBase::Init()
 
 	Scale = 0.6;
 
-	MoveSpeed = 0.04f; 
+	MoveSpeed = 0.04f;
 
 	RotationSpeed = 3.0f;
 
 	SecondPosition = 0;
+
+	m_IsFeverBall = false;
 
 	//デバッグ用：KdGameObjectにポインタを用意しているので実体化
 	m_pDebugWire = std::make_unique<KdDebugWireFrame>();
@@ -35,7 +37,7 @@ void BallBase::Init()
 void BallBase::Update()
 {
 
-	switch (MoveState)	
+	switch (MoveState)
 	{
 	case FirstMove:
 
@@ -60,35 +62,35 @@ void BallBase::Update()
 
 		switch (SecondPosition)
 		{
-		case 0:	
+		case 0:
 
 			TargetX = FirstFromTheLeftPos;
 
-			break; 
-		case 1:	
+			break;
+		case 1:
 
 			TargetX = SecondFromTheLeftPos;
-			
+
 			break;
-		case 2:	
-			
+		case 2:
+
 			TargetX = ThirdFromTheLeftPos;
-			
-			break; 
-		case 3:	
-			
-			TargetX = FourthFromTheLeftPos;
-			
+
 			break;
-		case 4:	
-			
+		case 3:
+
+			TargetX = FourthFromTheLeftPos;
+
+			break;
+		case 4:
+
 			TargetX = FifthFromTheLeftPos;
-			
-			break; 
+
+			break;
 		}
 
 		//現在のX座標から目標のX座標への距離と向きを計算する
-		GoalTargetX = TargetX - m_pos.x;       //目標までの残りの距離（方向付き）
+		GoalTargetX = TargetX - m_pos.x;       //目標までの残りの距離(方向付き)
 
 		//1フレームの移動量が残り距離を超えないように制御して移動する 
 		if (fabs(GoalTargetX) <= MoveSpeed) //マイナスの値をプラスに変換する関数
@@ -101,7 +103,7 @@ void BallBase::Update()
 		}
 		else
 		{
-			//目標に向かって符号（プラスマイナス）を判定して進む
+			//目標に向かって符号(プラスマイナス)を判定して進む
 			if (GoalTargetX > 0)
 			{
 				m_pos.x += MoveSpeed; //目標が右側にあるなら右へ
@@ -188,7 +190,7 @@ void BallBase::PostUpdate()
 		m_pos += hitDir * maxOverlap;
 	}
 
-	// ========== TypeDamage 判定（Playerに直接判定）==========
+	//========== TypeDamage判定(Playerに直接判定) ==========
 	if (m_TargetPlayer != nullptr)
 	{
 		KdCollider::SphereInfo damageSphere;

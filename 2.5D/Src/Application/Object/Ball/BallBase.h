@@ -14,7 +14,7 @@ enum BallMove
 	ThirdMove,		//3回目の移動
 };
 
-class BallBase : public KdGameObject , public BallType
+class BallBase : public KdGameObject, public BallType
 {
 public:
 
@@ -45,6 +45,11 @@ public:
 
 	void SetSecondPosition(int pos) { SecondPosition = pos; }
 
+	//フィーバー中に生成されたボールかどうか（フィーバー終了判定で使用）
+	void SetIsFeverBall(bool flg) { m_IsFeverBall = flg; }
+
+	bool GetIsFeverBall() const { return m_IsFeverBall; }
+
 private:
 
 	Player* m_TargetPlayer = nullptr;
@@ -62,6 +67,8 @@ private:
 	float RotationZ;
 
 	int SecondPosition;
+
+	bool m_IsFeverBall = false; //フィーバー中に生成されたボールかどうか
 
 	const int PositionCount = 5;
 

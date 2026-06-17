@@ -18,9 +18,9 @@ public:
 	int GetWaveLevel() { return WaveLevel; }
 
 	//ウェーブレベルが前回から変わったかを判定する
-	//（NewProductsGenerateがラベルを1回だけ出すタイミング検知に使用）
-	//ウェーブ1はラベル対象外（NewProductsGenerate::Generateも何も返さない）なので、
-	//ウェーブ1への変化（ゲーム開始直後の初回判定含む）はtrueにしない
+	//NewProductsGenerateがラベルを1回だけ出すタイミング検知に使用
+	//ウェーブ1はラベル対象外(NewProductsGenerate::Generateも何も返さない)なので、
+	//ウェーブ1への変化(ゲーム開始直後の初回判定含む)はtrueにしない
 	bool IsWaveChanged()
 	{
 		int currentWave = CalcCurrentWave();
@@ -56,7 +56,13 @@ public:
 
 		std::uniform_int_distribution<int> dist(0, waveMax - 1);
 		FeverBallType = dist(m_Rng);
+
+		//フィーバー中に流すボールの残り個数をセット
+		FeverRemainingSpawnCount = FeverSpawnTotal;
 	}
+
+	//フィーバー中に生成すべき分を出し切ったかどうか
+	bool IsFeverSpawnFinished() const { return FeverRemainingSpawnCount <= 0; }
 
 private:
 
@@ -89,7 +95,7 @@ private:
 
 	void ShuffleLaneDeck(); //レーン配置用デッキシャッフル
 
-	//RemainingTimeから現在のウェーブレベルを計算する（副作用なし）
+	//RemainingTimeから現在のウェーブレベルを計算する(副作用なし)
 	//ShuffleDeck・Generate・IsWaveChangedで共通利用
 	int CalcCurrentWave()
 	{
@@ -128,7 +134,7 @@ private:
 
 	// --- シャッフルデッキ用 ---
 	std::mt19937            m_Rng;       //乱数エンジン
-	std::vector<int>        m_Deck;      //今のデッキ（BallTypeのint値が入る）
+	std::vector<int>        m_Deck;      //今のデッキ(BallTypeのint値が入る)
 	int                     DeckIndex;   //次に配るインデックス
 
 	//レーン配置用（0〜4のレーン番号が入る）
@@ -138,7 +144,7 @@ private:
 	const int MaxLane = 5;
 
 	//出現位置用
-	int m_lastPosType; //前回の位置 (0:左 / 1:右 / -1:未設定)
+	int m_lastPosType; //前回の位置(0:左 / 1:右 / -1:未設定)
 
 	//BallSpeed用
 	float MoveSpeed = 0.04f;
@@ -146,4 +152,9 @@ private:
 
 	//フィーバータイムのボールを決めるよう
 	int FeverBallType = -1;
+
+	//フィーバー中に流すボールの総数と残り個数
+	const int FeverSpawnTotal = 50;
+
+	int FeverRemainingSpawnCount = 0;
 };
