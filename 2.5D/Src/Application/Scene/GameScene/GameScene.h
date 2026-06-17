@@ -8,6 +8,8 @@ class Timer;
 
 class Player;
 
+class NewProductsGenerate;
+
 class GameScene : public BaseScene
 {
 public :
@@ -24,6 +26,8 @@ private:
 	//ボールの種類・出現位置をランダムに決めて生成する工場
 	//ゲームオブジェクトではないのでm_objListには入らない
 	std::unique_ptr<BallGenerate> m_BallGenerator;
+
+	std::unique_ptr<NewProductsGenerate> m_NewProductsGenerate;
 
 	Player* m_pPlayer = nullptr;
 

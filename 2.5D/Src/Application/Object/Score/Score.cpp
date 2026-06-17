@@ -22,7 +22,7 @@ void Score::Update()
 	{
 		m_score = MaxScore;
 	}
-	if (m_score < 0)
+	else if (m_score < 0)
 	{
 		m_score = 0;
 	}

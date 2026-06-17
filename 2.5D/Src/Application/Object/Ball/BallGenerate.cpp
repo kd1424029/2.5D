@@ -8,7 +8,7 @@
 
 #include "../Player/Player.h"
 
-BallGenerate::BallGenerate(): m_Rng(std::random_device{}()), DeckIndex(0), m_lastPosType(-1)
+BallGenerate::BallGenerate() : m_Rng(std::random_device{}()), DeckIndex(0), m_lastPosType(-1)
 {
 	ShuffleDeck();
 
@@ -35,24 +35,8 @@ void BallGenerate::ShuffleDeck()
 	m_Deck.clear();
 
 	//残り時間に応じてデッキに含めるボール種類を決定
-	//数字は BallType:  0=SoccerBall 1=DirtySoccerBall 2=BasketBall 3=VolleyBall
-	int WaveLevel;
-	if (RemainingTime >= WaveTime1) 
-	{
-		WaveLevel = 1;
-	}
-	else if (RemainingTime >= WaveTime2)
-	{
-		WaveLevel = 2;
-	}
-	else if (RemainingTime >= WaveTime3)
-	{
-		WaveLevel = 3;
-	}
-	else 
-	{
-		WaveLevel = 4;
-	}
+	//数字は BallType:  1=SoccerBall 2=DirtySoccerBall 3=BasketBall 4=VolleyBall
+	WaveLevel = CalcCurrentWave();
 
 	for (int i = 0; i < WaveLevel; ++i)
 	{
@@ -76,9 +60,6 @@ void BallGenerate::ShuffleLaneDeck()
 
 std::shared_ptr<BallBase> BallGenerate::Generate()
 {
-	KdDebugGUI::Instance().ClearLog();
-	KdDebugGUI::Instance().AddLog("GoldFlg: %d", GoldFlg);
-
 	std::shared_ptr<BallBase> ball = nullptr;
 
 	if (m_TargetPlayer->GetGoldCnt() < MaxGoldCnt)
@@ -120,26 +101,9 @@ std::shared_ptr<BallBase> BallGenerate::Generate()
 		//===========================================
 		//通常ボールが生成されるときの処理
 		//===========================================
-		
-		// ウェーブレベルを計算(ShuffleDeckと同じロジック)
-		int CurrentWave;
 
-		if (RemainingTime >= WaveTime1) 
-		{
-			CurrentWave = 1;
-		}
-		else if (RemainingTime >= WaveTime2)
-		{
-			CurrentWave = 2;
-		}
-		else if (RemainingTime >= WaveTime3)
-		{
-			CurrentWave = 3;
-		}
-		else 
-		{
-			CurrentWave = 4;
-		}
+		// ウェーブレベルを計算(ShuffleDeckと同じロジック)
+		int CurrentWave = CalcCurrentWave();
 
 		//ウェーブが変わった or デッキ切れ → 再シャッフル
 		if (CurrentWave != LastWaveLevel || DeckIndex >= static_cast<int>(m_Deck.size()))

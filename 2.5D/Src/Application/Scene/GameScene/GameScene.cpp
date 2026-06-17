@@ -14,6 +14,7 @@
 #include "../../Object/Line/Line.h"
 #include "../../Object/Timer/Timer.h"
 #include "../../Object/Score/Score.h"
+#include "../../Object/NewProducts/NewProductsGenerate.h"
 
 GameScene::GameScene()
 {
@@ -44,7 +45,7 @@ void GameScene::Event()
 	Math::Matrix transMat = Math::Matrix::CreateTranslation(comPos);
 
 	m_camera->SetCameraMatrix(transMat);
-	
+
 	//一定間隔でボールを1つ生成してゲーム世界へ追加する
 	//種類・出現位置の決定はBallGenerateに任せている
 	GenerateTimer--;
@@ -67,6 +68,18 @@ void GameScene::Event()
 		else
 		{
 			GenerateTimer = NormalInterval;
+		}
+	}
+
+	//NewProductsGenerateが種類を決めて生成をする
+	//ウェーブが変わった瞬間にだけラベルを1つ生成する
+	if (m_BallGenerator->IsWaveChanged())
+	{
+		std::shared_ptr<NewProductsBase> newProduct = m_NewProductsGenerate->Generate();
+
+		if (newProduct)
+		{
+			m_objList.push_back(newProduct);
 		}
 	}
 
@@ -163,5 +176,9 @@ void GameScene::Init()
 	score->SetCamera(m_camera);
 	score->SetPlayer(player.get());
 	m_objList.push_back(score);
+
+	//商品ラベル
+	m_NewProductsGenerate = std::make_unique<NewProductsGenerate>(); //ここで生成
+	m_NewProductsGenerate->SetTarget(m_BallGenerator.get());
 
 }

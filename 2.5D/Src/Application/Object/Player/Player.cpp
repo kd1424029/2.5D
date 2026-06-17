@@ -375,7 +375,12 @@ void Player::OnHit(BallKind ballKind)
 	}
 	else  //ミス
 	{
-		Score-= Subtraction;
+		Score -= Subtraction;
+
+		if (Score < 0)
+		{
+			Score = 0;
+		}
 
 		GoldCnt++;//ミスでもGoldCntは増やす
 
