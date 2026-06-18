@@ -1,7 +1,5 @@
 ﻿#pragma once
 
-class KdCamera;
-
 class Player;
 
 class Score : public KdGameObject
@@ -17,8 +15,6 @@ public:
 
 	void DrawSprite() override;
 
-	void SetCamera(std::shared_ptr<KdCamera> camera) { m_wpCamera = camera; }
-
 	void SetPlayer(Player* player) { m_pPlayer = player; }
 
 private:
@@ -27,17 +23,16 @@ private:
 
 	std::shared_ptr<KdTexture> m_ScoreUi;
 
-	std::weak_ptr<KdCamera>   m_wpCamera;
-
 	Player* m_pPlayer = nullptr;
 
 	//座標
-	const float PosX = 1.75;
-	const float PosY = 7.7f;
+	const float ScorePosX = -170;
+	const float ScorePosY = 300;
+
+	const float ScoreUiPosX = -310;
+	const float ScoreUiPosY = 300;
 
 	const float Interval = 84;
-
-	const float ScoreUiAdjustment = 160;
 
 	//画像の大きさ
 	const float Width = 110;

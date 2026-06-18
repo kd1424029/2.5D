@@ -5,6 +5,7 @@ enum Label
 	Label_DefectiveProduct,
 	Label_NewProductBasket,
 	Label_NewProductVolley,
+	Label_NewFeverBall,
 };
 
 class NewProductsBase : public KdGameObject

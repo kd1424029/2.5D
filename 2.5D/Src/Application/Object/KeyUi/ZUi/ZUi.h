@@ -2,8 +2,6 @@
 
 #include "../KeyUiBase.h"
 
-class KdCamera;
-
 class ZUi : public KeyUiBase
 {
 public:
@@ -15,13 +13,9 @@ public:
 
 	void DrawSprite() override;
 
-	void SetCamera(std::shared_ptr<KdCamera> camera) { m_wpCamera = camera; }
-
 private:
 
-	std::weak_ptr<KdCamera>   m_wpCamera;
 
-
-	const float PosX = 1.7;
-	const float PosY = 1.23;
+	const float PosX = -150;
+	const float PosY = -290;
 };

@@ -15,6 +15,7 @@
 #include "../../Object/Timer/Timer.h"
 #include "../../Object/Score/Score.h"
 #include "../../Object/NewProducts/NewProductsGenerate.h"
+#include "../../Object/Transparent/Transparent.h"
 
 GameScene::GameScene()
 {
@@ -38,16 +39,36 @@ void GameScene::Event()
 	}
 
 	//カメラ用
-	Math::Vector3 comPos = { 0,4.5,-6.5 };//{-6, 6, -1};//{ 0, 10 , 0 };
+	static Math::Vector3 CameraPos = { 0,3.7 ,-6.7 };//{-6, 6, -1};//{ 0, 10 , 0 };
+
+	if (GetAsyncKeyState('W') & 0x8000)
+	{
+		CameraPos.y += 0.01;
+	}
+	if (GetAsyncKeyState('S') & 0x8000)
+	{
+		CameraPos.y -= 0.01;
+	}
+	if (GetAsyncKeyState('A') & 0x8000)
+	{
+		CameraPos.z+= 0.01;
+	}
+	if (GetAsyncKeyState('D') & 0x8000)
+	{
+		CameraPos.z -= 0.01;
+	}
+
+	KdDebugGUI::Instance().ClearLog();
+	KdDebugGUI::Instance().AddLog("y=%f\nz=%f", CameraPos.y, CameraPos.z);
 
 	//Math::Matrix rotation = Math::Matrix::CreateRotationX(DirectX::XMConvertToRadians(90.0f));
 
-	Math::Matrix transMat = Math::Matrix::CreateTranslation(comPos);
+	Math::Matrix transMat = Math::Matrix::CreateTranslation(CameraPos);
 
 	m_camera->SetCameraMatrix(transMat);
 
-	//一定間隔でボールを1つ生成してゲーム世界へ追加する
-	//種類・出現位置の決定はBallGenerateに任せている
+	//一定間隔でボールを1つ生成してオブジェクトリストへ追加する
+	//種類 出現位置の決定はBallGenerateに任せている
 	GenerateTimer--;
 
 	if (GenerateTimer < 0)
@@ -58,7 +79,7 @@ void GameScene::Event()
 		}
 
 		//BallGenerateがランダムに種類を決めて生成する
-		//フィーバー中に決められた個数を出し切った場合はnullptrが返るので、その場合はリストに追加しない
+		//フィーバー中に決められた個数を出し切った場合はnullptrが返るのでその場合はリストに追加しない
 		std::shared_ptr<BallBase> newBall = m_BallGenerator->Generate();
 
 		if (newBall != nullptr)
@@ -86,6 +107,16 @@ void GameScene::Event()
 		if (newProduct)
 		{
 			m_objList.push_back(newProduct);
+		}
+	}
+
+	if (m_BallGenerator->IsGoldFlgChanged())
+	{
+		std::shared_ptr<NewProductsBase> newFeverProduct = m_NewProductsGenerate->FeverGenerate();
+
+		if (newFeverProduct)
+		{
+			m_objList.push_back(newFeverProduct);
 		}
 	}
 
@@ -120,7 +151,7 @@ void GameScene::Init()
 
 	//ボール工場にプレイヤーを登録する
 	//当たり判定の通知先として生成された各ボールへ渡される
-	m_BallGenerator = std::make_unique<BallGenerate>(); // ここで生成
+	m_BallGenerator = std::make_unique<BallGenerate>();
 	m_BallGenerator->SetTarget(player.get());
 	player->SetBallGenerate(m_BallGenerator.get());
 
@@ -130,39 +161,40 @@ void GameScene::Init()
 	beltConveyor->Init();
 	m_objList.push_back(beltConveyor);
 
+	//透過画像
+	std::shared_ptr<Transparent> transparent;
+	transparent = std::make_shared<Transparent>();
+	transparent->Init();
+	m_objList.push_back(transparent);
+
 	//ノーマルボックスUI
 	std::shared_ptr<NormalBoxUi> normalboxui;
 	normalboxui = std::make_shared<NormalBoxUi>();
 	normalboxui->Init();
-	normalboxui->SetCamera(m_camera);
 	m_objList.push_back(normalboxui);
 
 	//ゴミ箱UI
 	std::shared_ptr<TrashBoxUi> trashboxui;
 	trashboxui = std::make_shared<TrashBoxUi>();
 	trashboxui->Init();
-	trashboxui->SetCamera(m_camera);
 	m_objList.push_back(trashboxui);
 
 	//XキーUI
 	std::shared_ptr<XUi> xui;
 	xui = std::make_shared<XUi>();
 	xui->Init();
-	xui->SetCamera(m_camera);
 	m_objList.push_back(xui);
 
 	//ZキーUI
 	std::shared_ptr<ZUi> zui;
 	zui = std::make_shared<ZUi>();
 	zui->Init();
-	zui->SetCamera(m_camera);
 	m_objList.push_back(zui);
 
 	//ライン
 	std::shared_ptr<Line> line;
 	line = std::make_shared<Line>();
 	line->Init();
-	line->SetCamera(m_camera);
 	line->SetPlayer(player.get());
 	m_objList.push_back(line);
 
@@ -170,7 +202,6 @@ void GameScene::Init()
 	std::shared_ptr<Timer> timer;
 	timer = std::make_shared<Timer>();
 	timer->Init();
-	timer->SetCamera(m_camera);
 	m_pTimer = timer.get();
 
 	m_objList.push_back(timer);
@@ -179,7 +210,6 @@ void GameScene::Init()
 	std::shared_ptr<Score> score;
 	score = std::make_shared<Score>();
 	score->Init();
-	score->SetCamera(m_camera);
 	score->SetPlayer(player.get());
 	m_objList.push_back(score);
 

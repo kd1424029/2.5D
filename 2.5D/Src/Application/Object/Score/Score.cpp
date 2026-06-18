@@ -41,28 +41,16 @@ void Score::Update()
 
 void Score::DrawSprite()
 {
-	std::shared_ptr<KdCamera> _spCamera = m_wpCamera.lock();
-
-	if (_spCamera)
+	//スコア表示
+	for (int i = 0; i < maxDigits; ++i)
 	{
-		Math::Vector3 _3DPos = GetPos();
-		_3DPos.x -= PosX;
-		_3DPos.y += PosY;
+		Math::Rectangle Rect = { CuttingInterval * m_digits[i],0,CuttingWidth,CuttingHeight };
 
-		//2D座標(3D座標->2D座標への変換作業)
-		Math::Vector3 _2dPos = Math::Vector3::Zero;
-		_spCamera->ConvertWorldToScreenDetail(_3DPos, _2dPos);
+		//表示														 X座標                         Y        幅    高さ    矩形データ       
+		KdShaderManager::Instance().m_spriteShader.DrawTex(m_Score, ScorePosX + (i * Interval), ScorePosY, Width, Height, &Rect);
 
-		//スコア表示
-		for (int i = 0; i < maxDigits; ++i)
-		{
-			Math::Rectangle Rect = { CuttingInterval * m_digits[i],0,CuttingWidth,CuttingHeight };
-
-			//表示														 X座標                         Y       幅    高さ    矩形データ       
-			KdShaderManager::Instance().m_spriteShader.DrawTex(m_Score, _2dPos.x + (i * Interval), _2dPos.y, Width, Height, &Rect);
-
-		}
-
-		KdShaderManager::Instance().m_spriteShader.DrawTex(m_ScoreUi, _2dPos.x - ScoreUiAdjustment, _2dPos.y, ScoreUiWidth, ScoreUiHeight);
 	}
+
+	KdShaderManager::Instance().m_spriteShader.DrawTex(m_ScoreUi, ScoreUiPosX, ScoreUiPosY, ScoreUiWidth, ScoreUiHeight);
+
 }

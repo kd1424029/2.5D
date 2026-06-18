@@ -72,14 +72,21 @@ private:
 
 	std::shared_ptr<KdModelData> m_TrashBoxModel;
 
+	//ボールスケール用
+	const float BallScale = 1.6;
+
 	//Box切り替え用
 	BoxType m_NextBoxType = BoxType::NormalBox; //次に変更する箱のタイプ
 
 	float BoxPosZ;    //元のZ座標
 
+	const float NormalBoxPosY = 1.5;
+
+	const float DirtyBoxPosY = 1.15;
+
 	const float SwitchDepth = -10.0f; //どれくらい奥に引っ込めるか
 
-	const float SwitchSpeed = 1.0f; //引っ込むスピード
+	const float SwitchSpeed = 1.5f; //引っ込むスピード
 
 	bool KeyFlg;
 

@@ -1,7 +1,5 @@
 ﻿#pragma once
 
-class KdCamera;
-
 class Timer : public KdGameObject
 {
 public:
@@ -15,8 +13,6 @@ public:
 
 	void DrawSprite() override;
 
-	void SetCamera(std::shared_ptr<KdCamera> camera) { m_wpCamera = camera; }
-
 	bool GetTimeUp() const { return TimeUpFlg; }  //タイマーが0になったか
 
 	float GetRemainingTime() const { return RemainTime; } //残り秒数を取得
@@ -27,9 +23,10 @@ private:
 
 	std::shared_ptr<KdTexture> m_RestUi;
 
-	std::weak_ptr<KdCamera>    m_wpCamera;
-
 	const int MaxTime = 120.0f;
+
+	const float TimerPosX = 460;
+	const float TimerPosY = 300;
 
 	//RestUi用
 	const int RestCharSize = 210;

@@ -17,7 +17,7 @@ void Player::Init()
 	m_TrashBoxModel = std::make_shared<KdModelData>();
 	m_TrashBoxModel->Load("Asset/Models/Box/TrashBox/TrashBox.gltf");
 
-	m_pos = { 0,1.9,-0.1 };
+	m_pos = { 0,1.4,-0.1 };
 
 	MoveCoolDownCount = 0;
 
@@ -259,6 +259,17 @@ void Player::Update()
 	//	}
 	//}
 
+	if (m_BoxType == BoxType::NormalBox)
+	{
+		m_pos.y = NormalBoxPosY;
+	
+	}
+	else if (m_BoxType == BoxType::TrashBox)
+	{
+		m_pos.y = DirtyBoxPosY;
+	}
+
+
 	Math::Matrix transMat = Math::Matrix::CreateTranslation(m_pos);
 
 	Math::Matrix scaleMat = Math::Matrix::CreateScale(Scale);
@@ -336,6 +347,7 @@ void Player::OnHit(BallKind ballKind)
 			m_pBallGenerate->SetStartFever();//フィーバーボールを抽選
 
 			const auto& objList = SceneManager::Instance().GetObjList();
+			
 			for (auto& obj : objList)
 			{
 				BallBase* ball = dynamic_cast<BallBase*>(obj.get());
@@ -390,6 +402,8 @@ void Player::OnHit(BallKind ballKind)
 			//フィーバー中FeverCountを増やす（デバッグ表示等に利用、終了判定には使わない）
 			FeverCount++;
 		}
+
+		const auto& objList = SceneManager::Instance().GetObjList();
 
 		//エフェクト(赤)
 		for (int i = 0; i < EffectCount; i++)

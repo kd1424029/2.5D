@@ -13,6 +13,9 @@ public:
 
 	std::shared_ptr<NewProductsBase> Generate();
 
+	//フィーバー用
+	std::shared_ptr<NewProductsBase> FeverGenerate();
+
 	void SetTarget(BallGenerate* ballgenerate) { m_BallGenerate = ballgenerate; }
 
 private:
@@ -22,6 +25,8 @@ private:
 	std::shared_ptr<KdTexture> m_NewProductBasketBall;
 	
 	std::shared_ptr<KdTexture> m_NewProductVolleyBall;
+
+	std::shared_ptr<KdTexture> m_NewFeverBall;
 
 	BallGenerate* m_BallGenerate = nullptr;
 

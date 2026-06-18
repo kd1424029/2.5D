@@ -27,3 +27,8 @@ void BeltConveyor::DrawLit()
 {
 	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_BeltConveyorModel, m_mWorld);
 }
+
+void BeltConveyor::GenerateDepthMapFromLight()
+{
+	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_BeltConveyorModel, m_mWorld);
+}

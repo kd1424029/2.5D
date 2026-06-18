@@ -151,6 +151,12 @@
     <Filter Include="Src\Application\Object\NewProducts\NewProductVolley">
       <UniqueIdentifier>{5ee2670f-7530-4e4d-8175-28ee555daae9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\NewProducts\NewFeverBall">
+      <UniqueIdentifier>{0d785e54-3ea1-4179-9b18-7295c7781cf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Transparent">
+      <UniqueIdentifier>{40904791-fa0e-4830-ac98-c8f8127c9113}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -408,6 +414,12 @@
     <ClInclude Include="Src\Application\Object\NewProducts\NewProductVolley\NewProductVolley.h">
       <Filter>Src\Application\Object\NewProducts\NewProductVolley</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\NewProducts\NewFeverBall\NewFeverBall.h">
+      <Filter>Src\Application\Object\NewProducts\NewFeverBall</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Transparent\Transparent.h">
+      <Filter>Src\Application\Object\Transparent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -631,6 +643,12 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\NewProducts\NewProductVolley\NewProductVolley.cpp">
       <Filter>Src\Application\Object\NewProducts\NewProductVolley</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\NewProducts\NewFeverBall\NewFeverBall.cpp">
+      <Filter>Src\Application\Object\NewProducts\NewFeverBall</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Transparent\Transparent.cpp">
+      <Filter>Src\Application\Object\Transparent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -21,6 +21,11 @@
 				-0.31657516956329346,
 				-0.31657516956329346,
 				-0.31657516956329346
+			],
+			"translation":[
+				0.01168060302734375,
+				0,
+				-0.002576609840616584
 			]
 		},
 		{
@@ -36,26 +41,11 @@
 	"materials":[
 		{
 			"doubleSided":true,
-			"name":"Bianco",
+			"name":"dirty",
 			"pbrMetallicRoughness":{
-				"baseColorFactor":[
-					0.44258439540863037,
-					0.33212944865226746,
-					0.08379930257797241,
-					1
-				]
-			}
-		},
-		{
-			"doubleSided":true,
-			"name":"Nero.001",
-			"pbrMetallicRoughness":{
-				"baseColorFactor":[
-					0,
-					0,
-					0,
-					1
-				],
+				"baseColorTexture":{
+					"index":0
+				},
 				"metallicFactor":0,
 				"roughnessFactor":0.5
 			}
@@ -81,20 +71,28 @@
 				{
 					"attributes":{
 						"POSITION":4,
-						"NORMAL":5
-					},
-					"indices":6,
-					"material":0
-				},
-				{
-					"attributes":{
-						"POSITION":7,
-						"NORMAL":8
+						"NORMAL":5,
+						"TEXCOORD_0":6,
+						"COLOR_0":7,
+						"COLOR_1":8
 					},
 					"indices":9,
-					"material":1
+					"material":0
 				}
 			]
+		}
+	],
+	"textures":[
+		{
+			"sampler":0,
+			"source":0
+		}
+	],
+	"images":[
+		{
+			"mimeType":"image/png",
+			"name":"dirty",
+			"uri":"dirty.png"
 		}
 	],
 	"accessors":[
@@ -135,7 +133,7 @@
 		{
 			"bufferView":4,
 			"componentType":5126,
-			"count":17255,
+			"count":26496,
 			"max":[
 				0.5284324288368225,
 				0.5284324884414673,
@@ -151,41 +149,33 @@
 		{
 			"bufferView":5,
 			"componentType":5126,
-			"count":17255,
+			"count":26496,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":6,
-			"componentType":5123,
-			"count":65160,
-			"type":"SCALAR"
+			"componentType":5126,
+			"count":26496,
+			"type":"VEC2"
 		},
 		{
 			"bufferView":7,
-			"componentType":5126,
-			"count":8466,
-			"max":[
-				0.5250412821769714,
-				0.5250412821769714,
-				0.5250412821769714
-			],
-			"min":[
-				-0.5250412821769714,
-				-0.5250412821769714,
-				-0.5250412821769714
-			],
-			"type":"VEC3"
+			"componentType":5121,
+			"count":26496,
+			"normalized":true,
+			"type":"VEC4"
 		},
 		{
 			"bufferView":8,
-			"componentType":5126,
-			"count":8466,
-			"type":"VEC3"
+			"componentType":5123,
+			"count":26496,
+			"normalized":true,
+			"type":"VEC4"
 		},
 		{
 			"bufferView":9,
 			"componentType":5123,
-			"count":32580,
+			"count":97740,
 			"type":"SCALAR"
 		}
 	],
@@ -216,44 +206,50 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":207060,
+			"byteLength":317952,
 			"byteOffset":840,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":207060,
-			"byteOffset":207900,
+			"byteLength":317952,
+			"byteOffset":318792,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":130320,
-			"byteOffset":414960,
+			"byteLength":211968,
+			"byteOffset":636744,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":105984,
+			"byteOffset":848712,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":211968,
+			"byteOffset":954696,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":195480,
+			"byteOffset":1166664,
 			"target":34963
-		},
+		}
+	],
+	"samplers":[
 		{
-			"buffer":0,
-			"byteLength":101592,
-			"byteOffset":545280,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":101592,
-			"byteOffset":646872,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":65160,
-			"byteOffset":748464,
-			"target":34963
+			"magFilter":9729,
+			"minFilter":9987
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":813624,
+			"byteLength":1362144,
 			"uri":"DirtySoccerBall.bin"
 		}
 	]

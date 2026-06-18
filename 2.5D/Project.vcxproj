@@ -294,6 +294,7 @@
     <ClInclude Include="Src\Application\Object\KeyUi\ZUi\ZUi.h" />
     <ClInclude Include="Src\Application\Object\Line\Line.h" />
     <ClInclude Include="Src\Application\Object\NewProducts\DefectiveProduct\DefectiveProduct.h" />
+    <ClInclude Include="Src\Application\Object\NewProducts\NewFeverBall\NewFeverBall.h" />
     <ClInclude Include="Src\Application\Object\NewProducts\NewProductBasket\NewProductBasket.h" />
     <ClInclude Include="Src\Application\Object\NewProducts\NewProductsBase.h" />
     <ClInclude Include="Src\Application\Object\NewProducts\NewProductsGenerate.h" />
@@ -301,6 +302,7 @@
     <ClInclude Include="Src\Application\Object\Player\Player.h" />
     <ClInclude Include="Src\Application\Object\Score\Score.h" />
     <ClInclude Include="Src\Application\Object\Timer\Timer.h" />
+    <ClInclude Include="Src\Application\Object\Transparent\Transparent.h" />
     <ClInclude Include="Src\Application\Scene\BaseScene\BaseScene.h" />
     <ClInclude Include="Src\Application\Scene\GameScene\GameScene.h" />
     <ClInclude Include="Src\Application\Scene\SceneManager.h" />
@@ -373,6 +375,7 @@
     <ClCompile Include="Src\Application\Object\KeyUi\ZUi\ZUi.cpp" />
     <ClCompile Include="Src\Application\Object\Line\Line.cpp" />
     <ClCompile Include="Src\Application\Object\NewProducts\DefectiveProduct\DefectiveProduct.cpp" />
+    <ClCompile Include="Src\Application\Object\NewProducts\NewFeverBall\NewFeverBall.cpp" />
     <ClCompile Include="Src\Application\Object\NewProducts\NewProductBasket\NewProductBasket.cpp" />
     <ClCompile Include="Src\Application\Object\NewProducts\NewProductsBase.cpp" />
     <ClCompile Include="Src\Application\Object\NewProducts\NewProductsGenerate.cpp" />
@@ -380,6 +383,7 @@
     <ClCompile Include="Src\Application\Object\Player\Player.cpp" />
     <ClCompile Include="Src\Application\Object\Score\Score.cpp" />
     <ClCompile Include="Src\Application\Object\Timer\Timer.cpp" />
+    <ClCompile Include="Src\Application\Object\Transparent\Transparent.cpp" />
     <ClCompile Include="Src\Application\Scene\BaseScene\BaseScene.cpp" />
     <ClCompile Include="Src\Application\Scene\GameScene\GameScene.cpp" />
     <ClCompile Include="Src\Application\Scene\SceneManager.cpp" />

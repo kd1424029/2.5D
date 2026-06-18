@@ -39,29 +39,15 @@ void Timer::Update()
 
 void Timer::DrawSprite()
 {
-	std::shared_ptr<KdCamera> _spCamera = m_wpCamera.lock();
-	if (!_spCamera) return;
 
-	//3D→2D座標変換
-	Math::Vector3 _3DPos = GetPos();
-
-	_3DPos.x = PosX;
-
-	_3DPos.y += PosY;
-
-	Math::Vector3 _2dPos = Math::Vector3::Zero;
-
-	_spCamera->ConvertWorldToScreenDetail(_3DPos, _2dPos);
-
-	if (!m_Timer) return;
 
 	//(分)(：)(秒の十の位)(秒の一の位)の順に描画
 	for (int i = 0; i < MaxDigits; ++i)
 	{
 		Math::Rectangle Rect = { CharSize * Digits[i], 0, CharSize, CharSize };
 
-		KdShaderManager::Instance().m_spriteShader.DrawTex(m_Timer, _2dPos.x + (i * CharSpacing), _2dPos.y, CharSize, CharHeight, &Rect);
+		KdShaderManager::Instance().m_spriteShader.DrawTex(m_Timer, TimerPosX + (i * CharSpacing), TimerPosY, CharSize, CharHeight, &Rect);
 	}
 
-	KdShaderManager::Instance().m_spriteShader.DrawTex(m_RestUi, _2dPos.x - RestAdjustment, _2dPos.y, RestCharSize, RestCharHeight);
+	KdShaderManager::Instance().m_spriteShader.DrawTex(m_RestUi, TimerPosX - RestAdjustment, TimerPosY, RestCharSize, RestCharHeight);
 }

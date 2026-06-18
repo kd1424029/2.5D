@@ -40,7 +40,22 @@ public:
 		return false;
 	}
 
+	bool IsGoldFlgChanged()
+	{
+		if (GoldFlg && !LastGoldFlg)
+		{
+			LastGoldFlg = true;
+			return true;
+		}
+
+		LastGoldFlg = GoldFlg;
+
+		return false;
+	}
+
 	void SetTarget(Player* player) { m_TargetPlayer = player; }
+
+	bool GetGoldFlg() { return GoldFlg; }
 
 	void ResetGoldFlg() { GoldFlg = false; }
 
@@ -125,12 +140,14 @@ private:
 
 	bool GoldFlg = false;
 
+	bool LastGoldFlg;
+
 	const int Left = 1;
 	const int Right = 0;
 	const int None = -1;
 
-	const Math::Vector3 FirstLeftPos = { -6, 3.23f, -2 };
-	const Math::Vector3 FirstRightPos = { 6, 3.23f, -2 };
+	const Math::Vector3 FirstLeftPos = { -6, 3.23f, -3 };
+	const Math::Vector3 FirstRightPos = { 6, 3.23f, -3 };
 
 	// --- シャッフルデッキ用 ---
 	std::mt19937            m_Rng;       //乱数エンジン
