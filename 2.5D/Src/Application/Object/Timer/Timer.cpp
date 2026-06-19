@@ -39,8 +39,6 @@ void Timer::Update()
 
 void Timer::DrawSprite()
 {
-
-
 	//(分)(：)(秒の十の位)(秒の一の位)の順に描画
 	for (int i = 0; i < MaxDigits; ++i)
 	{
@@ -48,6 +46,4 @@ void Timer::DrawSprite()
 
 		KdShaderManager::Instance().m_spriteShader.DrawTex(m_Timer, TimerPosX + (i * CharSpacing), TimerPosY, CharSize, CharHeight, &Rect);
 	}
-
-	//KdShaderManager::Instance().m_spriteShader.DrawTex(m_RestUi, RestPosX, RestPosY, RestCharSize, RestCharHeight);
 }

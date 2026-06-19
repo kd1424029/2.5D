@@ -230,7 +230,7 @@ void BallBase::PostUpdate()
 	}
 
 	//========== TypeDamage判定(Playerに直接判定) ==========
-	if (m_TargetPlayer != nullptr)
+	if (m_TargetPlayer != nullptr && ScaleFlg == false)   //既に当たっていたら判定しない
 	{
 		KdCollider::SphereInfo damageSphere;
 		damageSphere.m_sphere.Center = m_pos;
@@ -239,11 +239,9 @@ void BallBase::PostUpdate()
 
 		std::list<KdCollider::CollisionResult> retDamageList;
 
-		//ループなしPlayerオブジェクト1つにだけ判定する
 		if (m_TargetPlayer->Intersects(damageSphere, &retDamageList))
 		{
 			m_TargetPlayer->OnHit(ballKind);
-			
 			ScaleFlg = true;
 		}
 	}

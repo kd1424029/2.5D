@@ -43,8 +43,6 @@ void Player::Init()
 
 	GoldCnt = 0;
 
-	FeverCount = 0;
-
 	FeverFlg = false;
 
 	NormalBallMoveSpeed = 0.04;
@@ -62,8 +60,8 @@ void Player::PreUpdate()
 void Player::Update()
 {
 	//現在のScoreをデバッグ
-	//KdDebugGUI::Instance().ClearLog();
-	//KdDebugGUI::Instance().AddLog("%d", GoldCnt);
+	KdDebugGUI::Instance().ClearLog();
+	KdDebugGUI::Instance().AddLog("%d", Score);
 
 	//フィーバー終了判定 決められた個数を出し切りかつ画面上にフィーバーボールが1つも残っていなければ終了
 	if (FeverFlg && m_pBallGenerate != nullptr && m_pBallGenerate->IsFeverSpawnFinished())
@@ -326,7 +324,16 @@ void Player::OnHit(BallKind ballKind)
 
 	if (Match)
 	{
-		Score += FeverFlg ? FeverAddition : Addition;
+		if (FeverFlg == true)
+		{
+			Score += FeverAddition;
+		}
+		else
+		{
+			Score += Addition;
+		}
+
+		GoldCnt++;
 
 		Scale = MaxScale;
 
@@ -356,16 +363,6 @@ void Player::OnHit(BallKind ballKind)
 				m_pBallGenerate->SetRotationSpeed(MaxBallRotationSpeed);
 			}
 		}
-		else if (FeverFlg)
-		{
-			//フィーバー中：FeverCount を増やす（デバッグ表示等に利用、終了判定には使わない）
-			FeverCount++;
-		}
-		else
-		{
-			//通常時GoldCntを増やす
-			GoldCnt++;
-		}
 
 		//エフェクト(緑)
 		for (int i = 0; i < EffectCount; i++)
@@ -388,12 +385,6 @@ void Player::OnHit(BallKind ballKind)
 
 		GoldCnt++;//ミスでもGoldCntは増やす
 
-		if (FeverFlg)
-		{
-			//フィーバー中FeverCountを増やす（デバッグ表示等に利用、終了判定には使わない）
-			FeverCount++;
-		}
-
 		const auto& objList = SceneManager::Instance().GetObjList();
 
 		//エフェクト(赤)
@@ -411,7 +402,6 @@ void Player::OnHit(BallKind ballKind)
 void Player::EndFever()
 {
 	FeverFlg = false;
-	FeverCount = 0;
 	GoldCnt = 0;
 
 	//スピードを通常に戻す

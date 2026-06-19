@@ -44,7 +44,7 @@ private:
 
 	const float ArrowDownSpeed = 0.0009;
 
-	const float ArrowDownFeverSpeed = 0.1;//0.00185;
+	const float ArrowDownFeverSpeed = 0.00185;
 
 	const float MaxV = 1;
 };

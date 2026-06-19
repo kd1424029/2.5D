@@ -36,7 +36,7 @@ private:
 	const int RestCharHeight = 110;
 
 	//残り時間
-	float RemainTime;   //3分00秒
+	float RemainTime;   
 
 	bool  TimeUpFlg = false;
 

@@ -117,8 +117,6 @@ private:
 	//ゴールドボール用
 	int GoldCnt;
 
-	int FeverCount;     //フィーバー中のヒット数（デバッグ表示等で利用、終了判定には使わない）
-
 	bool FeverFlg;      //フィーバー中かどうか
 
 	//ボールスピード用
