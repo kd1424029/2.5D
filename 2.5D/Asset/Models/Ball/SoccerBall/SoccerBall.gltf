@@ -21,6 +21,11 @@
 				-0.31657516956329346,
 				-0.31657516956329346,
 				-0.31657516956329346
+			],
+			"translation":[
+				0,
+				-0.021258577704429626,
+				0
 			]
 		},
 		{
@@ -127,7 +132,7 @@
 		{
 			"bufferView":4,
 			"componentType":5126,
-			"count":10880,
+			"count":17255,
 			"max":[
 				0.5284324288368225,
 				0.5284324884414673,
@@ -143,7 +148,7 @@
 		{
 			"bufferView":5,
 			"componentType":5126,
-			"count":10880,
+			"count":17255,
 			"type":"VEC3"
 		},
 		{
@@ -155,7 +160,7 @@
 		{
 			"bufferView":7,
 			"componentType":5126,
-			"count":5472,
+			"count":8466,
 			"max":[
 				0.5250412821769714,
 				0.5250412821769714,
@@ -171,7 +176,7 @@
 		{
 			"bufferView":8,
 			"componentType":5126,
-			"count":5472,
+			"count":8466,
 			"type":"VEC3"
 		},
 		{
@@ -208,44 +213,44 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":130560,
+			"byteLength":207060,
 			"byteOffset":840,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":130560,
-			"byteOffset":131400,
+			"byteLength":207060,
+			"byteOffset":207900,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":130320,
-			"byteOffset":261960,
+			"byteOffset":414960,
 			"target":34963
 		},
 		{
 			"buffer":0,
-			"byteLength":65664,
-			"byteOffset":392280,
+			"byteLength":101592,
+			"byteOffset":545280,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":65664,
-			"byteOffset":457944,
+			"byteLength":101592,
+			"byteOffset":646872,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":65160,
-			"byteOffset":523608,
+			"byteOffset":748464,
 			"target":34963
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":588768,
+			"byteLength":813624,
 			"uri":"SoccerBall.bin"
 		}
 	]

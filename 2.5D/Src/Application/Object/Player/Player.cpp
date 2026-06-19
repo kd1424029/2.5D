@@ -248,16 +248,6 @@ void Player::Update()
 			Scale = NormalScale;
 		}
 	}
-	////Match失敗時に小さくする演出も入れる
-	//else if (Scale < NormalScale)
-	//{
-	//	Scale += ScaleSpeed * (OneFrame / MaxFrame);
-
-	//	if (Scale > NormalScale)
-	//	{
-	//		Scale = NormalScale;
-	//	}
-	//}
 
 	if (m_BoxType == BoxType::NormalBox)
 	{
@@ -269,17 +259,18 @@ void Player::Update()
 		m_pos.y = DirtyBoxPosY;
 	}
 
+	//デバッグキー
+	if (GetAsyncKeyState('F') & 0x8000)
+	{
+		GoldCnt = 5;
+	}
+
 
 	Math::Matrix transMat = Math::Matrix::CreateTranslation(m_pos);
 
 	Math::Matrix scaleMat = Math::Matrix::CreateScale(Scale);
 
 	m_mWorld = scaleMat * transMat;
-
-}
-
-void Player::PostUpdate()
-{
 
 }
 

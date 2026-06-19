@@ -12,6 +12,8 @@ void BallBase::Init()
 
 	Gravity = 0.0f;
 
+	ScaleGrowFlg = true;
+
 	TargetX = 0.0f;
 
 	GoalTargetX = 0.0f;
@@ -21,6 +23,8 @@ void BallBase::Init()
 	RotationZ = 0.0f;
 
 	Scale = 0.6;
+
+	ScaleFlg = false;
 
 	MoveSpeed = 0.04f;
 
@@ -128,6 +132,41 @@ void BallBase::Update()
 
 		RotationX += RotationSpeed;
 
+		if (ScaleFlg == true)
+		{
+			MoveState = BallMove::ScaleFaze;
+		}
+
+		break;
+
+	case ScaleFaze:
+
+		RotationZ = 0;
+		RotationX = 0;
+		m_pos.z = PosZ;
+		m_pos.y = PosY;
+
+		if (ScaleGrowFlg == true)
+		{
+			//========== 拡大 ==========
+			Scale += ScaleSpeed;
+
+			if (Scale >= ScaleMax)
+			{
+				Scale = ScaleMax;
+				ScaleGrowFlg = false; // 最大まで拡大したら縮小フェーズへ
+			}
+		}
+		else if (ScaleGrowFlg == false)
+		{
+			//========== 縮小 ==========
+			Scale -= ScaleSpeed;
+
+			if (Scale < 0)
+			{
+				m_isExpired = true; // 消滅
+			}
+		}
 		break;
 
 	}
@@ -135,7 +174,7 @@ void BallBase::Update()
 	m_pos.y -= Gravity;
 	Gravity += GravitySpeed;
 
-	if (m_pos.y < -10)
+	if (m_pos.y < MaxBottom)
 	{
 		//ゴールドボールを逃したらカウントをリセット
 		if (ballKind == BallKind::Kind_GoldBall && m_TargetPlayer != nullptr)
@@ -204,8 +243,8 @@ void BallBase::PostUpdate()
 		if (m_TargetPlayer->Intersects(damageSphere, &retDamageList))
 		{
 			m_TargetPlayer->OnHit(ballKind);
-
-			m_isExpired = true;
+			
+			ScaleFlg = true;
 		}
 	}
 

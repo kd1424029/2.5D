@@ -51,6 +51,6 @@ void Score::DrawSprite()
 
 	}
 
-	KdShaderManager::Instance().m_spriteShader.DrawTex(m_ScoreUi, ScoreUiPosX, ScoreUiPosY, ScoreUiWidth, ScoreUiHeight);
+	//KdShaderManager::Instance().m_spriteShader.DrawTex(m_ScoreUi, ScoreUiPosX, ScoreUiPosY, ScoreUiWidth, ScoreUiHeight);
 
 }

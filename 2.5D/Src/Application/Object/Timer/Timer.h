@@ -25,8 +25,11 @@ private:
 
 	const int MaxTime = 120.0f;
 
-	const float TimerPosX = 460;
-	const float TimerPosY = 300;
+	const float TimerPosX = 450;
+	const float TimerPosY = 290;
+
+	const float RestPosX = 340;
+	const float RestPosY = 290;
 
 	//RestUi用
 	const int RestCharSize = 210;
@@ -51,13 +54,6 @@ private:
 	static const int MaxDigits = 4;
 
 	int Digits[MaxDigits] = {};   //0 = 分 1 = コロン 2 = 秒十の位 3 = 秒一の位
-
-	//表示位置オフセット(3D→2D変換後の調整)
-	const float PosX = 4.8f;
-
-	const float PosY = 7.7f;
-
-	const float RestAdjustment = 110;
 
 	//画像のサイズ
 	const int CharSize = 64;    //画像の幅

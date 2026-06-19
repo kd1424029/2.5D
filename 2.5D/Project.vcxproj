@@ -288,6 +288,7 @@
     <ClInclude Include="Src\Application\Object\BoxUi\NormalBoxUi\NormalBoxUi.h" />
     <ClInclude Include="Src\Application\Object\BoxUi\TrashBoxUi\TrashBoxUi.h" />
     <ClInclude Include="Src\Application\Object\Effect\Effect.h" />
+    <ClInclude Include="Src\Application\Object\FeverFrame\FeverFrame.h" />
     <ClInclude Include="Src\Application\Object\Ground\Ground.h" />
     <ClInclude Include="Src\Application\Object\KeyUi\KeyUiBase.h" />
     <ClInclude Include="Src\Application\Object\KeyUi\XUi\XUi.h" />
@@ -369,6 +370,7 @@
     <ClCompile Include="Src\Application\Object\BoxUi\NormalBoxUi\NormalBoxUi.cpp" />
     <ClCompile Include="Src\Application\Object\BoxUi\TrashBoxUi\TrashBoxUi.cpp" />
     <ClCompile Include="Src\Application\Object\Effect\Effect.cpp" />
+    <ClCompile Include="Src\Application\Object\FeverFrame\FeverFrame.cpp" />
     <ClCompile Include="Src\Application\Object\Ground\Ground.cpp" />
     <ClCompile Include="Src\Application\Object\KeyUi\KeyUiBase.cpp" />
     <ClCompile Include="Src\Application\Object\KeyUi\XUi\XUi.cpp" />

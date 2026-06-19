@@ -12,6 +12,7 @@ enum BallMove
 	FirstMove,		//最初の移動
 	SecondMove,		//2回目の移動
 	ThirdMove,		//3回目の移動
+	ScaleFaze,      //消滅処理
 };
 
 class BallBase : public KdGameObject, public BallType
@@ -56,6 +57,18 @@ private:
 
 	float Scale;
 
+	bool ScaleFlg;
+
+	bool ScaleGrowFlg; // true 拡大　false 縮小
+
+	const float ScaleMax = 1.6f;   //拡大の最大値
+
+	const float ScaleSpeed = 0.1f; //スケールスピード
+
+	const float PosY = 1.9;
+	
+	const float PosZ = 0.5;
+
 	float Gravity;
 
 	float TargetX;
@@ -77,6 +90,8 @@ private:
 	float MoveSpeed;//移動速度
 
 	float RotationSpeed;
+
+	const float MaxBottom = 0;
 
 	const float GravitySpeed = 0.005f; //重力の加速度
 

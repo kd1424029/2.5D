@@ -157,6 +157,9 @@
     <Filter Include="Src\Application\Object\Transparent">
       <UniqueIdentifier>{40904791-fa0e-4830-ac98-c8f8127c9113}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\FeverFrame">
+      <UniqueIdentifier>{95e59c5a-4ecf-4cec-90b7-606793aa5134}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -396,9 +399,6 @@
     <ClInclude Include="Src\Application\Object\BoxUi\NormalBoxUi\NormalBoxUi.h">
       <Filter>Src\Application\Object\BoxUi\NormalBoxUi</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Object\Ground\Ground.h">
-      <Filter>Src\Application\Object\BoxUi\TrashBoxUi</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Application\Object\NewProducts\NewProductsBase.h">
       <Filter>Src\Application\Object\NewProducts</Filter>
     </ClInclude>
@@ -419,6 +419,12 @@
     </ClInclude>
     <ClInclude Include="Src\Application\Object\Transparent\Transparent.h">
       <Filter>Src\Application\Object\Transparent</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\FeverFrame\FeverFrame.h">
+      <Filter>Src\Application\Object\FeverFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Ground\Ground.h">
+      <Filter>Src\Application\Object\Ground</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -649,6 +655,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Transparent\Transparent.cpp">
       <Filter>Src\Application\Object\Transparent</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\FeverFrame\FeverFrame.cpp">
+      <Filter>Src\Application\Object\FeverFrame</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

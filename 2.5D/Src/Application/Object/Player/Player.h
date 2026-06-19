@@ -22,8 +22,6 @@ public:
 
 	void Update() override;
 
-	void PostUpdate() override;
-
 	void DrawLit() override;
 
 	void GenerateDepthMapFromLight() override;
@@ -71,9 +69,6 @@ private:
 	std::shared_ptr<KdModelData> m_NormalBoxModel;
 
 	std::shared_ptr<KdModelData> m_TrashBoxModel;
-
-	//ボールスケール用
-	const float BallScale = 1.6;
 
 	//Box切り替え用
 	BoxType m_NextBoxType = BoxType::NormalBox; //次に変更する箱のタイプ
@@ -146,7 +141,7 @@ private:
 	const float SmallScale = 0.5f;
 
 	//エフェクト用
-	const int   EffectCount = 20;
+	const int   EffectCount = 10;
 	const float EffectSpeed = 0.2f;
 	const float EffectLifeSpan = 30.0f;
 

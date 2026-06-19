@@ -16,6 +16,7 @@
 #include "../../Object/Score/Score.h"
 #include "../../Object/NewProducts/NewProductsGenerate.h"
 #include "../../Object/Transparent/Transparent.h"
+#include "../../Object/FeverFrame/FeverFrame.h"
 
 GameScene::GameScene()
 {
@@ -39,7 +40,7 @@ void GameScene::Event()
 	}
 
 	//カメラ用
-	static Math::Vector3 CameraPos = { 0,3.7 ,-6.7 };//{-6, 6, -1};//{ 0, 10 , 0 };
+	static Math::Vector3 CameraPos = { 0,3.7 ,-6.75 };//{-6, 6, -1};//{ 0, 10 , 0 };
 
 	if (GetAsyncKeyState('W') & 0x8000)
 	{
@@ -159,6 +160,7 @@ void GameScene::Init()
 	std::shared_ptr<BeltConveyor> beltConveyor;
 	beltConveyor = std::make_shared<BeltConveyor>();
 	beltConveyor->Init();
+	beltConveyor->SetTarget(player.get());
 	m_objList.push_back(beltConveyor);
 
 	//透過画像
@@ -212,6 +214,13 @@ void GameScene::Init()
 	score->Init();
 	score->SetPlayer(player.get());
 	m_objList.push_back(score);
+
+	//フィーバータイム演出用フレーム（画面の縁を光らせるUI）
+	std::shared_ptr<FeverFrame> feverFrame;
+	feverFrame = std::make_shared<FeverFrame>();
+	feverFrame->Init();
+	feverFrame->SetPlayer(player.get());
+	m_objList.push_back(feverFrame);
 
 	//商品ラベル
 	m_NewProductsGenerate = std::make_unique<NewProductsGenerate>(); //ここで生成

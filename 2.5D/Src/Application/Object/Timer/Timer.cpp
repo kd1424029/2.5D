@@ -49,5 +49,5 @@ void Timer::DrawSprite()
 		KdShaderManager::Instance().m_spriteShader.DrawTex(m_Timer, TimerPosX + (i * CharSpacing), TimerPosY, CharSize, CharHeight, &Rect);
 	}
 
-	KdShaderManager::Instance().m_spriteShader.DrawTex(m_RestUi, TimerPosX - RestAdjustment, TimerPosY, RestCharSize, RestCharHeight);
+	//KdShaderManager::Instance().m_spriteShader.DrawTex(m_RestUi, RestPosX, RestPosY, RestCharSize, RestCharHeight);
 }
