@@ -2,8 +2,6 @@
 
 #include "../BoxUiBase.h"
 
-class KdCamera;
-
 class NormalBoxUi : public BoxUiBase
 {
 public:
@@ -13,14 +11,19 @@ public:
 
 	void Init() override;
 
-	void DrawSprite() override;
+	void Update() override;
 
-	void SetCamera(std::shared_ptr<KdCamera> camera) { m_wpCamera = camera; }
+	void DrawSprite() override;
 
 private:
 
-	std::weak_ptr<KdCamera>   m_wpCamera;
-
 	const float PosX = -50;
-	const float PosY = -290;
+
+	const float GoalPosY = -290;
+
+	const float MaxPosY = -580;
+
+	const float MoveSpeed = 20;
+
+	float PosY;
 };

@@ -2,9 +2,9 @@
 
 class BaseScene;
 
-class SceneManager
+class SceneManager : public KdGameObject
 {
-public :
+public:
 
 	// シーン情報
 	enum class SceneType
@@ -26,6 +26,11 @@ public :
 	// 次のシーンをセット (次のフレームから切り替わる)
 	void SetNextScene(SceneType _nextScene)
 	{
+		if (m_fadeState != FadeState::None)
+		{
+			return;
+		}
+
 		m_nextSceneType = _nextScene;
 	}
 
@@ -35,7 +40,25 @@ public :
 	// 現在のシーンにオブジェクトを追加
 	void AddObject(const std::shared_ptr<KdGameObject>& _obj);
 
-private :
+	// 最終スコアを保存する（PlayScene終了時、ResultSceneへ遷移する前に呼ぶ）
+	void SetFinalScore(unsigned long _score) { m_finalScore = _score; }
+
+	// 保存しておいた最終スコアを取得する（ResultSceneで使用）
+	unsigned long GetFinalScore() const { return m_finalScore; }
+
+	void SetIsNewRecord(bool isNewRecord) { IsNewRecord = isNewRecord; }
+
+	bool GetIsNewRecord() const { return IsNewRecord; }
+
+private:
+
+	//暗転の状態
+	enum class FadeState
+	{
+		None,     //フェードしていない通常時
+		FadeOut,  //画面を暗くしていく
+		FadeIn    //暗い画面から明るくしていく
+	};
 
 	// マネージャーの初期化
 	// インスタンス生成(アプリ起動)時にコンストラクタで自動実行
@@ -48,14 +71,32 @@ private :
 	// シーン切り替え関数
 	void ChangeScene(SceneType _sceneType);
 
+	//フェードの状態を更新する
+	void UpdateFade();
+
 	// 現在のシーンのインスタンスを保持しているポインタ
 	std::shared_ptr<BaseScene> m_currentScene = nullptr;
 
 	// 現在のシーンの種類を保持している変数
-	SceneType m_currentSceneType = SceneType::Game;
-	
+	SceneType m_currentSceneType = SceneType::Title;
+
 	// 次のシーンの種類を保持している変数
 	SceneType m_nextSceneType = m_currentSceneType;
+
+	FadeState m_fadeState = FadeState::None;
+
+	float m_fadeAlpha = 0.0f;   //暗転画像の透明度
+
+	const float FadeSpeed = 0.04f;  //アルファ変化量
+
+	const int ScreenWidth = 1280;
+
+	const int ScreenHeight = 720;
+
+	// PlayScene終了時のスコアを保持しておき、ResultSceneで表示するために使う
+	unsigned long m_finalScore = 0;
+
+	bool IsNewRecord = false;
 
 private:
 

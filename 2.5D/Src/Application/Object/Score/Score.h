@@ -2,6 +2,8 @@
 
 class Player;
 
+class Timer;
+
 class Score : public KdGameObject
 {
 public:
@@ -17,7 +19,30 @@ public:
 
 	void SetPlayer(Player* player) { m_pPlayer = player; }
 
+	void SetTimer(Timer* timer) { m_pTimer = timer; }
+
+	// Playerが存在しない場面（ResultSceneなど）で、固定のスコアを表示するために使う
+	void SetFixedScore(unsigned long score) { m_score = score; }
+
+	void SetGoalPosY(float posy) { GoalPosY = posy; }
+
+	void SetScorePosY(float posy) { ScorePosY = posy; }
+
+	void SetWidth(float width) { Width = width; }
+
+	void SetHeight(float height) { Height = height; }
+
+	void SetInterval(float interval) { Interval = interval; }
+
+	void SetScorePosX(float posx) { ScorePosX = posx; }
+
+	bool IsNewRecord() const { return IsNewRecordFlg; }
+
+	unsigned long LoadHighScore() const; //外部ファイルからハイスコアを読み込む
+
 private:
+
+	void SaveHighScore();          //ハイスコアより高い場合のみ外部ファイルへ保存
 
 	std::shared_ptr<KdTexture> m_Score;
 
@@ -25,18 +50,35 @@ private:
 
 	Player* m_pPlayer = nullptr;
 
+	Timer* m_pTimer = nullptr;
+
+	bool HasSavedHighScore = false; //1ゲームにつき1回だけ保存するためのフラグ
+
+	bool IsNewRecordFlg = false; //今回のプレイで新記録が出たか
+
+	// ハイスコア保存先
+	static constexpr const char* HighScoreFilePath = "Asset/SaveData/HighScore.txt";
+
+
 	//座標
-	const float ScorePosX = -170;
-	const float ScorePosY = 280;
+	float ScorePosX;
+
+	const float MaxPosY = 560;
+
+	float GoalPosY;
+
+	const float MoveSpeed = 20.0;
+
+	float ScorePosY;
 
 	const float ScoreUiPosX = -310;
 	const float ScoreUiPosY = 290;
 
-	const float Interval = 84;
+	float Interval = 84;
 
 	//画像の大きさ
-	const float Width = 110;
-	const float Height = 110;
+	float Width;
+	float Height;
 
 	const float ScoreUiWidth = 220;
 	const float ScoreUiHeight = 110;

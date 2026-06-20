@@ -17,7 +17,9 @@ void Player::Init()
 	m_TrashBoxModel = std::make_shared<KdModelData>();
 	m_TrashBoxModel->Load("Asset/Models/Box/TrashBox/TrashBox.gltf");
 
-	m_pos = { 0,1.4,-0.1 };
+	BeginningFlg = true;
+
+	m_pos = { 0,1.5,MaxBeginningPosZ };
 
 	MoveCoolDownCount = 0;
 
@@ -60,6 +62,23 @@ void Player::PreUpdate()
 void Player::Update()
 {
 	if (GameStopped == true) return;
+
+	if (BeginningFlg)
+	{
+		m_pos.z += BeginningMoveSpeed;
+
+		if (m_pos.z > GoalBeginningPosZ)
+		{
+			m_pos.z = GoalBeginningPosZ;
+
+			BeginningFlg = false;
+		}
+
+		Math::Matrix transMat = Math::Matrix::CreateTranslation(m_pos);
+		m_mWorld = transMat;
+	}
+
+	if (BeginningFlg == true)return;
 
 	//現在のScoreをデバッグ
 	KdDebugGUI::Instance().ClearLog();

@@ -13,8 +13,6 @@ public:
 
 	void Update() override;
 
-	void PostUpdate() override;
-
 	void DrawSprite() override;
 
 	void SetPlayer(Player* player) { m_pPlayer = player; }
@@ -29,7 +27,15 @@ private:
 	
 	const Math::Vector3 TrashBoxPos = { 51 ,-290 ,0 };
 
+	const float PosX = -50;
 
+	const float GoalPosY = -290;
+
+	const float MaxPosY = -580;
+
+	const float MoveSpeed = 20;
+
+	
 	//座標を切り替えるための管理用変数
 	std::vector<Math::Vector3> m_PosList;	       //座標の選択肢リスト
 	int                        m_CurrentIndex;	   //0→NormalBoxPos 1→TrashBoxPos

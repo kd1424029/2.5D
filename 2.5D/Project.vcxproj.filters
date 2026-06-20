@@ -166,6 +166,15 @@
     <Filter Include="Src\Application\Object\CountDownUi">
       <UniqueIdentifier>{4d839666-77cd-4817-a1cf-1e7ff7d579ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\TitleName">
+      <UniqueIdentifier>{17f01a9d-6a8d-4b29-9192-ab42d1a279f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\NewRecord">
+      <UniqueIdentifier>{04a8886f-2dcd-46d8-87ce-6940dea2b885}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\TitleUi">
+      <UniqueIdentifier>{fe49683e-3a02-449d-a1ab-215edba79a0e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -438,6 +447,15 @@
     <ClInclude Include="Src\Application\Object\CountDownUi\CountDownUi.h">
       <Filter>Src\Application\Object\CountDownUi</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\TitleName\TitleName.h">
+      <Filter>Src\Application\Object\TitleName</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\NewRecord\NewRecord.h">
+      <Filter>Src\Application\Object\NewRecord</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\TitleUi\TitleUi.h">
+      <Filter>Src\Application\Object\TitleUi</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -676,6 +694,15 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\CountDownUi\CountDownUi.cpp">
       <Filter>Src\Application\Object\CountDownUi</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\TitleName\TitleName.cpp">
+      <Filter>Src\Application\Object\TitleName</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\NewRecord\NewRecord.cpp">
+      <Filter>Src\Application\Object\NewRecord</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\TitleUi\TitleUi.cpp">
+      <Filter>Src\Application\Object\TitleUi</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

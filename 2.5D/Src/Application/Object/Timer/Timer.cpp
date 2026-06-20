@@ -11,10 +11,19 @@ void Timer::Init()
 	RemainTime = 120.0f;   //2分00秒
 
 	TimeUpFlg = false;
+
+	TimerPosY = MaxPosY;
 }
 
 void Timer::Update()
 {
+	TimerPosY -= MoveSpeed;
+
+	if (TimerPosY < GoalPosY)
+	{
+		TimerPosY = GoalPosY;
+	}
+
 	if (TimeUpFlg) return;
 	
 	if (PausedFlg == false)

@@ -12,6 +12,8 @@ class NewProductsGenerate;
 
 class CountDownUi;
 
+class Score;
+
 class GameScene : public BaseScene
 {
 public :
@@ -42,6 +44,8 @@ private:
 	Player* m_pPlayer = nullptr;
 
 	Timer* m_pTimer = nullptr;
+
+	Score* m_pScore = nullptr;
 
 	CountDownUi* m_pCountDown = nullptr;
 

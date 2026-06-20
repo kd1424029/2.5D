@@ -9,6 +9,8 @@ public:
 
 	void Init() override;
 
+	void Update() override;
+
 	void DrawSprite() override;
 
 private:

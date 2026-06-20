@@ -39,7 +39,7 @@ void BeltConveyor::Update()
 		return;
 	}
 
-	if (m_TargetPlayer->GetFeverFlg())
+	if (m_TargetPlayer && m_TargetPlayer->GetFeverFlg())
 	{
 		ArrowUpV += ArrowUpFeverSpeed;
 		if (ArrowUpV > MaxV)

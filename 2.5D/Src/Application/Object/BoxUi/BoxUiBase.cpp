@@ -4,6 +4,9 @@ void BoxUiBase::Init()
 {
 }
 
+void BoxUiBase::Update()
+{}
+
 void BoxUiBase::DrawSprite()
 {
 }

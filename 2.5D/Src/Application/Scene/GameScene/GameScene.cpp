@@ -34,6 +34,14 @@ void GameScene::Event()
 		if (m_pPlayer)
 		{
 			m_pPlayer->SetGameStopped(true);
+
+			//現在のスコアをSceneManagerへ保存し、ResultSceneで表示できるようにする
+			SceneManager::Instance().SetFinalScore(m_pPlayer->GetScore());
+		}
+
+		if (m_pScore)
+		{
+			SceneManager::Instance().SetIsNewRecord(m_pScore->IsNewRecord());
 		}
 
 		SceneManager::Instance().SetNextScene(SceneManager::SceneType::Result);
@@ -60,9 +68,14 @@ void GameScene::Event()
 
 	if (GetAsyncKeyState('T') & 0x8000)
 	{
+		if (m_pPlayer)
+		{
+			SceneManager::Instance().SetFinalScore(m_pPlayer->GetScore());
+		}
+
 		SceneManager::Instance().SetNextScene
 		(
-			SceneManager::SceneType::Title
+			SceneManager::SceneType::Result
 		);
 	}
 
@@ -230,6 +243,8 @@ void GameScene::Init()
 	score = std::make_shared<Score>();
 	score->Init();
 	score->SetPlayer(player.get());
+	score->SetTimer(timer.get());
+	m_pScore = score.get();
 	m_objList.push_back(score);
 
 	//フィーバータイム演出用フレーム（画面の縁を光らせるUI）

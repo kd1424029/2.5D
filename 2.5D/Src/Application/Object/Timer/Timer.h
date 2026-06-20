@@ -30,14 +30,14 @@ private:
 	const int MaxTime = 120.0f;
 
 	const float TimerPosX = 440;
-	const float TimerPosY = 280;
 
-	const float RestPosX = 340;
-	const float RestPosY = 290;
+	const float MaxPosY = 560;
 
-	//RestUi用
-	const int RestCharSize = 210;
-	const int RestCharHeight = 110;
+	const float GoalPosY = 280;
+
+	const float MoveSpeed = 20.0;
+
+	float TimerPosY;
 
 	//残り時間
 	float RemainTime;   

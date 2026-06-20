@@ -9,6 +9,8 @@ public:
 
 	void Init() override;
 
+	void Update() override;
+
 	void DrawSprite() override;
 
 private:
@@ -19,7 +21,13 @@ private:
 
 	float PosX = 0;
 
-	float PosY = -290;
+	const float GoalPosY = -290;
+
+	const float MaxPosY = -580;
+
+	const float MoveSpeed = 20;
+
+	float PosY;
 
 	Math::Color color = { 1,1,1,Alpha };
 

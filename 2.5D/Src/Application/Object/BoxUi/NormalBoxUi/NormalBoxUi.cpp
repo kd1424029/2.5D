@@ -5,6 +5,18 @@ void NormalBoxUi::Init()
 	m_BoxUi = std::make_shared<KdTexture>();
 	m_BoxUi->Load("Asset/Textures/BoxUi/BoxUi.png");
 
+	PosY = MaxPosY;
+}
+
+void NormalBoxUi::Update()
+{
+	PosY += MoveSpeed;
+
+	if (PosY > GoalPosY)
+	{
+		PosY = GoalPosY;
+	}
+
 }
 
 void NormalBoxUi::DrawSprite()

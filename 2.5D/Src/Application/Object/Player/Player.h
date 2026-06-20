@@ -103,6 +103,7 @@ private:
 	const float MoveSpeed = 0.5f;
 
 	bool MoveFlgLeft;   //移動の入力を受け付けるフラグ
+
 	bool MoveFlgRight;
 
 	int MoveCoolDownCount; //クールタイムの残りフレーム数カウント
@@ -148,7 +149,7 @@ private:
 	const float NormalScale = 1.0f;
 	
 	//エフェクト用
-	const int   EffectCount = 10;
+	const int   EffectCount = 15;
 	const float EffectSpeed = 0.2f;
 	const float EffectLifeSpan = 30.0f;
 
@@ -156,4 +157,13 @@ private:
 
 	const Math::Color EffectColorGreen = { 0, 1, 0, 1 }; // 緑
 	const Math::Color EffectColorRed = { 1, 0, 0, 1 }; // 赤
+
+	//最初の動き用
+	bool BeginningFlg;  //最初の動き
+
+	const float MaxBeginningPosZ = -20;
+
+	const float GoalBeginningPosZ = -0.1;
+
+	const float BeginningMoveSpeed = 1.0;
 };

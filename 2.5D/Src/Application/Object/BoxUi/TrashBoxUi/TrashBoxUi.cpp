@@ -5,6 +5,17 @@ void TrashBoxUi::Init()
 	m_BoxUi = std::make_shared<KdTexture>();
 	m_BoxUi->Load("Asset/Textures/BoxUi/TrashBoxUi.png");
 
+	PosY = MaxPosY;
+}
+
+void TrashBoxUi::Update()
+{
+	PosY += MoveSpeed;
+
+	if (PosY > GoalPosY)
+	{
+		PosY = GoalPosY;
+	}
 }
 
 void TrashBoxUi::DrawSprite()
