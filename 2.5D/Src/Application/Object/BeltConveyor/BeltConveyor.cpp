@@ -34,6 +34,11 @@ void BeltConveyor::Init()
 
 void BeltConveyor::Update()
 {
+	if (m_TargetPlayer && m_TargetPlayer->GetGameStopped() == true)
+	{
+		return;
+	}
+
 	if (m_TargetPlayer->GetFeverFlg())
 	{
 		ArrowUpV += ArrowUpFeverSpeed;

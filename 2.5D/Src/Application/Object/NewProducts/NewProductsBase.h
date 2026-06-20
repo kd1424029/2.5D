@@ -25,7 +25,7 @@ public:
 
 private:
 
-	Math::Vector3 m_pos = { -1000 , 150, 0 };
+	Math::Vector3 m_pos = { -1000 , 120, 0 };
 
 	const float MoveSpeed = 5; 
 

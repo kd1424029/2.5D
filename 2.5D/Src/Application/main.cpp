@@ -97,7 +97,7 @@ void Application::KdBeginDraw(bool usePostProcess)
 void Application::KdPostDraw()
 {
 	// Imguiのレンダリング
-	KdDebugGUI::Instance().GuiProcess();
+	//KdDebugGUI::Instance().GuiProcess();
 
 	// BackBuffer -> 画面表示
 	KdDirect3D::Instance().WorkSwapChain()->Present(0, 0);
@@ -324,7 +324,7 @@ void Application::Execute()
 
 		m_fpsController.Update();
 
-		std::string titleBar = "ゲーム名 FPS:" + std::to_string(m_fpsController.m_nowfps);
+		std::string titleBar = "ボールファクトリー FPS:" + std::to_string(m_fpsController.m_nowfps);
 		SetWindowTextA(m_window.GetWndHandle(), titleBar.c_str());
 	}
 

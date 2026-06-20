@@ -16,8 +16,11 @@ void Timer::Init()
 void Timer::Update()
 {
 	if (TimeUpFlg) return;
-
-	RemainTime -= DeltaTime;  //毎フレーム 1/60秒 減算
+	
+	if (PausedFlg == false)
+	{
+		RemainTime -= DeltaTime;  //毎フレーム 1/60秒 減算
+	}
 
 	if (RemainTime < 0.0f)
 	{

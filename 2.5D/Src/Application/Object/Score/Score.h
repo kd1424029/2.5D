@@ -27,7 +27,7 @@ private:
 
 	//座標
 	const float ScorePosX = -170;
-	const float ScorePosY = 290;
+	const float ScorePosY = 280;
 
 	const float ScoreUiPosX = -310;
 	const float ScoreUiPosY = 290;

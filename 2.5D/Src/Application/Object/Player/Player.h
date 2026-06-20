@@ -36,6 +36,10 @@ public:
 
 	bool GetFeverFlg() { return FeverFlg; }
 
+	bool GetGameStopped() const { return GameStopped; }   
+
+	void SetGameStopped(bool flg) { GameStopped = flg; }
+
 	void SetBallGenerate(BallGenerate* gen) { m_pBallGenerate = gen; }
 
 	void SetResetGoldCnt() { GoldCnt = 0; }
@@ -72,6 +76,8 @@ private:
 
 	//Box切り替え用
 	BoxType m_NextBoxType = BoxType::NormalBox; //次に変更する箱のタイプ
+
+	bool GameStopped = false;
 
 	float BoxPosZ;    //元のZ座標
 
@@ -128,16 +134,19 @@ private:
 
 	//スケールアニメーション用
 	float Scale;
-	float ScaleSpeed;
 
 	float OneFrame;
 
 	float MaxFrame;
 
-	const float MaxScale = 1.5f;
-	const float NormalScale = 1.0f;
-	const float SmallScale = 0.5f;
+	bool ScaleFlg;
 
+	const float ScaleSpeed = 0.1;
+
+	const float MaxScale = 1.6f;
+	
+	const float NormalScale = 1.0f;
+	
 	//エフェクト用
 	const int   EffectCount = 10;
 	const float EffectSpeed = 0.2f;

@@ -40,6 +40,10 @@ void BallBase::Init()
 
 void BallBase::Update()
 {
+	if (m_TargetPlayer && m_TargetPlayer->GetGameStopped() == true)
+	{
+		return;
+	}
 
 	switch (MoveState)
 	{
@@ -188,6 +192,11 @@ void BallBase::Update()
 
 void BallBase::PostUpdate()
 {
+	if (m_TargetPlayer && m_TargetPlayer->GetGameStopped() == true)
+	{
+		return;
+	}
+
 	//========== TypeGround 判定 ==========
 	KdCollider::SphereInfo sphere;
 	sphere.m_sphere.Center = m_pos;

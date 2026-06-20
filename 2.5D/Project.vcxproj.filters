@@ -160,6 +160,12 @@
     <Filter Include="Src\Application\Object\FeverFrame">
       <UniqueIdentifier>{95e59c5a-4ecf-4cec-90b7-606793aa5134}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Scene\ResultScene">
+      <UniqueIdentifier>{eb322ad5-a971-4963-86b9-e6790ecf4b5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\CountDownUi">
+      <UniqueIdentifier>{4d839666-77cd-4817-a1cf-1e7ff7d579ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -426,6 +432,12 @@
     <ClInclude Include="Src\Application\Object\Ground\Ground.h">
       <Filter>Src\Application\Object\Ground</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Scene\ResultScene\ResultScene.h">
+      <Filter>Src\Application\Scene\ResultScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\CountDownUi\CountDownUi.h">
+      <Filter>Src\Application\Object\CountDownUi</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -658,6 +670,12 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\FeverFrame\FeverFrame.cpp">
       <Filter>Src\Application\Object\FeverFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Scene\ResultScene\ResultScene.cpp">
+      <Filter>Src\Application\Scene\ResultScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\CountDownUi\CountDownUi.cpp">
+      <Filter>Src\Application\Object\CountDownUi</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

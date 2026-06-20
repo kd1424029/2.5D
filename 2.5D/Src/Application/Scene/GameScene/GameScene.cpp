@@ -17,6 +17,7 @@
 #include "../../Object/NewProducts/NewProductsGenerate.h"
 #include "../../Object/Transparent/Transparent.h"
 #include "../../Object/FeverFrame/FeverFrame.h"
+#include "../../Object/CountDownUi/CountDownUi.h"
 
 GameScene::GameScene()
 {
@@ -27,6 +28,32 @@ GameScene::~GameScene() {}
 
 void GameScene::Event()
 {
+	//タイマーが0になったらゲームを停止しリザルトシーンへ遷移する
+	if (m_pTimer && m_pTimer->GetTimeUp())
+	{
+		if (m_pPlayer)
+		{
+			m_pPlayer->SetGameStopped(true);
+		}
+
+		SceneManager::Instance().SetNextScene(SceneManager::SceneType::Result);
+
+		return;
+	}
+
+	if (m_State == GameState::CountDown)
+	{
+		if (m_pCountDown && m_pCountDown->IsFinished())
+		{
+			m_State = GameState::Playing;
+
+			if (m_pTimer)
+			{
+				m_pTimer->SetPaused(false);   //カウントダウン終了でタイマー再開
+			}
+		}
+	}
+
 	//現在のオブジェクト数をデバッグ
 	//KdDebugGUI::Instance().ClearLog();
 	//KdDebugGUI::Instance().AddLog("%d", (int)m_objList.size());
@@ -40,29 +67,7 @@ void GameScene::Event()
 	}
 
 	//カメラ用
-	static Math::Vector3 CameraPos = { 0,3.7 ,-6.75 };//{-6, 6, -1};//{ 0, 10 , 0 };
-
-	if (GetAsyncKeyState('W') & 0x8000)
-	{
-		CameraPos.y += 0.01;
-	}
-	if (GetAsyncKeyState('S') & 0x8000)
-	{
-		CameraPos.y -= 0.01;
-	}
-	if (GetAsyncKeyState('A') & 0x8000)
-	{
-		CameraPos.z+= 0.01;
-	}
-	if (GetAsyncKeyState('D') & 0x8000)
-	{
-		CameraPos.z -= 0.01;
-	}
-
-	KdDebugGUI::Instance().ClearLog();
-	KdDebugGUI::Instance().AddLog("y=%f\nz=%f", CameraPos.y, CameraPos.z);
-
-	//Math::Matrix rotation = Math::Matrix::CreateRotationX(DirectX::XMConvertToRadians(90.0f));
+	static Math::Vector3 CameraPos = { 0,3.7 ,-6.75 };
 
 	Math::Matrix transMat = Math::Matrix::CreateTranslation(CameraPos);
 
@@ -111,6 +116,14 @@ void GameScene::Event()
 		}
 	}
 
+	//フィーバーが終了した時、フィーバー中に保留していた新商品ラベルがあれば生成する
+	std::shared_ptr<NewProductsBase> pendingProduct = m_NewProductsGenerate->CheckPendingGenerate();
+
+	if (pendingProduct)
+	{
+		m_objList.push_back(pendingProduct);
+	}
+
 	if (m_BallGenerator->IsGoldFlgChanged())
 	{
 		std::shared_ptr<NewProductsBase> newFeverProduct = m_NewProductsGenerate->FeverGenerate();
@@ -125,6 +138,10 @@ void GameScene::Event()
 
 void GameScene::Init()
 {
+	KdAudioManager::Instance().StopAllSound();
+
+	KdAudioManager::Instance().Play("Asset/Sounds/Bgm/GameBgm.WAV", true);
+
 	GenerateTimer = NormalInterval;
 
 	m_camera = std::make_shared<KdCamera>();
@@ -225,5 +242,21 @@ void GameScene::Init()
 	//商品ラベル
 	m_NewProductsGenerate = std::make_unique<NewProductsGenerate>(); //ここで生成
 	m_NewProductsGenerate->SetTarget(m_BallGenerator.get());
+	m_NewProductsGenerate->SetPlayer(player.get());
 
+
+
+	//カウントダウンUI（3,2,1,START）
+	std::shared_ptr<CountDownUi> countDown;
+	countDown = std::make_shared<CountDownUi>();
+	countDown->Init();
+	m_pCountDown = countDown.get();
+	m_objList.push_back(countDown);
+
+	m_State = GameState::CountDown;
+
+	if (m_pTimer)
+	{
+		m_pTimer->SetPaused(true);   //カウントダウン中はタイマーを止める
+	}
 }

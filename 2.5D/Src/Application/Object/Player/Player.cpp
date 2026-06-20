@@ -35,7 +35,7 @@ void Player::Init()
 
 	Scale = 1;
 
-	ScaleSpeed = 5.0;
+	ScaleFlg = false;
 
 	OneFrame = 1.0f;
 
@@ -59,6 +59,8 @@ void Player::PreUpdate()
 
 void Player::Update()
 {
+	if (GameStopped == true) return;
+
 	//現在のScoreをデバッグ
 	KdDebugGUI::Instance().ClearLog();
 	KdDebugGUI::Instance().AddLog("%d", Score);
@@ -83,6 +85,8 @@ void Player::Update()
 		if (feverBallRemains == false)
 		{
 			EndFever();
+
+			KdAudioManager::Instance().Play("Asset/Sounds/Bgm/GameBgm.WAV", true);
 		}
 	}
 
@@ -98,11 +102,15 @@ void Player::Update()
 			{
 				nextTarget.x -= MoveAmount;
 				inputDetected = true;
+
+				KdAudioManager::Instance().Play("Asset/Sounds/Se/Slide.WAV", false);
 			}
 			else if (GetAsyncKeyState(VK_RIGHT) & 0x8000 && MoveFlgRight == true)
 			{
 				nextTarget.x += MoveAmount;
 				inputDetected = true;
+
+				KdAudioManager::Instance().Play("Asset/Sounds/Se/Slide.WAV", false);
 			}
 
 			if (inputDetected == true)
@@ -213,11 +221,15 @@ void Player::Update()
 			{
 				//順送り0→1→0→1
 				m_NextBoxType = static_cast<BoxType>((current + Adjustment) % BoxTypeCount);
+
+				KdAudioManager::Instance().Play("Asset/Sounds/Se/Switching.WAV", false);
 			}
 			else if (GetAsyncKeyState('X') & 0x8000)
 			{
 				//逆送り1→0→1→0
 				m_NextBoxType = static_cast<BoxType>((current + BoxTypeCount - Adjustment) % BoxTypeCount);
+
+				KdAudioManager::Instance().Play("Asset/Sounds/Se/Switching.WAV", false);
 			}
 
 			//すでに同じBoxなら切り替え不要
@@ -256,6 +268,27 @@ void Player::Update()
 	{
 		m_pos.y = DirtyBoxPosY;
 	}
+
+	if (ScaleFlg == true)
+	{
+		Scale += ScaleSpeed;
+
+		if (Scale > MaxScale)
+		{
+			ScaleFlg = false;
+		}
+	}
+	else
+	{
+		Scale -= ScaleSpeed;
+
+		if (Scale < NormalScale)
+		{
+			Scale = NormalScale;
+		}
+
+	}
+
 
 	//デバッグキー
 	if (GetAsyncKeyState('F') & 0x8000)
@@ -324,6 +357,8 @@ void Player::OnHit(BallKind ballKind)
 
 	if (Match)
 	{
+		KdAudioManager::Instance().Play("Asset/Sounds/Se/Match.WAV", false);
+
 		if (FeverFlg == true)
 		{
 			Score += FeverAddition;
@@ -335,10 +370,15 @@ void Player::OnHit(BallKind ballKind)
 
 		GoldCnt++;
 
-		Scale = MaxScale;
+		ScaleFlg = true;
 
 		if (GoldMatch)
 		{
+			KdAudioManager::Instance().PauseAllSound();
+
+			KdAudioManager::Instance().Play("Asset/Sounds/Se/GoldMatch.WAV", false);
+
+			KdAudioManager::Instance().Play("Asset/Sounds/Bgm/FeverBgm.WAV", true);
 			//GoldBall取得→フィーバー開始
 			FeverFlg = true;
 
@@ -376,6 +416,8 @@ void Player::OnHit(BallKind ballKind)
 	}
 	else  //ミス
 	{
+		KdAudioManager::Instance().Play("Asset/Sounds/Se/Miss.WAV", false);
+
 		Score -= Subtraction;
 
 		if (Score < 0)
@@ -403,6 +445,8 @@ void Player::EndFever()
 {
 	FeverFlg = false;
 	GoldCnt = 0;
+
+	KdAudioManager::Instance().StopAllSound();
 
 	//スピードを通常に戻す
 	const auto& objList = SceneManager::Instance().GetObjList();

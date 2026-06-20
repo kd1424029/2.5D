@@ -17,16 +17,20 @@ public:
 
 	float GetRemainingTime() const { return RemainTime; } //残り秒数を取得
 
+	void SetPaused(bool flg) { PausedFlg = flg; }   //ゲーム開始カウントダウン中だけ呼ぶ
+
 private:
 
 	std::shared_ptr<KdTexture> m_Timer;
 
 	std::shared_ptr<KdTexture> m_RestUi;
 
+	bool PausedFlg = false;
+
 	const int MaxTime = 120.0f;
 
-	const float TimerPosX = 450;
-	const float TimerPosY = 290;
+	const float TimerPosX = 440;
+	const float TimerPosY = 280;
 
 	const float RestPosX = 340;
 	const float RestPosY = 290;

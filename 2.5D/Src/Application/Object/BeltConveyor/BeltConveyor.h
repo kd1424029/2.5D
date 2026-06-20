@@ -38,13 +38,13 @@ private:
 
 	float ArrowDownV;
 
-	const float ArrowUpSpeed = 0.001;
+	const float ArrowUpSpeed = 0.003;
 
-	const float ArrowUpFeverSpeed = 0.002;
+	const float ArrowUpFeverSpeed = 0.01;
 
-	const float ArrowDownSpeed = 0.0009;
+	const float ArrowDownSpeed = 0.004;
 
-	const float ArrowDownFeverSpeed = 0.00185;
+	const float ArrowDownFeverSpeed = 0.01;
 
 	const float MaxV = 1;
 };
