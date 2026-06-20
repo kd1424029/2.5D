@@ -4,21 +4,17 @@
 #include "../../Object/Back/Back.h"
 #include "../../Object/Score/Score.h"
 #include "../../Object/NewRecord/NewRecord.h"
+#include "../../Object/ResultUi/ResultUi.h"
 
 void ResultScene::Event()
 {
-	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
-	{
-		SceneManager::Instance().SetNextScene
-		(
-			SceneManager::SceneType::Title
-		);
-	}
 }
 
 void ResultScene::Init()
 {
 	KdAudioManager::Instance().StopAllSound();
+
+	KdAudioManager::Instance().Play("Asset/Sounds/Bgm/Result.WAV", false);
 
 	//背景
 	std::shared_ptr<Back> back;
@@ -47,4 +43,10 @@ void ResultScene::Init()
 		newrecord->Init();
 		m_objList.push_back(newrecord);
 	}
+
+	//タイトルへ
+	std::shared_ptr<ResultUi> resultui;
+	resultui = std::make_shared<ResultUi>();
+	resultui->Init();
+	m_objList.push_back(resultui);
 }
