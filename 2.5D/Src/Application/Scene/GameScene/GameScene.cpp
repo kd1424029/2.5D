@@ -18,6 +18,7 @@
 #include "../../Object/Transparent/Transparent.h"
 #include "../../Object/FeverFrame/FeverFrame.h"
 #include "../../Object/CountDownUi/CountDownUi.h"
+#include "../../Object/Shelf/Shelf.h"
 
 GameScene::GameScene()
 {
@@ -80,9 +81,11 @@ void GameScene::Event()
 	}
 
 	//カメラ用
-	static Math::Vector3 CameraPos = { 0,3.7 ,-6.75 };
+	static Math::Vector3 CameraPos = { 0,3.7 ,-6.75 }; //{ 0,10 , 0 };//{ 0,3.7 ,-6.75 }; // {15,1,5};
 
 	Math::Matrix transMat = Math::Matrix::CreateTranslation(CameraPos);
+
+	//Math::Matrix rotaionMat = Math::Matrix::CreateRotationX(DirectX::XMConvertToRadians(90));
 
 	m_camera->SetCameraMatrix(transMat);
 
@@ -171,6 +174,7 @@ void GameScene::Init()
 	back->Init();
 	m_objList.push_back(back);
 
+
 	//プレイヤー
 	std::shared_ptr<Player> player;
 	player = std::make_shared<Player>();
@@ -185,6 +189,30 @@ void GameScene::Init()
 	m_BallGenerator = std::make_unique<BallGenerate>();
 	m_BallGenerator->SetTarget(player.get());
 	player->SetBallGenerate(m_BallGenerator.get());
+
+
+	//棚
+	std::shared_ptr<Shelf> shelf;
+
+	//右側に6個
+	for (int i = 0; i < 7; i++)
+	{
+		shelf = std::make_shared<Shelf>();
+		shelf->Init();
+		shelf->SetPos(Math::Vector3(15, 1.5, i * 3.5 + 10));
+		shelf->SetTarget(player.get());
+		m_objList.push_back(shelf);
+	}
+
+	//左側に6個
+	for (int i = 0; i < 7; i++)
+	{
+		shelf = std::make_shared<Shelf>();
+		shelf->Init();
+		shelf->SetPos(Math::Vector3(-15, 1.5, i * 3.5 + 10));
+		shelf->SetTarget(player.get());
+		m_objList.push_back(shelf);
+	}
 
 	//ベルトコンベア
 	std::shared_ptr<BeltConveyor> beltConveyor;
@@ -258,8 +286,6 @@ void GameScene::Init()
 	m_NewProductsGenerate = std::make_unique<NewProductsGenerate>(); //ここで生成
 	m_NewProductsGenerate->SetTarget(m_BallGenerator.get());
 	m_NewProductsGenerate->SetPlayer(player.get());
-
-
 
 	//カウントダウンUI（3,2,1,START）
 	std::shared_ptr<CountDownUi> countDown;

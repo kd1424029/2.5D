@@ -80,7 +80,7 @@ void CountDownUi::DrawSprite()
 		else if (m_Phase == Phase::Two)   frameIndex = 1;
 		else if (m_Phase == Phase::One)   frameIndex = 0;
 
-		Math::Rectangle Rect = { CharSize * frameIndex, 0, CharSize, CharSize };
+		Math::Rectangle Rect = { CharSize * frameIndex, 0, CharSize, CharRectSize };
 
 		KdShaderManager::Instance().m_spriteShader.DrawTex(m_NumberTex, PosX, PosY, CharSize, CharHeight, &Rect);
 		

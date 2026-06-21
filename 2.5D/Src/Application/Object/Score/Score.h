@@ -80,13 +80,10 @@ private:
 	float Width;
 	float Height;
 
-	const float ScoreUiWidth = 220;
-	const float ScoreUiHeight = 110;
-
 	//画像の切り取り間隔
 	const long CuttingInterval = 64;
 	const long CuttingWidth = 64;
-	const long CuttingHeight = 64;
+	const long CuttingHeight = 100;
 
 	//表示する桁数
 	static const int maxDigits = 5;

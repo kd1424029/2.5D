@@ -40,6 +40,7 @@ private:
 
 	//数字
 	const int CharSize = 64;
+	const int CharRectSize = 100;
 	const int CharHeight = 105;
 
 	//1フェーズあたりの表示フレーム数（60 = 1秒）

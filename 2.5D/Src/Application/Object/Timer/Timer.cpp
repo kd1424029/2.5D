@@ -54,7 +54,7 @@ void Timer::DrawSprite()
 	//(分)(：)(秒の十の位)(秒の一の位)の順に描画
 	for (int i = 0; i < MaxDigits; ++i)
 	{
-		Math::Rectangle Rect = { CharSize * Digits[i], 0, CharSize, CharSize };
+		Math::Rectangle Rect = { CharSize * Digits[i], 0, CharSize, CharRectHeight };
 
 		KdShaderManager::Instance().m_spriteShader.DrawTex(m_Timer, TimerPosX + (i * CharSpacing), TimerPosY, CharSize, CharHeight, &Rect);
 	}

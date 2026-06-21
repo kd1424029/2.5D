@@ -178,6 +178,9 @@
     <Filter Include="Src\Application\Object\ResultUi">
       <UniqueIdentifier>{2c0dc3ea-9b64-4417-a788-6484d1c67013}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Shelf">
+      <UniqueIdentifier>{670a2ab8-7500-483f-ac5b-38d6e13269a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -462,6 +465,9 @@
     <ClInclude Include="Src\Application\Object\ResultUi\ResultUi.h">
       <Filter>Src\Application\Object\ResultUi</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Shelf\Shelf.h">
+      <Filter>Src\Application\Object\Shelf</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -712,6 +718,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\ResultUi\ResultUi.cpp">
       <Filter>Src\Application\Object\ResultUi</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Shelf\Shelf.cpp">
+      <Filter>Src\Application\Object\Shelf</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

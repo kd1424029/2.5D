@@ -29,7 +29,7 @@ private:
 
 	const int MaxTime = 120.0f;
 
-	const float TimerPosX = 440;
+	const float TimerPosX = 400;
 
 	const float MaxPosY = 560;
 
@@ -62,7 +62,9 @@ private:
 	//画像のサイズ
 	const int CharSize = 64;    //画像の幅
 
+	const int CharRectHeight = 100;    //画像の縦幅
+
 	const int CharHeight = 105; //描画時の高さ
 
-	const int CharSpacing = 50; //文字間隔(px)
+	const int CharSpacing = 60; //文字間隔(px)
 };

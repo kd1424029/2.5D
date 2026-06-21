@@ -19,9 +19,9 @@ void Score::Init()
 
 	GoalPosY = 280;
 
-	Width = 110;
+	Width = 70;
 
-	Height = 110;
+	Height = 111;
 
 	ScorePosX = -170;
 }

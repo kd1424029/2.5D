@@ -17,7 +17,7 @@ private:
 
 	std::shared_ptr<KdTexture> m_NewRecord;
 
-	const float PosX = 0;
+	const float PosX = 18;
 
 	const float GoalPosY = 250;
 

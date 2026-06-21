@@ -29,9 +29,9 @@ void ResultScene::Init()
 	score->Init();
 	score->SetFixedScore(SceneManager::Instance().GetFinalScore());
 	score->SetGoalPosY(100);
-	score->SetWidth(150);
-	score->SetHeight(150);
-	score->SetInterval(100);
+	score->SetWidth(90);
+	score->SetHeight(171);
+	score->SetInterval(104);
 	score->SetScorePosX(-205);
 	m_objList.push_back(score);
 
