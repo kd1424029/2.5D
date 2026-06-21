@@ -281,7 +281,7 @@ void Player::Update()
 	if (m_BoxType == BoxType::NormalBox)
 	{
 		m_pos.y = NormalBoxPosY;
-	
+
 	}
 	else if (m_BoxType == BoxType::TrashBox)
 	{
@@ -404,7 +404,7 @@ void Player::OnHit(BallKind ballKind)
 			m_pBallGenerate->SetStartFever();//フィーバーボールを抽選
 
 			const auto& objList = SceneManager::Instance().GetObjList();
-			
+
 			for (auto& obj : objList)
 			{
 				BallBase* ball = dynamic_cast<BallBase*>(obj.get());
@@ -423,13 +423,21 @@ void Player::OnHit(BallKind ballKind)
 			}
 		}
 
+		//ゴミ箱(TrashBox)の時はエフェクトの発生位置を高くする
+		float effectPosY = m_pos.y + EffectAdjust;
+
+		if (m_BoxType == BoxType::TrashBox)
+		{
+			effectPosY = m_pos.y + EffectAdjustTrash;
+		}
+
 		//エフェクト(緑)
 		for (int i = 0; i < EffectCount; i++)
 		{
 			auto effect = std::make_shared<Effect>();
 			effect->Init();
 			Math::Vector3 move = { RandRange(EffectSpeed), RandRange(EffectSpeed), RandRange(EffectSpeed) };
-			effect->SetParam(Math::Vector3(m_pos.x, m_pos.y + EffectAdjust, m_pos.z), move, EffectLifeSpan, EffectColorGreen);
+			effect->SetParam(Math::Vector3(m_pos.x, effectPosY + EffectAdjustNormalBox, m_pos.z), move, EffectLifeSpan, EffectColorGreen);
 			SceneManager::Instance().AddObject(effect);
 		}
 	}
@@ -448,13 +456,39 @@ void Player::OnHit(BallKind ballKind)
 
 		const auto& objList = SceneManager::Instance().GetObjList();
 
-		//エフェクト(赤)
-		for (int i = 0; i < EffectCount; i++)
+		//煙突からボワっと出る灰色の煙エフェクト
+		for (int i = 0; i < SmokeEffectCount; i++)
 		{
 			auto effect = std::make_shared<Effect>();
 			effect->Init();
-			Math::Vector3 move = { RandRange(EffectSpeed), RandRange(EffectSpeed), RandRange(EffectSpeed) };
-			effect->SetParam(Math::Vector3(m_pos.x, m_pos.y + EffectAdjust, m_pos.z), move, EffectLifeSpan, EffectColorRed);
+
+			//発生位置をXZ方向にランダムにばらけさせる（全部同じ場所だと1個に見えてしまうため）
+			Math::Vector3 spawnPos =
+			{
+				m_pos.x + RandRange(SmokeSpreadXZ),
+				m_pos.y + EffectAdjust,
+				m_pos.z + RandRange(SmokeSpreadXZ)
+			};
+
+			//上昇スピードにも個体差をつけて自然な見え方にする
+			float riseSpeed = SmokeRiseSpeed + RandRange(SmokeRiseSpeedRange);
+
+			//X方向にもランダムに流れさせて、上昇しながら横にも広がるようにする
+			float xMove = RandRange(SmokeXMoveRange);
+
+			Math::Vector3 move = { xMove, riseSpeed, 0.0f };
+
+			effect->SetParam(
+				spawnPos,
+				move,
+				SmokeLifeSpan,
+				EffectColorGray,
+				EffectType::Smoke,
+				SmokeStartScale,
+				SmokeEndScale,
+				SmokeWobble
+			);
+
 			SceneManager::Instance().AddObject(effect);
 		}
 	}

@@ -67,7 +67,7 @@ private:
 
 	const float PosY = 1.9;
 	
-	const float PosZ = 0.5;
+	const float PosZ = 0;
 
 	float Gravity;
 

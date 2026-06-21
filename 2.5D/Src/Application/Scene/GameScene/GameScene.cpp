@@ -40,12 +40,20 @@ void GameScene::Event()
 			SceneManager::Instance().SetFinalScore(m_pPlayer->GetScore());
 		}
 
-		if (m_pScore)
+		if (m_pTimer->IsReadyToChangeScene())  //音が鳴り終わってから遷移
 		{
-			SceneManager::Instance().SetIsNewRecord(m_pScore->IsNewRecord());
-		}
+			if (m_pPlayer)
+			{
+				SceneManager::Instance().SetFinalScore(m_pPlayer->GetScore());
+			}
 
-		SceneManager::Instance().SetNextScene(SceneManager::SceneType::Result);
+			if (m_pScore)
+			{
+				SceneManager::Instance().SetIsNewRecord(m_pScore->IsNewRecord());
+			}
+
+			SceneManager::Instance().SetNextScene(SceneManager::SceneType::Result);
+		}
 
 		return;
 	}

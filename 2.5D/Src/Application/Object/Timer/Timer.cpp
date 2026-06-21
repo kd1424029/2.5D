@@ -1,5 +1,9 @@
 ﻿#include "Timer.h"
 
+#include "../TimeUp/TimeUp.h"
+
+#include "../../Scene/SceneManager.h"
+
 void Timer::Init()
 {
 	m_Timer = std::make_shared<KdTexture>();
@@ -13,6 +17,8 @@ void Timer::Init()
 	TimeUpFlg = false;
 
 	TimerPosY = MaxPosY;
+
+	Count = 60;
 }
 
 void Timer::Update()
@@ -24,8 +30,24 @@ void Timer::Update()
 		TimerPosY = GoalPosY;
 	}
 
-	if (TimeUpFlg) return;
-	
+	if (TimeUpFlg)
+	{
+		//タイムアップ後、音が鳴り終わるまで待ってからシーン遷移可能にする
+		if (SceneChangeFlg == false)
+		{
+			if (SceneChangeWaitCount > 0)
+			{
+				SceneChangeWaitCount--;
+			}
+			else
+			{
+				SceneChangeFlg = true;
+			}
+		}
+
+		return;
+	}
+
 	if (PausedFlg == false)
 	{
 		RemainTime -= DeltaTime;  //毎フレーム 1/60秒 減算
@@ -34,6 +56,18 @@ void Timer::Update()
 	if (RemainTime < 0.0f)
 	{
 		RemainTime = 0.0f;
+
+		if (TimeUpSeFlg == false)
+		{
+			KdAudioManager::Instance().Play("Asset/Sounds/Se/TimeUp.WAV", false);
+			TimeUpSeFlg = true;
+
+			SceneChangeWaitCount = SceneChangeWaitFrames; //音の再生時間分だけ待つ
+		}
+
+		auto timeup = std::make_shared<TimeUp>();
+		timeup->Init();
+		SceneManager::Instance().AddObject(timeup);
 
 		TimeUpFlg = true;
 	}

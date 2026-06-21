@@ -15,6 +15,8 @@ public:
 
 	bool GetTimeUp() const { return TimeUpFlg; }  //タイマーが0になったか
 
+	bool IsReadyToChangeScene() const { return SceneChangeFlg; }
+
 	float GetRemainingTime() const { return RemainTime; } //残り秒数を取得
 
 	void SetPaused(bool flg) { PausedFlg = flg; }   //ゲーム開始カウントダウン中だけ呼ぶ
@@ -44,6 +46,12 @@ private:
 
 	bool  TimeUpFlg = false;
 
+	bool SceneChangeFlg = false;
+
+	int SceneChangeWaitCount = 0;  //シーン遷移までの残りフレーム数
+
+	const int SceneChangeWaitFrames = 90;
+
 	const float DeltaTime = 1.0f / 60.0f;
 
 	const int SecondsPerMinute = 60; //1分当たりの秒数
@@ -67,4 +75,9 @@ private:
 	const int CharHeight = 105; //描画時の高さ
 
 	const int CharSpacing = 60; //文字間隔(px)
+
+	//終了カウント
+	float Count;
+
+	bool TimeUpSeFlg;
 };

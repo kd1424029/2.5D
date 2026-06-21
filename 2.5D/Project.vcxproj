@@ -307,6 +307,7 @@
     <ClInclude Include="Src\Application\Object\Score\Score.h" />
     <ClInclude Include="Src\Application\Object\Shelf\Shelf.h" />
     <ClInclude Include="Src\Application\Object\Timer\Timer.h" />
+    <ClInclude Include="Src\Application\Object\TimeUp\TimeUp.h" />
     <ClInclude Include="Src\Application\Object\TitleName\TitleName.h" />
     <ClInclude Include="Src\Application\Object\TitleUi\TitleUi.h" />
     <ClInclude Include="Src\Application\Object\Transparent\Transparent.h" />
@@ -396,6 +397,7 @@
     <ClCompile Include="Src\Application\Object\Score\Score.cpp" />
     <ClCompile Include="Src\Application\Object\Shelf\Shelf.cpp" />
     <ClCompile Include="Src\Application\Object\Timer\Timer.cpp" />
+    <ClCompile Include="Src\Application\Object\TimeUp\TimeUp.cpp" />
     <ClCompile Include="Src\Application\Object\TitleName\TitleName.cpp" />
     <ClCompile Include="Src\Application\Object\TitleUi\TitleUi.cpp" />
     <ClCompile Include="Src\Application\Object\Transparent\Transparent.cpp" />

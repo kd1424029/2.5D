@@ -36,7 +36,7 @@ public:
 
 	bool GetFeverFlg() { return FeverFlg; }
 
-	bool GetGameStopped() const { return GameStopped; }   
+	bool GetGameStopped() const { return GameStopped; }
 
 	void SetGameStopped(bool flg) { GameStopped = flg; }
 
@@ -145,18 +145,33 @@ private:
 	const float ScaleSpeed = 0.1;
 
 	const float MaxScale = 1.6f;
-	
+
 	const float NormalScale = 1.0f;
-	
-	//エフェクト用
+
+	//エフェクト用(ヒット時の緑パーティクル)
 	const int   EffectCount = 15;
 	const float EffectSpeed = 0.2f;
 	const float EffectLifeSpan = 30.0f;
 
-	const float EffectAdjust = 0.5;
+	const float EffectAdjust = 0.3;
+
+	const float EffectAdjustTrash = 0.8; //ゴミ箱の時はエフェクトの発生Yを高くする
+
+	const float EffectAdjustNormalBox = 0.8; //ゴミ箱の時はエフェクトの発生Yを高くする
 
 	const Math::Color EffectColorGreen = { 0, 1, 0, 1 }; // 緑
-	const Math::Color EffectColorRed = { 1, 0, 0, 1 }; // 赤
+	const Math::Color EffectColorGray = { 0.8f, 0.8f, 0.8f, 1 }; // 灰色（ミス時の煙）
+
+	//ミス時の煙エフェクト用(煙突からボワっと出るイメージ)
+	const int   SmokeEffectCount = 15;     //一度のミスで出す煙の数
+	const float SmokeRiseSpeed = 0.05f;   //上昇スピード
+	const float SmokeLifeSpan = 30.0f;    //煙が消えるまでのフレーム数
+	const float SmokeStartScale = 0.3f;   //出てきた瞬間の小ささ
+	const float SmokeEndScale = 1.6f;     //消える直前のボワっとした大きさ
+	const float SmokeWobble = 0.02f;      //左右の揺らぎ幅
+	const float SmokeSpreadXZ = 0.6f;     //発生位置をXZ方向にどれだけ散らばらせるか
+	const float SmokeRiseSpeedRange = 0.09f; //上昇スピードの個体差（速い煙/遅い煙ができる）
+	const float SmokeXMoveRange = 0.08f;  //上昇しながらX方向にどれだけ流れていくか(個体ごとにランダム)
 
 	//最初の動き用
 	bool BeginningFlg;  //最初の動き

@@ -181,6 +181,9 @@
     <Filter Include="Src\Application\Object\Shelf">
       <UniqueIdentifier>{670a2ab8-7500-483f-ac5b-38d6e13269a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\TimeUp">
+      <UniqueIdentifier>{b4ce70f1-ce36-4e7a-ad36-27988b22923d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -468,6 +471,9 @@
     <ClInclude Include="Src\Application\Object\Shelf\Shelf.h">
       <Filter>Src\Application\Object\Shelf</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\TimeUp\TimeUp.h">
+      <Filter>Src\Application\Object\TimeUp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -721,6 +727,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Shelf\Shelf.cpp">
       <Filter>Src\Application\Object\Shelf</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\TimeUp\TimeUp.cpp">
+      <Filter>Src\Application\Object\TimeUp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
