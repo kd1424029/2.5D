@@ -10,10 +10,12 @@ void Score::Init()
 	m_Score = std::make_shared<KdTexture>();
 	m_Score->Load("Asset/Textures/Score/Score.png");
 
-	m_ScoreUi = std::make_shared<KdTexture>();
-	m_ScoreUi->Load("Asset/Textures/Score/ScoreUi.png");
+	m_ScorePt = std::make_shared<KdTexture>();
+	m_ScorePt->Load("Asset/Textures/Score/Pt.png");
 
 	ScorePosY = MaxPosY;
+
+	PtPosY = PtMaxPosY;
 
 	HasSavedHighScore = false;
 
@@ -30,10 +32,12 @@ void Score::Update()
 {
 
 	ScorePosY -= MoveSpeed;
+	PtPosY -= MoveSpeed;
 
 	if (ScorePosY < GoalPosY)
 	{
 		ScorePosY = GoalPosY;
+		PtPosY = PtGoalPosY;
 	}
 
 	//Playerが存在する場合（プレイ中）はPlayerから現在のスコアを取得する
@@ -127,4 +131,6 @@ void Score::DrawSprite()
 		KdShaderManager::Instance().m_spriteShader.DrawTex(m_Score, ScorePosX + (i * Interval), ScorePosY, Width, Height, &Rect);
 
 	}
+
+	KdShaderManager::Instance().m_spriteShader.DrawTex(m_ScorePt, PtPosX, PtPosY, PtWidth, PtHeight);
 }

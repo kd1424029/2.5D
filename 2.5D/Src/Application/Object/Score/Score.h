@@ -26,15 +26,25 @@ public:
 
 	void SetGoalPosY(float posy) { GoalPosY = posy; }
 
+	void SetPtGoalPosY(float posy) { PtGoalPosY = posy; }
+
 	void SetScorePosY(float posy) { ScorePosY = posy; }
+
+	void SetPtPosY(float posy) { PtPosY = posy; }
 
 	void SetWidth(float width) { Width = width; }
 
 	void SetHeight(float height) { Height = height; }
 
+	void SetPtWidth(float width) { PtWidth = width; }
+
+	void SetPtHeight(float height) { PtHeight = height; }
+
 	void SetInterval(float interval) { Interval = interval; }
 
 	void SetScorePosX(float posx) { ScorePosX = posx; }
+
+	void SetPtPosX(float posx) { PtPosX = posx; }
 
 	bool IsNewRecord() const { return IsNewRecordFlg; }
 
@@ -46,7 +56,7 @@ private:
 
 	std::shared_ptr<KdTexture> m_Score;
 
-	std::shared_ptr<KdTexture> m_ScoreUi;
+	std::shared_ptr<KdTexture> m_ScorePt;
 
 	Player* m_pPlayer = nullptr;
 
@@ -63,7 +73,19 @@ private:
 	//座標
 	float ScorePosX;
 
+	float PtPosX = 240;
+
+	float PtPosY;
+
+	float PtGoalPosY = 260;
+
+	float PtWidth = 60;
+
+	float PtHeight = 101;
+
 	const float MaxPosY = 560;
+
+	const float PtMaxPosY = 540;
 
 	float GoalPosY;
 

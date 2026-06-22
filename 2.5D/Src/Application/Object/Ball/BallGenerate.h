@@ -136,7 +136,7 @@ private:
 
 	const int BallCount = 4;
 
-	const int MaxGoldCnt = 5;
+	const int MaxGoldCnt = 4;
 
 	bool GoldFlg = false;
 

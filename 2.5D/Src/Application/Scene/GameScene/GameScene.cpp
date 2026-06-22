@@ -129,33 +129,26 @@ void GameScene::Event()
 	}
 
 	//NewProductsGenerateが種類を決めて生成をする
-	//ウェーブが変わった瞬間にだけラベルを1つ生成する
+	//ウェーブが変わった瞬間にだけラベル要求を1つ積む
 	if (m_BallGenerator->IsWaveChanged())
 	{
-		std::shared_ptr<NewProductsBase> newProduct = m_NewProductsGenerate->Generate();
-
-		if (newProduct)
-		{
-			m_objList.push_back(newProduct);
-		}
+		m_NewProductsGenerate->Generate();
 	}
 
-	//フィーバーが終了した時、フィーバー中に保留していた新商品ラベルがあれば生成する
-	std::shared_ptr<NewProductsBase> pendingProduct = m_NewProductsGenerate->CheckPendingGenerate();
-
-	if (pendingProduct)
-	{
-		m_objList.push_back(pendingProduct);
-	}
+	//フィーバーが終了した時、保留していた新商品ラベルがあれば要求を積む
+	m_NewProductsGenerate->CheckPendingGenerate();
 
 	if (m_BallGenerator->IsGoldFlgChanged())
 	{
-		std::shared_ptr<NewProductsBase> newFeverProduct = m_NewProductsGenerate->FeverGenerate();
+		m_NewProductsGenerate->FeverGenerate();
+	}
 
-		if (newFeverProduct)
-		{
-			m_objList.push_back(newFeverProduct);
-		}
+	//積まれた要求を間隔を空けて1個ずつ取り出して実際に生成する
+	std::shared_ptr<NewProductsBase> newProduct = m_NewProductsGenerate->Update();
+
+	if (newProduct)
+	{
+		m_objList.push_back(newProduct);
 	}
 
 }
@@ -198,7 +191,7 @@ void GameScene::Init()
 	//棚
 	std::shared_ptr<Shelf> shelf;
 
-	//右側に6個
+	//右側に7個
 	for (int i = 0; i < 7; i++)
 	{
 		shelf = std::make_shared<Shelf>();
@@ -210,7 +203,7 @@ void GameScene::Init()
 
 	KdAudioManager::Instance().Play("Asset/Sounds/Bgm/GameBgm.WAV", true);
 
-	//左側に6個
+	//左側に7個
 	for (int i = 0; i < 7; i++)
 	{
 		shelf = std::make_shared<Shelf>();

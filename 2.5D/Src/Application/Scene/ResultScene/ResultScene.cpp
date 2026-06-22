@@ -23,16 +23,20 @@ void ResultScene::Init()
 	back->SetPosY(-100);
 	m_objList.push_back(back);
 
-	//スコア（GameScene終了時にSceneManagerへ保存しておいた最終スコアを表示する）
+	//スコア(GameScene終了時にSceneManagerへ保存しておいた最終スコアを表示する)
 	std::shared_ptr<Score> score;
 	score = std::make_shared<Score>();
 	score->Init();
 	score->SetFixedScore(SceneManager::Instance().GetFinalScore());
 	score->SetGoalPosY(100);
+	score->SetPtGoalPosY(70);
 	score->SetWidth(90);
 	score->SetHeight(171);
+	score->SetPtWidth(70);
+	score->SetPtHeight(141);
 	score->SetInterval(104);
-	score->SetScorePosX(-205);
+	score->SetScorePosX(-210);
+	score->SetPtPosX(290);
 	m_objList.push_back(score);
 
 	//新記録

@@ -28,6 +28,10 @@ void Timer::Update()
 		PausedFlg = !PausedFlg;
 	}
 
+	if (GetAsyncKeyState('P') & 0x8000)
+	{
+		RemainTime = 0.0f;
+	}
 
 	TimerPosY -= MoveSpeed;
 

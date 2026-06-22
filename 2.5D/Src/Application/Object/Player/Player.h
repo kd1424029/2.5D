@@ -161,8 +161,8 @@ private:
 
 	const float EffectAdjustNormalBox = 0.8; //ゴミ箱の時はエフェクトの発生Yを高くする
 
-	const Math::Color EffectColorGreen = { 0, 1, 0, 1 }; // 緑
-	const Math::Color EffectColorGray = { 0.8f, 0.8f, 0.8f, 1 }; // 灰色（ミス時の煙）
+	const Math::Color EffectColorGreen = { 0, 1, 0, 1 }; //緑
+	const Math::Color EffectColorGray = { 1, 1, 1, 1 };  //黒色（ミス時の煙）
 
 	//ミス時の煙エフェクト用(煙突からボワっと出るイメージ)
 	const int   SmokeEffectCount = 15;     //一度のミスで出す煙の数

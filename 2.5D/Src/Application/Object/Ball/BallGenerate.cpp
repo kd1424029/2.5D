@@ -61,7 +61,7 @@ void BallGenerate::ShuffleLaneDeck()
 std::shared_ptr<BallBase> BallGenerate::Generate()
 {
 	//フィーバー中に決められた個数を出し切ったらフィーバーが終わるまで何も生成しない
-	if (m_TargetPlayer && m_TargetPlayer->GetFeverFlg() && FeverRemainingSpawnCount <= 0)
+	if (m_TargetPlayer->GetFeverFlg() && FeverRemainingSpawnCount <= 0)
 	{
 		return nullptr;
 	}
@@ -70,7 +70,7 @@ std::shared_ptr<BallBase> BallGenerate::Generate()
 
 	bool isFeverSpawn = false; //このボールがフィーバー固定タイプとして生成されたか
 
-	if (m_TargetPlayer && m_TargetPlayer->GetGoldCnt() < MaxGoldCnt)
+	if (m_TargetPlayer->GetGoldCnt() < MaxGoldCnt)
 	{
 		GoldFlg = false;
 	}
@@ -87,7 +87,7 @@ std::shared_ptr<BallBase> BallGenerate::Generate()
 	//========================================================
 	//ボールのインスタンス生成と出現位置(座標)の決定
 	//========================================================
-	if (m_TargetPlayer && m_TargetPlayer->GetGoldCnt() >= MaxGoldCnt && GoldFlg == false)
+	if (m_TargetPlayer->GetGoldCnt() >= MaxGoldCnt && GoldFlg == false)
 	{
 		// ------------------------------------------
 		// 【金のボールが生成されるときの処理】
@@ -124,7 +124,7 @@ std::shared_ptr<BallBase> BallGenerate::Generate()
 		int BallType;
 
 		//フィーバー中でかつ流すべき残り個数がある間だけフィーバー固定タイプにする
-		isFeverSpawn = (m_TargetPlayer && m_TargetPlayer->GetFeverFlg() && FeverRemainingSpawnCount > 0);
+		isFeverSpawn = (m_TargetPlayer->GetFeverFlg() && FeverRemainingSpawnCount > 0);
 
 		if (isFeverSpawn)
 		{

@@ -29,20 +29,20 @@ void Effect::Update()
 		m_pos.x += sinf(LifeSpan * 0.3f) * m_Wobble;
 
 		//寿命の前半(0〜ShrinkStartRatio)でボワっと膨らみ、
-		//後半は縮みながら消えることで「だんだん薄くなって消える」見た目にする
+		//後半は縮みながら消えることで(だんだん薄くなって消える)見た目にする
 		const float ShrinkStartRatio = 0.6f; //このタイミングから縮み始める
 
 		float scale;
 
 		if (progress < ShrinkStartRatio)
 		{
-			//前半：StartScaleからEndScaleまで膨らむ
+			//前半 StartScaleからEndScaleまで膨らむ
 			float growProgress = progress / ShrinkStartRatio;
 			scale = m_StartScale + (m_EndScale - m_StartScale) * growProgress;
 		}
 		else
 		{
-			//後半：EndScaleから0まで縮んで消える
+			//後半 EndScaleから0まで縮んで消える
 			float shrinkProgress = (progress - ShrinkStartRatio) / (1.0f - ShrinkStartRatio);
 			scale = m_EndScale * (1.0f - shrinkProgress);
 		}
@@ -56,7 +56,7 @@ void Effect::Update()
 	}
 	else
 	{
-		// 毎フレーム移動
+		//毎フレーム移動
 		m_pos += m_Move;
 
 		//寿命が尽きるその瞬間に綺麗にサイズを0にする計算
@@ -77,8 +77,7 @@ void Effect::DrawLit()
 
 void Effect::DrawBright()
 {
-	//煙はギラっと光らせたくないので、発光パスには描かない
-	//（ここで描くとブルームで明るく加算され、灰色のはずが白っぽく見えてしまう）
+	//煙は光らせない
 	if (m_Type == EffectType::Smoke) return;
 
 	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_Model, m_mWorld, m_Color);
