@@ -28,10 +28,26 @@ void Effect::Update()
 		m_pos += m_Move;
 		m_pos.x += sinf(LifeSpan * 0.3f) * m_Wobble;
 
-		//最初は小さく、消える直前にボワっと膨らみきる
-		float scale = m_StartScale + (m_EndScale - m_StartScale) * progress;
+		//寿命の前半(0〜ShrinkStartRatio)でボワっと膨らみ、
+		//後半は縮みながら消えることで「だんだん薄くなって消える」見た目にする
+		const float ShrinkStartRatio = 0.6f; //このタイミングから縮み始める
 
-		//膨らむほど薄くなって自然に消える
+		float scale;
+
+		if (progress < ShrinkStartRatio)
+		{
+			//前半：StartScaleからEndScaleまで膨らむ
+			float growProgress = progress / ShrinkStartRatio;
+			scale = m_StartScale + (m_EndScale - m_StartScale) * growProgress;
+		}
+		else
+		{
+			//後半：EndScaleから0まで縮んで消える
+			float shrinkProgress = (progress - ShrinkStartRatio) / (1.0f - ShrinkStartRatio);
+			scale = m_EndScale * (1.0f - shrinkProgress);
+		}
+
+		//サイズだけでなく透明度も下げて、より自然にフェードアウトさせる
 		m_Color.A(1.0f - progress);
 
 		Math::Matrix scaleMat = Math::Matrix::CreateScale(scale);

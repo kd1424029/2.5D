@@ -79,14 +79,28 @@ unsigned long Score::LoadHighScore() const
 		ifs >> highScore;
 	}
 
+	//ファイルが不正に書き換えられている場合などに備えて上限を適用する
+	if (highScore > MaxScore)
+	{
+		highScore = static_cast<unsigned long>(MaxScore);
+	}
+
 	return highScore;
 }
 
 void Score::SaveHighScore()
 {
+	//SetFixedScore()経由などでクランプされていない値が来る場合があるため、保存前に上限を適用する
+	unsigned long scoreToSave = m_score;
+
+	if (scoreToSave > MaxScore)
+	{
+		scoreToSave = static_cast<unsigned long>(MaxScore);
+	}
+
 	unsigned long highScore = LoadHighScore();
 
-	if (m_score <= highScore)
+	if (scoreToSave <= highScore)
 	{
 		IsNewRecordFlg = false;
 		return; //今回のスコアがハイスコア以下なら何もしない
@@ -98,7 +112,7 @@ void Score::SaveHighScore()
 
 	if (ofs)
 	{
-		ofs << m_score;
+		ofs << scoreToSave;
 	}
 }
 

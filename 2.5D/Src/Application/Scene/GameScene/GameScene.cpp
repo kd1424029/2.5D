@@ -164,8 +164,6 @@ void GameScene::Init()
 {
 	KdAudioManager::Instance().StopAllSound();
 
-	KdAudioManager::Instance().Play("Asset/Sounds/Bgm/GameBgm.WAV", true);
-
 	GenerateTimer = NormalInterval;
 
 	m_camera = std::make_shared<KdCamera>();
@@ -182,7 +180,6 @@ void GameScene::Init()
 	back->Init();
 	m_objList.push_back(back);
 
-
 	//プレイヤー
 	std::shared_ptr<Player> player;
 	player = std::make_shared<Player>();
@@ -198,7 +195,6 @@ void GameScene::Init()
 	m_BallGenerator->SetTarget(player.get());
 	player->SetBallGenerate(m_BallGenerator.get());
 
-
 	//棚
 	std::shared_ptr<Shelf> shelf;
 
@@ -211,6 +207,8 @@ void GameScene::Init()
 		shelf->SetTarget(player.get());
 		m_objList.push_back(shelf);
 	}
+
+	KdAudioManager::Instance().Play("Asset/Sounds/Bgm/GameBgm.WAV", true);
 
 	//左側に6個
 	for (int i = 0; i < 7; i++)

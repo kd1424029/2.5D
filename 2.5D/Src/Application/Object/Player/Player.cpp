@@ -309,6 +309,11 @@ void Player::Update()
 	}
 
 
+	if (Score > MaxScore)
+	{
+		Score = MaxScore;
+	}
+
 	//デバッグキー
 	if (GetAsyncKeyState('F') & 0x8000)
 	{

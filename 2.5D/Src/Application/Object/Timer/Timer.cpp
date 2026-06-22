@@ -12,7 +12,7 @@ void Timer::Init()
 	m_RestUi = std::make_shared<KdTexture>();
 	m_RestUi->Load("Asset/Textures/Timer/TimeUi.png");
 
-	RemainTime = 120.0f;   //2分00秒
+	RemainTime = 120.0f;   //2分00秒 
 
 	TimeUpFlg = false;
 
@@ -23,6 +23,12 @@ void Timer::Init()
 
 void Timer::Update()
 {
+	if (GetAsyncKeyState('M') & 0x0001)
+	{
+		PausedFlg = !PausedFlg;
+	}
+
+
 	TimerPosY -= MoveSpeed;
 
 	if (TimerPosY < GoalPosY)

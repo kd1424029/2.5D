@@ -96,7 +96,7 @@ private:
 	//ウェーブ設定を定数で管理
 	const int WaveTime1 = 100; //100秒以上 → SoccerBallのみ
 	const int WaveTime2 = 85;  //85秒以上 → + DirtySoccerBall
-	const int WaveTime3 = 55;  //55秒以上 → + BasketBall
+	const int WaveTime3 = 50;  //50秒以上 → + BasketBall
 	const int WaveTime4 = 45;  //45秒以上 → + VolleyBall
 
 	int RemainingTime = 120;
@@ -171,7 +171,7 @@ private:
 	int FeverBallType = -1;
 
 	//フィーバー中に流すボールの総数と残り個数
-	const int FeverSpawnTotal = 50;
+	const int FeverSpawnTotal = 60;
 
 	int FeverRemainingSpawnCount = 0;
 };
