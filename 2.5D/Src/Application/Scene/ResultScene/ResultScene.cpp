@@ -29,14 +29,14 @@ void ResultScene::Init()
 	score->Init();
 	score->SetFixedScore(SceneManager::Instance().GetFinalScore());
 	score->SetGoalPosY(100);
-	score->SetPtGoalPosY(70);
+	score->SetPtGoalPosY(72);
 	score->SetWidth(90);
 	score->SetHeight(171);
 	score->SetPtWidth(70);
 	score->SetPtHeight(141);
 	score->SetInterval(104);
-	score->SetScorePosX(-210);
-	score->SetPtPosX(290);
+	score->SetScorePosX(-260);
+	score->SetPtPosX(350);
 	m_objList.push_back(score);
 
 	//新記録

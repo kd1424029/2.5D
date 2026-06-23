@@ -29,7 +29,7 @@ void NewProductsGenerate::Generate()
 
 	//現在のウェーブレベル（＝要素数）を取得
 	int currentWave = m_BallGenerate->GetWaveLevel();
-	//新しく追加されたボールの種類(waveLevelが3なら、新要素はインデックス2のバスケ)
+	//新しく追加されたボールの種類(waveLevelが3なら 新要素はインデックス2のバスケ)
 	int newBallType = currentWave - 1;
 
 	if (m_Player && m_Player->GetFeverFlg() == true)
@@ -42,7 +42,7 @@ void NewProductsGenerate::Generate()
 
 	ProductRequest req;
 	req.type = ProductRequestType::Wave;
-	req.ballType = newBallType; // ボールタイプを直接記録
+	req.ballType = newBallType;  //ボールタイプを直接記録
 	m_RequestQueue.push(req);
 }
 
@@ -83,7 +83,7 @@ std::shared_ptr<NewProductsBase> NewProductsGenerate::Update()
 		return nullptr;
 	}
 
-	// キューから要求を1個取り出して生成する
+	//キューから要求を1個取り出して生成する
 	ProductRequest req = m_RequestQueue.front();
 	m_RequestQueue.pop();
 
@@ -103,7 +103,7 @@ std::shared_ptr<NewProductsBase> NewProductsGenerate::Update()
 		KdAudioManager::Instance().Play("Asset/Sounds/Se/Inform.WAV", false);
 	}
 
-	// 実際に何か生成できた時だけ次の間隔を空ける
+	//実際に何か生成できた時だけ次の間隔を空ける
 	if (newProduct)
 	{
 		if (req.type == ProductRequestType::Fever)
@@ -132,7 +132,7 @@ std::shared_ptr<NewProductsBase> NewProductsGenerate::CreateProductByBallType(in
 
 		KdAudioManager::Instance().Play("Asset/Sounds/Se/Inform.WAV", false);
 	}
-	else if (ballType == 2) // 2: BasketBall (バスケットボール)
+	else if (ballType == 2) //2 BasketBall (バスケットボール)
 	{
 		newProduct = std::make_shared<NewProductBasket>();
 		newProduct->Init();
@@ -140,7 +140,7 @@ std::shared_ptr<NewProductsBase> NewProductsGenerate::CreateProductByBallType(in
 
 		KdAudioManager::Instance().Play("Asset/Sounds/Se/Inform.WAV", false);
 	}
-	else if (ballType == 3) // 3: VolleyBall (バレーボール)
+	else if (ballType == 3) //3 VolleyBall (バレーボール)
 	{
 		newProduct = std::make_shared<NewProductVolley>();
 		newProduct->Init();

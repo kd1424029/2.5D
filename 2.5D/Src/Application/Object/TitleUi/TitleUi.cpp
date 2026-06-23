@@ -34,12 +34,12 @@ void TitleUi::Init()
 	//最高スコア表示用
 	m_pBestScoreDisplay = std::make_shared<Score>();
 	m_pBestScoreDisplay->Init();
-	m_pBestScoreDisplay->SetGoalPosY(0);     //画面中央あたりに表示
-	m_pBestScoreDisplay->SetScorePosX(-160);
-	m_pBestScoreDisplay->SetScorePosY(0);
+	m_pBestScoreDisplay->SetGoalPosY(5);     //画面中央あたりに表示
+	m_pBestScoreDisplay->SetScorePosX(-230);
+	m_pBestScoreDisplay->SetScorePosY(5);
 	m_pBestScoreDisplay->SetPtPosY(-20);
-	m_pBestScoreDisplay->SetPtGoalPosY(-20);
-	m_pBestScoreDisplay->SetPtPosX(250);
+	m_pBestScoreDisplay->SetPtGoalPosY(-25);
+	m_pBestScoreDisplay->SetPtPosX(260);
 
 	ShowBestScore = false;
 }

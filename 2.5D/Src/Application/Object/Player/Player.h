@@ -115,7 +115,7 @@ private:
 	//スコア用
 	int Score;     //合計スコア
 
-	const int MaxScore = 99999;
+	const int MaxScore = 999999;
 
 	const int Addition = 500;
 

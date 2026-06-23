@@ -73,7 +73,7 @@ private:
 	//座標
 	float ScorePosX;
 
-	float PtPosX = 240;
+	float PtPosX = 275;
 
 	float PtPosY;
 
@@ -108,10 +108,10 @@ private:
 	const long CuttingHeight = 100;
 
 	//表示する桁数
-	static const int maxDigits = 5;
+	static const int maxDigits = 6;
 
 	unsigned long m_score = 0;
 	int m_digits[maxDigits] = {}; //各桁の数値を格納
 
-	const float MaxScore = 99999;
+	const float MaxScore = 999999;
 };

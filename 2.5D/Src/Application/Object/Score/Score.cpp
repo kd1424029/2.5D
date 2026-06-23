@@ -25,7 +25,7 @@ void Score::Init()
 
 	Height = 111;
 
-	ScorePosX = -170;
+	ScorePosX = -210;
 }
 
 void Score::Update()
@@ -40,8 +40,8 @@ void Score::Update()
 		PtPosY = PtGoalPosY;
 	}
 
-	//Playerが存在する場合（プレイ中）はPlayerから現在のスコアを取得する
-	//Playerが存在しない場合（ResultSceneなど）はSetFixedScore()で設定済みの値をそのまま使う
+	//Playerが存在する場合(プレイ中)はPlayerから現在のスコアを取得する
+	//Playerが存在しない場合(ResultSceneなど)はSetFixedScore()で設定済みの値をそのまま使う
 	if (m_pPlayer != nullptr)
 	{
 		m_score = m_pPlayer->GetScore();

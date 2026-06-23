@@ -19,7 +19,7 @@ public:
 
 	//ウェーブレベルが前回から変わったかを判定する
 	//NewProductsGenerateがラベルを1回だけ出すタイミング検知に使用
-	//ウェーブ1はラベル対象外(NewProductsGenerate::Generateも何も返さない)なので、
+	//ウェーブ1はラベル対象外(NewProductsGenerate Generateも何も返さない)なので、
 	//ウェーブ1への変化(ゲーム開始直後の初回判定含む)はtrueにしない
 	bool IsWaveChanged()
 	{
@@ -103,7 +103,7 @@ private:
 
 	int WaveLevel = 0;
 
-	int LastWaveLevel = -1; // 前回のウェーブレベル(デッキ再構築判定用)
+	int LastWaveLevel = -1; //前回のウェーブレベル(デッキ再構築判定用)
 
 	// デッキをシャッフルして先頭から配り直す
 	void ShuffleDeck();
@@ -111,7 +111,7 @@ private:
 	void ShuffleLaneDeck(); //レーン配置用デッキシャッフル
 
 	//RemainingTimeから現在のウェーブレベルを計算する(副作用なし)
-	//ShuffleDeck・Generate・IsWaveChangedで共通利用
+	//ShuffleDeck Generate IsWaveChangedで共通利用
 	int CalcCurrentWave()
 	{
 		if (RemainingTime >= WaveTime1)
@@ -132,11 +132,11 @@ private:
 		}
 	}
 
-	int m_LastLabelWave = -1; //ラベル表示用：前回判定したウェーブレベル
+	int m_LastLabelWave = -1; //ラベル表示用 前回判定したウェーブレベル
 
 	const int BallCount = 4;
 
-	const int MaxGoldCnt = 4;
+	const int MaxGoldCnt = 5;
 
 	bool GoldFlg = false;
 
