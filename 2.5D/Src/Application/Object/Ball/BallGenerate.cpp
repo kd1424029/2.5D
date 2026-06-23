@@ -60,22 +60,27 @@ void BallGenerate::ShuffleLaneDeck()
 
 std::shared_ptr<BallBase> BallGenerate::Generate()
 {
-	//フィーバー中に決められた個数を出し切ったらフィーバーが終わるまで何も生成しない
 	if (m_TargetPlayer->GetFeverFlg() && FeverRemainingSpawnCount <= 0)
 	{
 		return nullptr;
 	}
 
 	std::shared_ptr<BallBase> ball = nullptr;
-
-	bool isFeverSpawn = false; //このボールがフィーバー固定タイプとして生成されたか
+	bool isFeverSpawn = false;
 
 	if (m_TargetPlayer->GetGoldCnt() < MaxGoldCnt)
 	{
 		GoldFlg = false;
 	}
 
-	// 先にレーン用デッキから配置するレーン番号を引いておく(金 通常共通で使うた)
+	// ★ここに移動：金/通常どちらが生成されるかに関わらず、毎回ウェーブを判定・更新する
+	int CurrentWave = CalcCurrentWave();
+	if (CurrentWave != LastWaveLevel || DeckIndex >= static_cast<int>(m_Deck.size()))
+	{
+		LastWaveLevel = CurrentWave;
+		ShuffleDeck(); // この中でWaveLevelも更新される
+	}
+
 	if (m_LaneDeckIndex >= static_cast<int>(m_LaneDeck.size()))
 	{
 		ShuffleLaneDeck();
@@ -83,22 +88,13 @@ std::shared_ptr<BallBase> BallGenerate::Generate()
 
 	int AssignedLane = m_LaneDeck[m_LaneDeckIndex++];
 
-
-	//========================================================
-	//ボールのインスタンス生成と出現位置(座標)の決定
-	//========================================================
 	if (m_TargetPlayer->GetGoldCnt() >= MaxGoldCnt && GoldFlg == false)
 	{
-		// ------------------------------------------
-		// 【金のボールが生成されるときの処理】
-		// ------------------------------------------
+		// 金のボール生成（ここはCalcCurrentWave/ShuffleDeck呼び出し不要、上で済んでいる）
 		ball = std::make_shared<GoldBall>();
 		ball->Init();
 		ball->SetModel(m_GoldBallModel);
-
-		// 金のボール専用の出現位置（右側固定）を設定
 		ball->SetPos(FirstRightPos);
-
 		ball->SetMoveSpeed(MoveSpeed);
 		ball->SetRotationSpeed(RotationSpeed);
 
@@ -106,73 +102,47 @@ std::shared_ptr<BallBase> BallGenerate::Generate()
 	}
 	else
 	{
-		//===========================================
-		//通常ボールが生成されるときの処理
-		//===========================================
-
-		// ウェーブレベルを計算(ShuffleDeckと同じロジック)
-		int CurrentWave = CalcCurrentWave();
-
-		//ウェーブが変わった or デッキ切れ → 再シャッフル
-		if (CurrentWave != LastWaveLevel || DeckIndex >= static_cast<int>(m_Deck.size()))
-		{
-			LastWaveLevel = CurrentWave;
-
-			ShuffleDeck();
-		}
-
+		// 通常ボール：もう一度CalcCurrentWaveやShuffleDeckの判定をする必要はない
 		int BallType;
-
-		//フィーバー中でかつ流すべき残り個数がある間だけフィーバー固定タイプにする
 		isFeverSpawn = (m_TargetPlayer->GetFeverFlg() && FeverRemainingSpawnCount > 0);
 
 		if (isFeverSpawn)
 		{
-			BallType = FeverBallType;    //フィーバー中は固定
-
-			FeverRemainingSpawnCount--;   //フィーバー分の残り生成数を消費
+			BallType = FeverBallType;
+			FeverRemainingSpawnCount--;
 		}
 		else
 		{
-			BallType = m_Deck[DeckIndex++]; //通常はデッキから
+			BallType = m_Deck[DeckIndex++];
 		}
 
 		switch (BallType)
 		{
 		case 0:
-
 			ball = std::make_shared<SoccerBall>();
 			ball->Init();
 			ball->SetModel(m_SoccerBallModel);
-
 			break;
 		case 1:
-
 			ball = std::make_shared<DirtySoccerBall>();
 			ball->Init();
 			ball->SetModel(m_DirtySoccerBallModel);
-
 			break;
 		case 2:
-
 			ball = std::make_shared<BasketBall>();
 			ball->Init();
 			ball->SetModel(m_BasketBallModel);
-
 			break;
 		case 3:
-
 			ball = std::make_shared<VolleyBall>();
 			ball->Init();
 			ball->SetModel(m_VolleyBallModel);
-
 			break;
 		}
 
 		ball->SetMoveSpeed(MoveSpeed);
 		ball->SetRotationSpeed(RotationSpeed);
 
-		//通常ボールの時だけ左右交互に出現させる
 		if (m_lastPosType == -1)
 		{
 			std::uniform_int_distribution<int> dist(0, 1);
@@ -183,22 +153,12 @@ std::shared_ptr<BallBase> BallGenerate::Generate()
 			m_lastPosType = 1 - m_lastPosType;
 		}
 
-		if (m_lastPosType == 0)
-		{
-			ball->SetPos(FirstLeftPos);
-		}
-		else
-		{
-			ball->SetPos(FirstRightPos);
-		}
+		ball->SetPos(m_lastPosType == 0 ? FirstLeftPos : FirstRightPos);
 	}
 
-	//========================================================
-	//最後に共通のデータ(レーン番号 ターゲット)をセットする
-	//========================================================
-	ball->SetSecondPosition(AssignedLane); //金 通常どちらにも綺麗に分配される
+	ball->SetSecondPosition(AssignedLane);
 	ball->SetTarget(m_TargetPlayer);
-	ball->SetIsFeverBall(isFeverSpawn); //フィーバー固定タイプとして生成されたボールには印をつける
+	ball->SetIsFeverBall(isFeverSpawn);
 
 	return ball;
 }
