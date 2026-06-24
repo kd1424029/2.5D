@@ -35,7 +35,7 @@ void ResultScene::Init()
 	score->SetPtWidth(70);
 	score->SetPtHeight(141);
 	score->SetInterval(104);
-	score->SetScorePosX(-260);
+	score->SetScorePosX(-263);
 	score->SetPtPosX(350);
 	m_objList.push_back(score);
 

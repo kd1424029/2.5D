@@ -150,7 +150,6 @@ void GameScene::Event()
 	{
 		m_objList.push_back(newProduct);
 	}
-
 }
 
 void GameScene::Init()
